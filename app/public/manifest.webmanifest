@@ -1,0 +1,25 @@
+{
+  "id": "./",
+  "name": "Assistant Cat",
+  "short_name": "Assistant Cat",
+  "description": "Organização pessoal com clareza, privacidade e assistência inteligente.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#121212",
+  "icons": [
+    {
+      "src": "app-icon.png",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

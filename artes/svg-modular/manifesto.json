@@ -1,0 +1,438 @@
+{
+  "viewBox": "0 0 240 240",
+  "count": 72,
+  "items": [
+    {
+      "file": "combinacoes/tuxedo-none-none.svg",
+      "coat": "tuxedo",
+      "outfit": "none",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/tuxedo-none-round.svg",
+      "coat": "tuxedo",
+      "outfit": "none",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/tuxedo-none-square.svg",
+      "coat": "tuxedo",
+      "outfit": "none",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/tuxedo-suit-none.svg",
+      "coat": "tuxedo",
+      "outfit": "suit",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/tuxedo-suit-round.svg",
+      "coat": "tuxedo",
+      "outfit": "suit",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/tuxedo-suit-square.svg",
+      "coat": "tuxedo",
+      "outfit": "suit",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/tuxedo-hoodie-none.svg",
+      "coat": "tuxedo",
+      "outfit": "hoodie",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/tuxedo-hoodie-round.svg",
+      "coat": "tuxedo",
+      "outfit": "hoodie",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/tuxedo-hoodie-square.svg",
+      "coat": "tuxedo",
+      "outfit": "hoodie",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/ginger-none-none.svg",
+      "coat": "ginger",
+      "outfit": "none",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/ginger-none-round.svg",
+      "coat": "ginger",
+      "outfit": "none",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/ginger-none-square.svg",
+      "coat": "ginger",
+      "outfit": "none",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/ginger-suit-none.svg",
+      "coat": "ginger",
+      "outfit": "suit",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/ginger-suit-round.svg",
+      "coat": "ginger",
+      "outfit": "suit",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/ginger-suit-square.svg",
+      "coat": "ginger",
+      "outfit": "suit",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/ginger-hoodie-none.svg",
+      "coat": "ginger",
+      "outfit": "hoodie",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/ginger-hoodie-round.svg",
+      "coat": "ginger",
+      "outfit": "hoodie",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/ginger-hoodie-square.svg",
+      "coat": "ginger",
+      "outfit": "hoodie",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/siamese-none-none.svg",
+      "coat": "siamese",
+      "outfit": "none",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/siamese-none-round.svg",
+      "coat": "siamese",
+      "outfit": "none",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/siamese-none-square.svg",
+      "coat": "siamese",
+      "outfit": "none",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/siamese-suit-none.svg",
+      "coat": "siamese",
+      "outfit": "suit",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/siamese-suit-round.svg",
+      "coat": "siamese",
+      "outfit": "suit",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/siamese-suit-square.svg",
+      "coat": "siamese",
+      "outfit": "suit",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/siamese-hoodie-none.svg",
+      "coat": "siamese",
+      "outfit": "hoodie",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/siamese-hoodie-round.svg",
+      "coat": "siamese",
+      "outfit": "hoodie",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/siamese-hoodie-square.svg",
+      "coat": "siamese",
+      "outfit": "hoodie",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/calico-none-none.svg",
+      "coat": "calico",
+      "outfit": "none",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/calico-none-round.svg",
+      "coat": "calico",
+      "outfit": "none",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/calico-none-square.svg",
+      "coat": "calico",
+      "outfit": "none",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/calico-suit-none.svg",
+      "coat": "calico",
+      "outfit": "suit",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/calico-suit-round.svg",
+      "coat": "calico",
+      "outfit": "suit",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/calico-suit-square.svg",
+      "coat": "calico",
+      "outfit": "suit",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/calico-hoodie-none.svg",
+      "coat": "calico",
+      "outfit": "hoodie",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/calico-hoodie-round.svg",
+      "coat": "calico",
+      "outfit": "hoodie",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/calico-hoodie-square.svg",
+      "coat": "calico",
+      "outfit": "hoodie",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/black-none-none.svg",
+      "coat": "black",
+      "outfit": "none",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/black-none-round.svg",
+      "coat": "black",
+      "outfit": "none",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/black-none-square.svg",
+      "coat": "black",
+      "outfit": "none",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/black-suit-none.svg",
+      "coat": "black",
+      "outfit": "suit",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/black-suit-round.svg",
+      "coat": "black",
+      "outfit": "suit",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/black-suit-square.svg",
+      "coat": "black",
+      "outfit": "suit",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/black-hoodie-none.svg",
+      "coat": "black",
+      "outfit": "hoodie",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/black-hoodie-round.svg",
+      "coat": "black",
+      "outfit": "hoodie",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/black-hoodie-square.svg",
+      "coat": "black",
+      "outfit": "hoodie",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/solid_gray-none-none.svg",
+      "coat": "solid_gray",
+      "outfit": "none",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/solid_gray-none-round.svg",
+      "coat": "solid_gray",
+      "outfit": "none",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/solid_gray-none-square.svg",
+      "coat": "solid_gray",
+      "outfit": "none",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/solid_gray-suit-none.svg",
+      "coat": "solid_gray",
+      "outfit": "suit",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/solid_gray-suit-round.svg",
+      "coat": "solid_gray",
+      "outfit": "suit",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/solid_gray-suit-square.svg",
+      "coat": "solid_gray",
+      "outfit": "suit",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/solid_gray-hoodie-none.svg",
+      "coat": "solid_gray",
+      "outfit": "hoodie",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/solid_gray-hoodie-round.svg",
+      "coat": "solid_gray",
+      "outfit": "hoodie",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/solid_gray-hoodie-square.svg",
+      "coat": "solid_gray",
+      "outfit": "hoodie",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/white-none-none.svg",
+      "coat": "white",
+      "outfit": "none",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/white-none-round.svg",
+      "coat": "white",
+      "outfit": "none",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/white-none-square.svg",
+      "coat": "white",
+      "outfit": "none",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/white-suit-none.svg",
+      "coat": "white",
+      "outfit": "suit",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/white-suit-round.svg",
+      "coat": "white",
+      "outfit": "suit",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/white-suit-square.svg",
+      "coat": "white",
+      "outfit": "suit",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/white-hoodie-none.svg",
+      "coat": "white",
+      "outfit": "hoodie",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/white-hoodie-round.svg",
+      "coat": "white",
+      "outfit": "hoodie",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/white-hoodie-square.svg",
+      "coat": "white",
+      "outfit": "hoodie",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/gray_tabby-none-none.svg",
+      "coat": "gray_tabby",
+      "outfit": "none",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/gray_tabby-none-round.svg",
+      "coat": "gray_tabby",
+      "outfit": "none",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/gray_tabby-none-square.svg",
+      "coat": "gray_tabby",
+      "outfit": "none",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/gray_tabby-suit-none.svg",
+      "coat": "gray_tabby",
+      "outfit": "suit",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/gray_tabby-suit-round.svg",
+      "coat": "gray_tabby",
+      "outfit": "suit",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/gray_tabby-suit-square.svg",
+      "coat": "gray_tabby",
+      "outfit": "suit",
+      "glasses": "square"
+    },
+    {
+      "file": "combinacoes/gray_tabby-hoodie-none.svg",
+      "coat": "gray_tabby",
+      "outfit": "hoodie",
+      "glasses": "none"
+    },
+    {
+      "file": "combinacoes/gray_tabby-hoodie-round.svg",
+      "coat": "gray_tabby",
+      "outfit": "hoodie",
+      "glasses": "round"
+    },
+    {
+      "file": "combinacoes/gray_tabby-hoodie-square.svg",
+      "coat": "gray_tabby",
+      "outfit": "hoodie",
+      "glasses": "square"
+    }
+  ]
+}

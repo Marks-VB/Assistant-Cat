@@ -1,0 +1,6 @@
+/* SPDX-License-Identifier: AGPL-3.0-or-later */
+(function(root){'use strict';let db=null,mode='memory';const key='assistente-gato-prototype-v2';
+async function init(){try{db=await new Promise((resolve,reject)=>{if(!root.indexedDB)return reject(Error('indisponível'));const r=indexedDB.open(key,1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});mode='IndexedDB';}catch{try{localStorage.setItem(key+'-probe','1');localStorage.removeItem(key+'-probe');mode='localStorage';}catch{mode='memory';}}return mode;}
+async function load(){if(db)return new Promise((resolve,reject)=>{const r=db.transaction('kv').objectStore('kv').get('state');r.onsuccess=()=>resolve(r.result||null);r.onerror=()=>reject(r.error);});if(mode==='localStorage'){const raw=localStorage.getItem(key);return raw?JSON.parse(raw):null;}return null;}
+async function save(state){const snapshot=JSON.parse(JSON.stringify(state));if(db)return new Promise((resolve,reject)=>{const tx=db.transaction('kv','readwrite');tx.objectStore('kv').put(snapshot,'state');tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||Error('Gravação cancelada.'));});if(mode==='localStorage')localStorage.setItem(key,JSON.stringify(snapshot));}
+root.GatoStorage={init,load,save,getMode:()=>mode};})(window);

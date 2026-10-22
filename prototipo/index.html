@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Assistente Gato — organização pessoal com foco em clareza, privacidade e rotinas amigáveis.">
+  <title>Assistente Gato — protótipo local</title>
+  <link rel="stylesheet" href="../design-system/tokens.css">
+  <link rel="stylesheet" href="src/app.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Pular para o conteúdo principal</a>
+  <div id="app">
+    <p class="loading" role="status">Preparando seu espaço…</p>
+  </div>
+
+  <dialog id="editor" aria-labelledby="editor-title" aria-modal="true">
+    <form id="event-form">
+      <div class="dialog-head">
+        <h2 id="editor-title">Novo evento</h2>
+        <button type="button" data-action="close-dialog" class="icon-button" aria-label="Fechar editor">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <input type="hidden" name="id">
+      <input type="hidden" name="proposalKey">
+      <label for="event-title">
+        Título
+        <input id="event-title" name="title" required maxlength="180" placeholder="O que você vai fazer?">
+      </label>
+      <label for="event-allday" style="display:flex;align-items:center;gap:10px;cursor:pointer;margin-bottom:18px">
+        <input type="checkbox" name="allDay" id="event-allday">
+        <span>Dia inteiro</span>
+      </label>
+      <div class="form-row">
+        <label for="event-date">
+          Data inicial
+          <input id="event-date" name="date" type="date" required>
+        </label>
+        <label id="end-date-wrapper" for="event-end-date" style="display:none">
+          Data final
+          <input id="event-end-date" name="endDate" type="date">
+        </label>
+        <label id="time-wrapper" for="event-time">
+          Horário
+          <input id="event-time" name="time" type="time" value="09:00" required>
+        </label>
+      </div>
+      <div id="duration-wrapper">
+        <label for="event-duration">
+          Duração, em minutos
+          <input id="event-duration" name="duration" type="number" min="1" max="1440" value="60" required>
+        </label>
+      </div>
+      <label for="event-recurrence">
+        Repetição
+        <select id="event-recurrence" name="recurrence">
+          <option value="none">Não se repete</option>
+          <option value="daily">Todos os dias</option>
+          <option value="weekly">Semanalmente</option>
+          <option value="monthly">Mensalmente</option>
+        </select>
+      </label>
+      <label for="event-notes">
+        Notas
+        <textarea id="event-notes" name="notes" rows="3" maxlength="4000" placeholder="Detalhes que ajudam a lembrar"></textarea>
+      </label>
+      <p id="editor-error" class="error" role="alert" aria-live="assertive"></p>
+      <div class="dialog-actions">
+        <button type="button" data-action="close-dialog" class="secondary">Cancelar</button>
+        <button type="submit">Salvar evento</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="task-editor" aria-labelledby="task-editor-title" aria-modal="true">
+    <form id="task-edit-form">
+      <div class="dialog-head">
+        <h2 id="task-editor-title">Editar tarefa</h2>
+        <button type="button" data-action="close-task-dialog" class="icon-button" aria-label="Fechar editor de tarefa">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <input type="hidden" name="id">
+      <label for="task-title">
+        Título
+        <input id="task-title" name="title" required maxlength="180" placeholder="O que você precisa fazer?">
+      </label>
+      <div class="form-row">
+        <label for="task-due">
+          Prazo opcional
+          <input id="task-due" name="due" type="date">
+        </label>
+        <label for="task-priority">
+          Importância
+          <select id="task-priority" name="priority">
+            <option value="normal">Normal</option>
+            <option value="high">Alta prioridade</option>
+            <option value="low">Baixa prioridade</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-row">
+        <label for="task-repeat-amount">
+          Repetir após conclusão
+          <input id="task-repeat-amount" name="repeatAmount" type="number" min="1" max="365" placeholder="Qtd. (ex: 3)">
+        </label>
+        <label for="task-repeat-unit">
+          Intervalo
+          <select id="task-repeat-unit" name="repeatUnit">
+            <option value="">Não se repete</option>
+            <option value="days">Dias após conclusão</option>
+            <option value="weeks">Semanas após conclusão</option>
+            <option value="months">Meses após conclusão</option>
+          </select>
+        </label>
+      </div>
+      <p id="task-editor-error" class="error" role="alert" aria-live="assertive"></p>
+      <div class="dialog-actions">
+        <button type="button" data-action="close-task-dialog" class="secondary">Cancelar</button>
+        <button type="submit">Salvar tarefa</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="recap-dialog" aria-labelledby="recap-dialog-title" aria-modal="true">
+    <div class="dialog-head">
+      <h2 id="recap-dialog-title">Retrospectiva da Semana</h2>
+      <button type="button" data-action="close-recap-dialog" class="icon-button" aria-label="Fechar retrospectiva">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div style="margin: 16px 0;">
+      <pre id="recap-dialog-content" style="white-space: pre-wrap; font-family: inherit; background: var(--surface-alt); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); font-size: 13px; line-height: 1.6;"></pre>
+    </div>
+    <div class="dialog-actions">
+      <button type="button" data-action="close-recap-dialog" class="secondary">Fechar</button>
+      <button type="button" data-action="copy-recap">Copiar Resumo</button>
+    </div>
+  </dialog>
+
+  <input id="backup-file" type="file" accept="application/json,.json" hidden aria-label="Arquivo de backup JSON">
+  <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="src/cat-avatar.js"></script>
+  <script src="src/domain.js"></script>
+  <script src="src/storage.js"></script>
+  <script src="src/ai-adapter.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>

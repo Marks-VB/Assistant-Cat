@@ -1,0 +1,138 @@
+/* SPDX-License-Identifier: AGPL-3.0-or-later */
+:root {
+  --bg: #121212;
+  --surface: #1E1E1E;
+  --surface-alt: #252525;
+  --surface-hover: #2C2C2E;
+  --text: #FFFFFF;
+  --muted: #9E9E9E;
+  --border: rgba(255, 255, 255, 0.08);
+  --accent: #FF4D4D;
+  --accent-soft: rgba(255, 77, 77, 0.14);
+  --danger: #FF4D4D;
+  --warning: #FFA726;
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-card: 20px;
+  --radius-lg: 28px;
+  --radius-pill: 9999px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+[data-theme=light] {
+  --bg: #F7F7F8;
+  --surface: #FFFFFF;
+  --surface-alt: #EFEFEF;
+  --surface-hover: #E5E5EA;
+  --text: #1C1C1E;
+  --muted: #8E8E93;
+  --border: rgba(0, 0, 0, 0.08);
+  --accent: #FF4D4D;
+  --accent-soft: rgba(255, 77, 77, 0.12);
+  --danger: #FF4D4D;
+  --warning: #F57C00;
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme=dark] {
+  --bg: #121212;
+  --surface: #1E1E1E;
+  --surface-alt: #252525;
+  --surface-hover: #2C2C2E;
+  --text: #FFFFFF;
+  --muted: #9E9E9E;
+  --border: rgba(255, 255, 255, 0.08);
+  --accent: #FF4D4D;
+  --accent-soft: rgba(255, 77, 77, 0.14);
+  --danger: #FF4D4D;
+  --warning: #FFA726;
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* 01. Minimalist Theme (Obsidian: Typography & Clean Contrast) */
+[data-theme=minimalist] {
+  --bg: #FAFAF9;
+  --surface: #FFFFFF;
+  --surface-alt: #F4F4F5;
+  --surface-hover: #E4E4E7;
+  --text: #18181B;
+  --muted: #71717A;
+  --border: rgba(24, 24, 27, 0.12);
+  --accent: #18181B;
+  --accent-soft: rgba(24, 24, 27, 0.08);
+  --danger: #DC2626;
+  --warning: #D97706;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+/* 03. Glassmorphism Theme (Obsidian: Frosted Glass & Translucent Depth) */
+[data-theme=glassmorphism] {
+  --bg: #0F172A;
+  --surface: rgba(30, 41, 59, 0.7);
+  --surface-alt: rgba(51, 65, 85, 0.6);
+  --surface-hover: rgba(71, 85, 105, 0.7);
+  --text: #F8FAFC;
+  --muted: #94A3B8;
+  --border: rgba(255, 255, 255, 0.15);
+  --accent: #38BDF8;
+  --accent-soft: rgba(56, 189, 248, 0.2);
+  --danger: #F43F5E;
+  --warning: #FBBF24;
+  --shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* 16. Nord Theme (Arctic Frost / Clean Cold Dark) */
+[data-theme=nord] {
+  --bg: #2E3440;
+  --surface: #3B4252;
+  --surface-alt: #434C5E;
+  --surface-hover: #4C566A;
+  --text: #ECEFF4;
+  --muted: #D8DEE9;
+  --border: rgba(216, 222, 233, 0.12);
+  --accent: #88C0D0;
+  --accent-soft: rgba(136, 192, 208, 0.18);
+  --danger: #BF616A;
+  --warning: #EBCB8B;
+  --shadow: 0 16px 36px rgba(46, 52, 64, 0.7);
+}
+
+/* 14. Cyberpunk Theme (Obsidian: Neon High-Tech & Contrast) */
+[data-theme=cyberpunk] {
+  --bg: #05050A;
+  --surface: #0E0F1A;
+  --surface-alt: #17192C;
+  --surface-hover: #22253D;
+  --text: #00F0FF;
+  --muted: #7983A8;
+  --border: rgba(0, 240, 255, 0.22);
+  --accent: #FF0055;
+  --accent-soft: rgba(255, 0, 85, 0.22);
+  --danger: #FF0033;
+  --warning: #FFE600;
+  --shadow: 0 16px 45px rgba(255, 0, 85, 0.25);
+}
+
+/* 13. Retro Theme (Obsidian: Warm Earthy 70s/80s Nostalgia) */
+[data-theme=retro] {
+  --bg: #F5EBE1;
+  --surface: #EFE4D6;
+  --surface-alt: #E3D6C5;
+  --surface-hover: #D7C6B3;
+  --text: #3D2D1E;
+  --muted: #7D6B58;
+  --border: rgba(61, 45, 30, 0.14);
+  --accent: #C85A32;
+  --accent-soft: rgba(200, 90, 50, 0.15);
+  --danger: #B33927;
+  --warning: #D9822B;
+  --shadow: 0 8px 24px rgba(61, 45, 30, 0.1);
+}

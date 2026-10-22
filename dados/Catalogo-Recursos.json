@@ -1,0 +1,2060 @@
+{
+ "modules": 21,
+ "capabilities": 256,
+ "phases": {
+  "P1": 74,
+  "P2": 79,
+  "P3": 83,
+  "P0": 20
+ },
+ "features": [
+  {
+   "id": "ACC01",
+   "feature": "Introdução guiada",
+   "behavior": "Apresentar agenda, tarefas, hábitos e coordenação com exemplos interativos.",
+   "evidence": "H:appOnboarding.taskCenter.empty.title",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "ACC02",
+   "feature": "Identificação do usuário",
+   "behavior": "Cadastrar nome, e-mail e identificador público.",
+   "evidence": "H:appOnboarding.information.username",
+   "deps": "L/S",
+   "phase": "P1"
+  },
+  {
+   "id": "ACC03",
+   "feature": "Entrada por e-mail",
+   "behavior": "Solicitar e validar código enviado ao e-mail, com reenvio e contagem de espera.",
+   "evidence": "R:account_setting_email_resend_countdown",
+   "deps": "S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "ACC04",
+   "feature": "Entrada com Google",
+   "behavior": "Conectar identidade Google para autenticação.",
+   "evidence": "R:continue_with_google",
+   "deps": "S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "ACC05",
+   "feature": "Identidade Apple",
+   "behavior": "Vincular conta Apple como método de acesso; validar disponibilidade por plataforma.",
+   "evidence": "R:account_setting_apple",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "ACC06",
+   "feature": "Métodos de acesso vinculados",
+   "behavior": "Listar, conectar e desconectar identidades, preservando um meio de acesso.",
+   "evidence": "R:account_setting_unlink_disabled",
+   "deps": "S",
+   "phase": "P2"
+  },
+  {
+   "id": "ACC07",
+   "feature": "Troca de e-mail",
+   "behavior": "Atualizar endereço com verificação.",
+   "evidence": "R:account_setting_update_email",
+   "deps": "S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "ACC08",
+   "feature": "Conflitos de identidade",
+   "behavior": "Orientar acesso à conta existente quando um endereço já estiver associado.",
+   "evidence": "R:existing_account_conflict_title",
+   "deps": "S",
+   "phase": "P2"
+  },
+  {
+   "id": "ACC09",
+   "feature": "Migração de contas",
+   "behavior": "Oferecer fluxo explícito para combinar dados de contas relacionadas.",
+   "evidence": "R:account_setting_migrate_description2",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "ACC10",
+   "feature": "Perfil público",
+   "behavior": "Editar nome apresentado a outras pessoas.",
+   "evidence": "R:edit_profile_public_name_label",
+   "deps": "L/S",
+   "phase": "P1"
+  },
+  {
+   "id": "ACC11",
+   "feature": "Saída e exclusão da conta",
+   "behavior": "Encerrar sessão e excluir dados da conta mediante confirmação.",
+   "evidence": "R:account_delete_description",
+   "deps": "L/S",
+   "phase": "P2"
+  },
+  {
+   "id": "ACC12",
+   "feature": "Faixa etária na introdução",
+   "behavior": "Há seleção de faixa etária no original; definir a política do novo produto separadamente.",
+   "evidence": "R:age_gate_title",
+   "deps": "L",
+   "phase": "P3"
+  },
+  {
+   "id": "AST01",
+   "feature": "Nome do assistente",
+   "behavior": "Definir nome personalizado e validá-lo.",
+   "evidence": "H:myAssistant.nameLabel;V:Screenshot_20261021_100939_referencia.png",
+   "deps": "L",
+   "phase": "P0"
+  },
+  {
+   "id": "AST02",
+   "feature": "Aparência do assistente",
+   "behavior": "Escolher representação visual própria, sem reaproveitar a identidade do original.",
+   "evidence": "H:appOnboarding.assistant.randomize;V:Screenshot_20261021_100939_referencia.png",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "AST03",
+   "feature": "Personalidade por instruções",
+   "behavior": "Editar o estilo de interação e as instruções pessoais do assistente.",
+   "evidence": "H:myAssistant.personalityRowLabel;V:Screenshot_20261021_100939_referencia.png",
+   "deps": "L/A",
+   "phase": "P1"
+  },
+  {
+   "id": "AST04",
+   "feature": "Personalidades predefinidas",
+   "behavior": "Selecionar estilos de personalidade oferecidos pelo produto.",
+   "evidence": "H:/referencia/user/assistant_soul_presets",
+   "deps": "L/A",
+   "phase": "P1"
+  },
+  {
+   "id": "AST05",
+   "feature": "Prévia de escrita",
+   "behavior": "Testar o tom do assistente antes de salvar.",
+   "evidence": "H:myAssistant.personalityV2.writingPreview",
+   "deps": "A",
+   "phase": "P1"
+  },
+  {
+   "id": "AST06",
+   "feature": "Estilo e tom de voz",
+   "behavior": "Selecionar estilos de voz, com alternativas de timbre.",
+   "evidence": "H:myAssistant.personalityV2.voiceStyle",
+   "deps": "V",
+   "phase": "P2"
+  },
+  {
+   "id": "AST07",
+   "feature": "Seis estilos em português",
+   "behavior": "Oferecer equivalentes próprios para estilos acolhedor, brincalhão, profissional, direto, confiante e amigável.",
+   "evidence": "A:assets/assistant_voice_options_pt.json",
+   "deps": "L/V",
+   "phase": "P2"
+  },
+  {
+   "id": "AST08",
+   "feature": "Reprodução automática",
+   "behavior": "Controlar leitura automática das respostas em texto.",
+   "evidence": "H:myAssistant.autoplayTextLabel;V:Screenshot_20261021_100939_referencia.png",
+   "deps": "L/V",
+   "phase": "P2"
+  },
+  {
+   "id": "AST09",
+   "feature": "Notificações do assistente",
+   "behavior": "Ativar ou desativar avisos proativos do assistente.",
+   "evidence": "H:myAssistant.notificationLabel",
+   "deps": "L/N/S",
+   "phase": "P1"
+  },
+  {
+   "id": "AST10",
+   "feature": "Quem pode conversar com o assistente",
+   "behavior": "Configurar acesso público, contatos, usuários do serviço ou ninguém.",
+   "evidence": "H:myAssistant.accessLevel.contacts",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "AST11",
+   "feature": "Nome de remetente",
+   "behavior": "Definir como o assistente se identifica em comunicações externas.",
+   "evidence": "H:myAssistant.senderName.title;V:Screenshot_20261021_100939_referencia.png",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "AST12",
+   "feature": "Endereço do assistente",
+   "behavior": "Reservar endereço de e-mail e identificador em domínio próprio do novo serviço.",
+   "evidence": "H:myAssistant.assistantAddressClaim",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "AST13",
+   "feature": "Como o assistente chama o usuário",
+   "behavior": "Configurar um apelido privado usado pelo assistente.",
+   "evidence": "H:memorias.nicknameLabel;V:Screenshot_20261021_100939_referencia.png",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CHT01",
+   "feature": "Conversa principal",
+   "behavior": "Trocar mensagens com o assistente e manter histórico persistente.",
+   "evidence": "H:chat.sessions.mainChat",
+   "deps": "L/A",
+   "phase": "P0"
+  },
+  {
+   "id": "CHT02",
+   "feature": "Criar evento pelo chat",
+   "behavior": "Transformar solicitação em proposta estruturada de compromisso.",
+   "evidence": "H:chat.emptyState.createEvent",
+   "deps": "L/A",
+   "phase": "P0"
+  },
+  {
+   "id": "CHT03",
+   "feature": "Criar tarefa pelo chat",
+   "behavior": "Criar afazer a partir de linguagem natural.",
+   "evidence": "H:chat.emptyState.addTodo",
+   "deps": "L/A",
+   "phase": "P0"
+  },
+  {
+   "id": "CHT04",
+   "feature": "Múltiplas conversas",
+   "behavior": "Abrir e retomar sessões independentes.",
+   "evidence": "H:chat.sessions.openSessions;V:Screenshot_20261021_100946_referencia.png",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CHT05",
+   "feature": "Renomear conversa",
+   "behavior": "Alterar o nome de uma sessão.",
+   "evidence": "H:chat.sessions.rename",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CHT06",
+   "feature": "Fixar conversas",
+   "behavior": "Fixar e desafixar sessões para acesso rápido.",
+   "evidence": "H:chat.sessions.pin",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CHT07",
+   "feature": "Excluir conversa",
+   "behavior": "Remover uma sessão com confirmação.",
+   "evidence": "H:chat.sessions.deleteMessage",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CHT08",
+   "feature": "Responder a uma mensagem",
+   "behavior": "Enviar resposta com referência à mensagem original.",
+   "evidence": "H:chat.contextMenu.reply",
+   "deps": "L/A",
+   "phase": "P1"
+  },
+  {
+   "id": "CHT09",
+   "feature": "Copiar e excluir mensagens",
+   "behavior": "Executar ações sobre mensagens individuais.",
+   "evidence": "H:chat.contextMenu.copy;H:chat.contextMenu.delete",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CHT10",
+   "feature": "Reenviar após falha",
+   "behavior": "Exibir falha de entrega e permitir nova tentativa sem duplicação.",
+   "evidence": "H:chat.accessibility.resendFailedMessage",
+   "deps": "L/A/S",
+   "phase": "P0"
+  },
+  {
+   "id": "CHT11",
+   "feature": "Reações",
+   "behavior": "Adicionar ou alterar reação em mensagens e itens de agenda.",
+   "evidence": "H:chat.accessibility.addReaction",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CHT12",
+   "feature": "Cartões interativos",
+   "behavior": "Exibir eventos, listas, sugestões e confirmações como componentes acionáveis.",
+   "evidence": "C:InteractionBlockData;C:ConfirmationBlock;V:Screenshot_20261021_100950_referencia.png",
+   "deps": "L/A",
+   "phase": "P0"
+  },
+  {
+   "id": "CHT13",
+   "feature": "Contexto de contatos e agenda",
+   "behavior": "Selecionar contatos, calendários e eventos como contexto da conversa.",
+   "evidence": "H:chat.mention.contactsTitle;H:chat.mention.calendars",
+   "deps": "L/A",
+   "phase": "P1"
+  },
+  {
+   "id": "CHT14",
+   "feature": "Contexto de tarefas e listas",
+   "behavior": "Referenciar afazeres e listas em uma solicitação.",
+   "evidence": "H:chat.mention.seedLists;H:chat.mention.todos",
+   "deps": "L/A",
+   "phase": "P1"
+  },
+  {
+   "id": "CHT15",
+   "feature": "Pesquisa na web",
+   "behavior": "Acionar ferramenta de pesquisa a partir da conversa.",
+   "evidence": "H:chat.mention.webSearch",
+   "deps": "A/X",
+   "phase": "P3"
+  },
+  {
+   "id": "CHT16",
+   "feature": "Ferramentas pelo compositor",
+   "behavior": "Iniciar coordenação ou automação a partir do menu de anexos.",
+   "evidence": "H:chat.attachmentSheet.coordination;H:chat.attachmentSheet.triggerDesc",
+   "deps": "L/A/S",
+   "phase": "P3"
+  },
+  {
+   "id": "CHT17",
+   "feature": "Histórico expandido",
+   "behavior": "Mostrar ou recolher histórico e navegar para mensagens recentes.",
+   "evidence": "H:chat.history.show;H:chat.accessibility.jumpToLatestMessages",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CHT18",
+   "feature": "Limpar histórico",
+   "behavior": "Oferecer limpeza explícita das conversas.",
+   "evidence": "H:/referencia/chat/clear-history",
+   "deps": "L/S",
+   "phase": "P1"
+  },
+  {
+   "id": "CHT19",
+   "feature": "Escolha do modo de resposta",
+   "behavior": "Há seleção automática e de versão do assistente; a nova versão pode mapear para perfis próprios.",
+   "evidence": "H:chat.versionSelect.auto.label",
+   "deps": "L/A",
+   "phase": "P2"
+  },
+  {
+   "id": "CHT20",
+   "feature": "Reportar resposta",
+   "behavior": "Enviar feedback sobre uma mensagem específica.",
+   "evidence": "H:chat.contextMenu.report",
+   "deps": "L/S",
+   "phase": "P2"
+  },
+  {
+   "id": "INP01",
+   "feature": "Enviar imagens",
+   "behavior": "Anexar uma ou mais imagens e uma legenda ao chat.",
+   "evidence": "H:chat.input.captionPlaceholder;H:chat.accessibility.selectedImagePreview",
+   "deps": "L/A",
+   "phase": "P1"
+  },
+  {
+   "id": "INP02",
+   "feature": "Anexos de arquivo",
+   "behavior": "Representar anexos de arquivo na conversa; validar formatos aceitos em execução.",
+   "evidence": "H:chat.collapsedAttachmentTag.file",
+   "deps": "L/A",
+   "phase": "P2"
+  },
+  {
+   "id": "INP03",
+   "feature": "Recortar imagem",
+   "behavior": "Recortar, reposicionar e restaurar imagem antes do envio.",
+   "evidence": "H:chat.imageCrop.editImage;H:chat.imageCrop.reset",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "INP04",
+   "feature": "Visualizador de imagens",
+   "behavior": "Ampliar, salvar e compartilhar imagens recebidas.",
+   "evidence": "H:chat.accessibility.saveImage;H:chat.accessibility.shareImage",
+   "deps": "L/N",
+   "phase": "P2"
+  },
+  {
+   "id": "INP05",
+   "feature": "Extrair evento de imagem",
+   "behavior": "Interpretar imagem como entrada para criação de eventos; não foi validada a qualidade da extração.",
+   "evidence": "R:compare_creating_events_v1",
+   "deps": "A",
+   "phase": "P2"
+  },
+  {
+   "id": "INP06",
+   "feature": "Mensagem de voz",
+   "behavior": "Gravar, cancelar e enviar áudio.",
+   "evidence": "H:voice.slideToCancel;H:chat.accessibility.sendVoiceRecording",
+   "deps": "L/V",
+   "phase": "P1"
+  },
+  {
+   "id": "INP07",
+   "feature": "Voz para texto",
+   "behavior": "Transcrever gravação e permitir revisão do texto.",
+   "evidence": "H:chat.accessibility.recordVoiceToText;H:/referencia/speech/transcribe",
+   "deps": "V",
+   "phase": "P1"
+  },
+  {
+   "id": "INP08",
+   "feature": "Ler mensagens em voz alta",
+   "behavior": "Sintetizar e reproduzir o texto de uma resposta.",
+   "evidence": "H:chat.contextMenu.playVoice",
+   "deps": "V",
+   "phase": "P2"
+  },
+  {
+   "id": "INP09",
+   "feature": "Conversa de voz em tempo real",
+   "behavior": "Exibir estados ouvindo, falando e processando durante sessão de voz.",
+   "evidence": "H:calendar.realtime.listening;H:calendar.realtime.speaking",
+   "deps": "V/A/S",
+   "phase": "P3"
+  },
+  {
+   "id": "INP10",
+   "feature": "Controles de chamada",
+   "behavior": "Atender, recusar, encerrar, silenciar microfone e alternar alto-falante.",
+   "evidence": "R:call_answer;R:call_mute;R:call_speaker_on",
+   "deps": "N/V/S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "INP11",
+   "feature": "Tratamento de permissão e erro de áudio",
+   "behavior": "Orientar quando microfone estiver negado, gravação for curta ou transcrição falhar.",
+   "evidence": "H:voice.micPermissionDenied;H:voice.tooShort",
+   "deps": "L/N/V",
+   "phase": "P1"
+  },
+  {
+   "id": "MEM01",
+   "feature": "Catálogo de memórias",
+   "behavior": "Listar informações que o assistente guarda sobre a pessoa.",
+   "evidence": "H:memorias.navTitle;V:Screenshot_20261021_101054_referencia.png",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "MEM02",
+   "feature": "Criar memória manualmente",
+   "behavior": "Adicionar título, descrição e categoria.",
+   "evidence": "H:memorias.createModalTitle;H:memorias.detailsTitle;V:Screenshot_20261021_101054_referencia.png",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "MEM03",
+   "feature": "Editar e excluir memória",
+   "behavior": "Alterar ou remover qualquer memória visível.",
+   "evidence": "H:memorias.editModalTitle;H:memorias.deleteConfirmTitle",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "MEM04",
+   "feature": "Categorias de memória",
+   "behavior": "Organizar identidade, fatos, preferências, relações, restrições, regras e habilidades.",
+   "evidence": "H:memorias.categories.constraint;H:memorias.categories.skill",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "MEM05",
+   "feature": "Filtrar memórias",
+   "behavior": "Filtrar por categoria e apresentar estados vazios.",
+   "evidence": "H:memorias.filters.menuLabel",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "MEM06",
+   "feature": "Criar memória por conversa",
+   "behavior": "Solicitar ao assistente que registre uma informação.",
+   "evidence": "H:memorias.chatCreatePrompt",
+   "deps": "L/A",
+   "phase": "P1"
+  },
+  {
+   "id": "MEM07",
+   "feature": "Aprendizagem a partir do uso",
+   "behavior": "Há apresentação de aprendizagem de preferências; algoritmo e critérios não estão recuperados.",
+   "evidence": "H:memorias.learnMoreDialog.learnsTitle",
+   "deps": "A",
+   "phase": "P2"
+  },
+  {
+   "id": "MEM08",
+   "feature": "Importação de memória",
+   "behavior": "Existe fluxo ou guia de importação; formatos e provedores precisam ser validados.",
+   "evidence": "H:memorias.importAction;V:Screenshot_20261021_101054_referencia.png",
+   "deps": "L/A",
+   "phase": "P2"
+  },
+  {
+   "id": "MEM09",
+   "feature": "Preferências de rotina",
+   "behavior": "Coletar ritmo diário, antecedência preferida e tipo de lembrete.",
+   "evidence": "H:appOnboarding.rememberHabits.naturalRhythm.title",
+   "deps": "L/A",
+   "phase": "P1"
+  },
+  {
+   "id": "MEM10",
+   "feature": "Ativar ou desativar memória",
+   "behavior": "Controlar o uso de memória nas conversas e abrir suas configurações.",
+   "evidence": "H:memory_enabled;V:Screenshot_20261021_101051_referencia.png",
+   "deps": "L/A",
+   "phase": "P1"
+  },
+  {
+   "id": "CAL01",
+   "feature": "Agenda do dia",
+   "behavior": "Mostrar compromissos e próximos itens na tela inicial.",
+   "evidence": "H:home.now.viewCalendar;H:home.now.noEvents;V:Screenshot_20261021_100954_referencia.png",
+   "deps": "L",
+   "phase": "P0"
+  },
+  {
+   "id": "CAL02",
+   "feature": "Linha do tempo diária",
+   "behavior": "Exibir blocos de eventos posicionados por horário.",
+   "evidence": "H:DayViewHourGrid;H:DayViewEventBlock",
+   "deps": "L",
+   "phase": "P0"
+  },
+  {
+   "id": "CAL03",
+   "feature": "Alternar lista e linha do tempo",
+   "behavior": "Escolher representação diária por lista ou grade horária.",
+   "evidence": "H:calendar.dayDisplayMode.switchToList;H:calendar.dayDisplayMode.switchToTimeline",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CAL04",
+   "feature": "Navegar por datas",
+   "behavior": "Ir para hoje e percorrer dias, semanas e meses; detalhes de todos os modos exigem validação visual.",
+   "evidence": "H:calendar.today;C:CalendarZoomInteractionSource;V:Screenshot_20261021_100958_referencia.png",
+   "deps": "L",
+   "phase": "P0"
+  },
+  {
+   "id": "CAL05",
+   "feature": "Ajuste de escala",
+   "behavior": "Controlar a escala de visualização da agenda.",
+   "evidence": "H:calendar.zoomControls.adjust",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "CAL06",
+   "feature": "Busca na agenda",
+   "behavior": "Pesquisar eventos e tarefas, com estados de início, erro e ausência de resultados.",
+   "evidence": "H:home.calendar.search.placeholder",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CAL07",
+   "feature": "Filtros de busca",
+   "behavior": "Filtrar por espécie do item e estado de conclusão.",
+   "evidence": "H:home.calendar.search.filters.kinds.;H:home.calendar.search.status.completed",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CAL08",
+   "feature": "Calendários visíveis",
+   "behavior": "Selecionar calendários exibidos e um calendário padrão.",
+   "evidence": "R:calendar_settings_calendar_checkbox;R:calendar_settings_default_calendar;V:Screenshot_20261021_101016_referencia.png",
+   "deps": "L",
+   "phase": "P0"
+  },
+  {
+   "id": "CAL09",
+   "feature": "Nome e cor do calendário",
+   "behavior": "Criar, renomear, colorir e excluir calendários próprios.",
+   "evidence": "R:calendar_settings_new_calendar;R:calendar_settings_calendar_color",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CAL10",
+   "feature": "Categorias e cores de eventos",
+   "behavior": "Configurar classificação visual por categoria.",
+   "evidence": "H:calendar.viewOptions.category;H:/referencia/user/event_category_color_config;V:Screenshot_20261021_101051_referencia.png",
+   "deps": "L/A",
+   "phase": "P1"
+  },
+  {
+   "id": "CAL11",
+   "feature": "Ocultar duplicatas e recusados",
+   "behavior": "Controlar duplicação aparente e exibição de convites recusados.",
+   "evidence": "H:calendar.viewOptions.hideDuplicateEvents;H:calendar.viewOptions.showDeclinedEvents;V:Screenshot_20261021_101016_referencia.png",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "CAL12",
+   "feature": "Emojis e reações na agenda",
+   "behavior": "Controlar exibição de emojis e filtrar estados ou reações.",
+   "evidence": "H:calendar.viewOptions.showEventEmoji;H:calendar.viewOptions.reactions.completed;V:Screenshot_20261021_101016_referencia.png",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "CAL13",
+   "feature": "Reposicionar eventos",
+   "behavior": "Arrastar eventos para outro horário, respeitando origem e permissão de edição.",
+   "evidence": "H:DayViewDragGhost;H:event.moveUnavailable",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "CAL14",
+   "feature": "Calendários somente leitura",
+   "behavior": "Indicar origem e impedir edição de eventos sem permissão.",
+   "evidence": "R:calendar_readonly_event_message",
+   "deps": "L/X",
+   "phase": "P1"
+  },
+  {
+   "id": "CAL15",
+   "feature": "Catálogo de calendários assináveis",
+   "behavior": "Pesquisar e assinar calendários temáticos de um catálogo.",
+   "evidence": "H:calendar.subscriptions.searchPlaceholder;H:/referencia/ical-feed-catalog",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "EVT01",
+   "feature": "Criar e editar evento",
+   "behavior": "Gerenciar título, início, fim, calendário e demais atributos.",
+   "evidence": "R:event_edit_title_new;H:event.dateTimeEdit.title",
+   "deps": "L",
+   "phase": "P0"
+  },
+  {
+   "id": "EVT02",
+   "feature": "Dia inteiro e vários dias",
+   "behavior": "Representar eventos sem hora e compromissos que atravessam datas.",
+   "evidence": "H:event.allDay;H:event.multiDayLabel",
+   "deps": "L",
+   "phase": "P0"
+  },
+  {
+   "id": "EVT03",
+   "feature": "Localização do evento",
+   "behavior": "Buscar local, editar endereço e abrir em aplicativo de mapas.",
+   "evidence": "H:event.locationPopover.edit;H:event.locationPopover.findInMaps",
+   "deps": "L/X",
+   "phase": "P1"
+  },
+  {
+   "id": "EVT04",
+   "feature": "Notas e checklist no evento",
+   "behavior": "Adicionar texto ou lista de verificação às notas.",
+   "evidence": "H:event.notes.modeChecklist;H:event.notes.modeText",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "EVT05",
+   "feature": "Participantes",
+   "behavior": "Adicionar e remover convidados do evento.",
+   "evidence": "H:event.actionMenu.addAttendees;C:Attendees",
+   "deps": "L/S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "EVT06",
+   "feature": "Anexos do evento",
+   "behavior": "Representar e baixar anexos associados ao compromisso.",
+   "evidence": "H:event.attachments.downloadPromptMessage;C:EventAttachment",
+   "deps": "L/S",
+   "phase": "P2"
+  },
+  {
+   "id": "EVT07",
+   "feature": "Repetição periódica",
+   "behavior": "Configurar recorrência diária, semanal, mensal ou anual e intervalos.",
+   "evidence": "C:RecurrenceRules;H:event.dateTimeEdit.repeat",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "EVT08",
+   "feature": "Término da recorrência",
+   "behavior": "Definir término por data, contagem ou sem limite.",
+   "evidence": "H:event.dateTimeEdit.repeatCount;H:event.dateTimeEdit.endRepeatsOn",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "EVT09",
+   "feature": "Editar ocorrência ou série",
+   "behavior": "Escolher somente esta, esta e próximas ou toda a série.",
+   "evidence": "H:event.recurringScopeOptions.onlyThisEvent;H:event.recurringScopeOptions.thisAndFollowingEvents",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "EVT10",
+   "feature": "Excluir ocorrência ou série",
+   "behavior": "Aplicar escopo de exclusão aos eventos recorrentes.",
+   "evidence": "H:event.deleteModal.chooseRecurringScopeTitle",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "EVT11",
+   "feature": "Múltiplos lembretes",
+   "behavior": "Configurar mais de um aviso antes ou depois do evento.",
+   "evidence": "H:event.alarm.additionalAlarms;H:event.alarm.hourAfter",
+   "deps": "L/N",
+   "phase": "P1"
+  },
+  {
+   "id": "EVT12",
+   "feature": "Regras para dia inteiro",
+   "behavior": "Configurar avisos no dia, no anterior ou no seguinte.",
+   "evidence": "H:event.alarm.allDay.dayBefore;H:event.alarm.allDay.onTheDay",
+   "deps": "L/N",
+   "phase": "P1"
+  },
+  {
+   "id": "EVT13",
+   "feature": "Conversa vinculada ao evento",
+   "behavior": "Pedir alterações em um chat contextual do compromisso.",
+   "evidence": "H:event.sheet.chatInputPlaceholder",
+   "deps": "L/A",
+   "phase": "P1"
+  },
+  {
+   "id": "EVT14",
+   "feature": "Emoji do evento",
+   "behavior": "Escolher ou receber recomendação de emoji.",
+   "evidence": "H:event.emojiRecommend",
+   "deps": "L/A",
+   "phase": "P2"
+  },
+  {
+   "id": "EVT15",
+   "feature": "Link de reunião",
+   "behavior": "Abrir chamada ou reunião a partir da agenda.",
+   "evidence": "H:home.now.joinMeeting;C:ConferenceInfo",
+   "deps": "L/X",
+   "phase": "P1"
+  },
+  {
+   "id": "TSK01",
+   "feature": "Criar e editar afazer",
+   "behavior": "Gerenciar título e notas de uma tarefa independente de evento.",
+   "evidence": "H:seeds.newSeed;H:seeds.sheet.notesPlaceholder;V:Screenshot_20261021_101004_referencia.png",
+   "deps": "L",
+   "phase": "P0"
+  },
+  {
+   "id": "TSK02",
+   "feature": "Concluir e reabrir",
+   "behavior": "Marcar conclusão, reabrir e desfazer ação recente.",
+   "evidence": "H:seeds.sheet.markCompleteAction;H:seeds.sheet.incompleteAction",
+   "deps": "L",
+   "phase": "P0"
+  },
+  {
+   "id": "TSK03",
+   "feature": "Prazo e horário",
+   "behavior": "Definir data, hora ou prazo de dia inteiro.",
+   "evidence": "H:seeds.sheet.dueTimeTitle;H:seeds.sheet.allDayLabel",
+   "deps": "L",
+   "phase": "P0"
+  },
+  {
+   "id": "TSK04",
+   "feature": "Listas próprias",
+   "behavior": "Criar, renomear, colorir, trocar e excluir listas.",
+   "evidence": "H:seeds.lists.createAction;H:seeds.lists.colorLabel",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "TSK05",
+   "feature": "Mover entre listas",
+   "behavior": "Alterar a lista à qual o afazer pertence.",
+   "evidence": "H:seeds.sheet.changeListAction",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "TSK06",
+   "feature": "Subtarefas",
+   "behavior": "Adicionar e gerenciar itens subordinados.",
+   "evidence": "H:seeds.sheet.addSubTodo",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "TSK07",
+   "feature": "Importância",
+   "behavior": "Marcar nível de importância de uma tarefa.",
+   "evidence": "H:seeds.sheet.importanceAction",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "TSK08",
+   "feature": "Ordenação",
+   "behavior": "Ordenar itens e persistir mudanças de posição.",
+   "evidence": "H:seeds.sort.action;H:seeds.sheet.reorderFailedToast",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "TSK09",
+   "feature": "Notificações de prazo",
+   "behavior": "Programar avisos no vencimento ou depois dele.",
+   "evidence": "H:seeds.sheet.notificationAtDueTime;H:seeds.sheet.notificationDayAfterDue",
+   "deps": "L/N",
+   "phase": "P1"
+  },
+  {
+   "id": "TSK10",
+   "feature": "Repetição após concluir",
+   "behavior": "Repetir após determinado número de horas, dias, semanas, meses ou anos da conclusão.",
+   "evidence": "H:seeds.sheet.repeatAfterCompletionDay;H:seeds.sheet.repeatAfterCompletionMonth",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "TSK11",
+   "feature": "Histórico de conclusões",
+   "behavior": "Consultar quando as ocorrências de uma tarefa foram concluídas.",
+   "evidence": "H:seeds.sheet.completionHistoryTitle",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "TSK12",
+   "feature": "Recorrência e série de subtarefas",
+   "behavior": "Aplicar edição e exclusão a séries de afazeres e subtarefas.",
+   "evidence": "H:seeds.sheet.occurrence.deleteSubTodoSeriesConfirmTitle",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "TSK13",
+   "feature": "Sugestão de horário",
+   "behavior": "Pedir recomendação para encaixar um afazer na agenda.",
+   "evidence": "H:seeds.sheet.timeRecommendationAction",
+   "deps": "L/A",
+   "phase": "P2"
+  },
+  {
+   "id": "TSK14",
+   "feature": "Converter em compromisso",
+   "behavior": "Transformar ou agendar um afazer como evento.",
+   "evidence": "H:seeds.sheet.convertingToEvent;H:seeds.sheet.scheduleSuccessToast",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "TSK15",
+   "feature": "Discussão por tarefa",
+   "behavior": "Manter conversa ligada à tarefa ou ocorrência.",
+   "evidence": "H:seeds.sheet.threadPlaceholder",
+   "deps": "L/A",
+   "phase": "P1"
+  },
+  {
+   "id": "TSK16",
+   "feature": "Limpeza de concluídas",
+   "behavior": "Remover afazeres concluídos em lote, mediante confirmação.",
+   "evidence": "H:seeds.sheet.deleteAllCompletedMessage",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "TSK17",
+   "feature": "Listas compartilhadas",
+   "behavior": "Há indicação de listas compartilhadas; papéis e permissões ainda precisam ser validados.",
+   "evidence": "H:seeds.lists.shared",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "REM01",
+   "feature": "Lembretes locais",
+   "behavior": "Agendar notificações de evento sem depender de uma conexão ativa no momento do aviso.",
+   "evidence": "C:EventReminderReceiver;C:ReminderScheduleMethod",
+   "deps": "L/N",
+   "phase": "P1"
+  },
+  {
+   "id": "REM02",
+   "feature": "Aviso local em tela de chamada",
+   "behavior": "Mostrar lembrete com aparência de chamada; separar isso de uma ligação telefônica real.",
+   "evidence": "C:LocalCallReminderActivity",
+   "deps": "L/N/V",
+   "phase": "P2"
+  },
+  {
+   "id": "REM03",
+   "feature": "Fala de lembrete",
+   "behavior": "Gerar áudio de lembrete para eventos e tarefas, com alternativa local ou previamente armazenada.",
+   "evidence": "C:ReminderSpeechRequest;C:TodoReminderSpeechRequest",
+   "deps": "L/V",
+   "phase": "P2"
+  },
+  {
+   "id": "REM04",
+   "feature": "Sons configuráveis",
+   "behavior": "Selecionar som para mensagem, evento e chamada.",
+   "evidence": "R:notification_settings_notification_sounds",
+   "deps": "L/N",
+   "phase": "P1"
+  },
+  {
+   "id": "REM05",
+   "feature": "Preferências padrão",
+   "behavior": "Definir duração e padrões de aviso para eventos e eventos de dia inteiro.",
+   "evidence": "R:notification_settings_default_event_settings",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "REM06",
+   "feature": "Diagnóstico de permissões",
+   "behavior": "Mostrar estado de notificações, alarmes exatos e avisos em tela cheia.",
+   "evidence": "R:permission_exact_alarm;R:permission_full_screen_notification",
+   "deps": "N",
+   "phase": "P1"
+  },
+  {
+   "id": "REM07",
+   "feature": "Diagnóstico de bateria",
+   "behavior": "Explicar restrições de uso em segundo plano conforme o aparelho.",
+   "evidence": "R:background_activities_title;R:battery_optimization_title",
+   "deps": "N",
+   "phase": "P2"
+  },
+  {
+   "id": "REM08",
+   "feature": "Recuperação após reinício",
+   "behavior": "Reconciliar lembretes após reiniciar aparelho ou atualizar agenda.",
+   "evidence": "C:LocalReminderRecoveryReceiver;C:ReminderRecoveryReason",
+   "deps": "L/N",
+   "phase": "P1"
+  },
+  {
+   "id": "REM09",
+   "feature": "Lista de lembretes locais",
+   "behavior": "Permitir conferir avisos e chamadas locais programadas.",
+   "evidence": "R:local_reminders_list_title;R:local_call_list_title",
+   "deps": "L/N",
+   "phase": "P2"
+  },
+  {
+   "id": "REM10",
+   "feature": "Atualização de alarmes",
+   "behavior": "Cancelar ou reagendar avisos quando item ou recorrência mudar.",
+   "evidence": "C:ReminderScheduleReason;C:ReminderRefreshMode",
+   "deps": "L/N",
+   "phase": "P1"
+  },
+  {
+   "id": "REM11",
+   "feature": "Avisos por mensageiros",
+   "behavior": "Enviar avisos a canais de mensagens conectados, usando integrações próprias.",
+   "evidence": "R:notification_settings_im_messaging_notifications",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "CON01",
+   "feature": "Cadastro e edição de contato",
+   "behavior": "Gerenciar nomes, apelido, e-mails, telefone e anotação.",
+   "evidence": "R:contact_nickname;R:contact_user_note_placeholder",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CON02",
+   "feature": "Aniversário e atributos opcionais",
+   "behavior": "Guardar aniversário e demais campos opcionais do perfil.",
+   "evidence": "R:contact_birthday;R:contact_gender",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "CON03",
+   "feature": "Foto do contato",
+   "behavior": "Representar e visualizar avatar.",
+   "evidence": "R:contact_view_profile_photo;C:ContactAvatarResponse",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "CON04",
+   "feature": "Busca de contatos",
+   "behavior": "Pesquisar pessoas pelo cadastro.",
+   "evidence": "R:contacts_search_placeholder",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CON05",
+   "feature": "Grupos de contatos",
+   "behavior": "Criar e excluir grupos de pessoas.",
+   "evidence": "R:contact_group_create;R:contact_group_delete_title",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "CON06",
+   "feature": "Importação do aparelho",
+   "behavior": "Selecionar todos ou alguns contatos locais para importar.",
+   "evidence": "R:contacts_phone_picker_select_all;R:contacts_import_from_phone_action;V:Screenshot_20261021_101041_referencia.png",
+   "deps": "N",
+   "phase": "P2"
+  },
+  {
+   "id": "CON07",
+   "feature": "Importação Google Contacts",
+   "behavior": "Autorizar conta Google, conferir prévia e importar contatos.",
+   "evidence": "R:contacts_import_from_google_action;C:GoogleContactsPreviewResponse;V:Screenshot_20261021_101041_referencia.png",
+   "deps": "S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "CON08",
+   "feature": "Validação de duplicados",
+   "behavior": "Detectar e-mail ou telefone já cadastrado.",
+   "evidence": "R:contact_email_already_exists;R:contact_phone_already_exists",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CON09",
+   "feature": "Sugestões e recentes",
+   "behavior": "Exibir pessoas sugeridas e recentemente contatadas.",
+   "evidence": "R:contacts_may_know_group_title;R:select_contacts_recently_contacted",
+   "deps": "L/S",
+   "phase": "P2"
+  },
+  {
+   "id": "CON10",
+   "feature": "Convidar por endereço",
+   "behavior": "Permitir participante novo informado por e-mail sem cadastro prévio completo.",
+   "evidence": "R:select_contacts_search_placeholder",
+   "deps": "L/S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "COL01",
+   "feature": "Enviar ou omitir e-mail de convite",
+   "behavior": "Salvar participantes escolhendo se a comunicação deve ser enviada.",
+   "evidence": "R:select_contacts_send_email_title;R:select_contacts_send_email_skip",
+   "deps": "S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "COL02",
+   "feature": "Responder a convite",
+   "behavior": "Aceitar, recusar ou responder talvez.",
+   "evidence": "H:event.invitation.accept;H:event.invitation.maybe;H:event.invitation.reject",
+   "deps": "S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "COL03",
+   "feature": "Resposta com mensagem",
+   "behavior": "Adicionar texto à resposta do convite.",
+   "evidence": "H:event.invitation.replyWithMessage",
+   "deps": "S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "COL04",
+   "feature": "Impacto do convite na agenda",
+   "behavior": "Mostrar conflitos e possíveis ajustes antes da confirmação.",
+   "evidence": "H:jsonRenderScheduleInvitation.viewCalendarImpact",
+   "deps": "L/A",
+   "phase": "P2"
+  },
+  {
+   "id": "COL05",
+   "feature": "Sugestões de resolução de conflito",
+   "behavior": "Comparar antes e depois, sugerir mudança e confirmar ajustes.",
+   "evidence": "H:jsonRenderScheduleConflict.preview;H:jsonRenderScheduleConflict.confirmAdjustments",
+   "deps": "L/A",
+   "phase": "P2"
+  },
+  {
+   "id": "COL06",
+   "feature": "Nova coordenação por e-mail",
+   "behavior": "Criar solicitação com participantes e objetivo em linguagem natural.",
+   "evidence": "H:kiwi.composer.requestPlaceholderMany;H:/referencia/kiwi/coordinations",
+   "deps": "S/A/X",
+   "phase": "P3"
+  },
+  {
+   "id": "COL07",
+   "feature": "Gerenciar participantes da coordenação",
+   "behavior": "Adicionar e retirar pessoas e salvar novos contatos.",
+   "evidence": "H:kiwi.addParticipant.addEmail;H:kiwi.addToContacts.confirm",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "COL08",
+   "feature": "Estados da coordenação",
+   "behavior": "Listar aguardando abordagem, aguardando resposta, aguardando confirmação e concluídas.",
+   "evidence": "H:kiwi.list.awaitingRepliesTab;H:kiwi.list.awaitingConfirmationTab",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "COL09",
+   "feature": "Histórico de e-mails",
+   "behavior": "Exibir remetentes, destinatários, citações, anexos e convites de calendário.",
+   "evidence": "H:kiwi.email.showEarlierQuotedContent;H:kiwi.email.calendarInvite",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "COL10",
+   "feature": "Conversa contextual da coordenação",
+   "behavior": "Pedir explicações ou mudanças sobre a negociação.",
+   "evidence": "H:kiwi.sheet.chatPlaceholder",
+   "deps": "S/A",
+   "phase": "P3"
+  },
+  {
+   "id": "COL11",
+   "feature": "Pausar, retomar e encerrar",
+   "behavior": "Administrar ciclo de vida da coordenação e tratar estados somente leitura.",
+   "evidence": "H:kiwi.close.confirmTitle;H:kiwi.quota.resumeFailed",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "COL12",
+   "feature": "Notas de coordenação",
+   "behavior": "Atualizar instruções e observações de uma negociação.",
+   "evidence": "H:kiwi.notes.title;H:kiwi.notes.updateHint",
+   "deps": "S/A",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG01",
+   "feature": "Tipos de agendamento",
+   "behavior": "Criar vários tipos de atendimento ou reunião.",
+   "evidence": "H:bookingList.typesSection;H:bookingConfig.createAction;V:Screenshot_20261021_101107_referencia.png",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG02",
+   "feature": "Título e apresentação",
+   "behavior": "Configurar nome e descrição mostrados ao visitante.",
+   "evidence": "H:bookingConfig.nameLabel;H:bookingConfig.descriptionForBooker",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG03",
+   "feature": "URL personalizada",
+   "behavior": "Escolher identificador, validar disponibilidade e compartilhar link.",
+   "evidence": "H:bookingConfig.slugLabel;H:bookingConfig.shareLink",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG04",
+   "feature": "Duração e fuso",
+   "behavior": "Configurar duração do atendimento e fuso da página.",
+   "evidence": "H:bookingConfig.durationLabel;H:bookingConfig.timezoneLabel",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG05",
+   "feature": "Janelas de disponibilidade",
+   "behavior": "Definir dias e faixas de trabalho, evitando intervalos sobrepostos.",
+   "evidence": "H:bookingConfig.workingHoursLabel;H:bookingConfig.workingHoursOverlap",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG06",
+   "feature": "Antecedência e horizonte",
+   "behavior": "Definir prazo mínimo para reservar e distância máxima no futuro.",
+   "evidence": "H:bookingConfig.minNoticeLabel;H:bookingConfig.maxDaysLabel",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG07",
+   "feature": "Intervalo entre reuniões",
+   "behavior": "Configurar margem entre reservas.",
+   "evidence": "H:bookingConfig.bufferLabel",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG08",
+   "feature": "Calendários de conflito e destino",
+   "behavior": "Escolher calendários consultados e calendário que recebe a reserva.",
+   "evidence": "H:bookingConfig.conflictCalendarsLabel;H:bookingConfig.hostCalendarLabel",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG09",
+   "feature": "Local ou reunião virtual",
+   "behavior": "Escolher encontro presencial ou vídeo e representar requisitos do provedor.",
+   "evidence": "H:bookingConfig.locationInPerson;H:bookingConfig.locationVideo",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG10",
+   "feature": "Criar página por conversa",
+   "behavior": "Gerar rascunho com requisitos pendentes, prévia e publicação.",
+   "evidence": "H:bookingConfigChat.requirementsLabel;H:bookingConfig.draftPublish",
+   "deps": "S/A",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG11",
+   "feature": "Visão do visitante",
+   "behavior": "Visualizar perfil e tipos disponíveis como outra pessoa.",
+   "evidence": "H:bookingList.viewVisitorView;H:bookingProfile.chooseType",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG12",
+   "feature": "Reserva pelo visitante",
+   "behavior": "Selecionar dia e horário, mudar fuso e confirmar reserva.",
+   "evidence": "H:booking.changeTimezone;H:booking.confirmCta",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG13",
+   "feature": "Perguntas ao visitante",
+   "behavior": "Coletar respostas obrigatórias e opcionais.",
+   "evidence": "H:booking.answerRequired;H:booking.answerOptional",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG14",
+   "feature": "Concorrência de reservas",
+   "behavior": "Tratar horário ocupado entre seleção e confirmação.",
+   "evidence": "H:booking.errorSlotTaken",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG15",
+   "feature": "Histórico e cancelamento",
+   "behavior": "Listar reservas, abrir evento e cancelar com confirmação.",
+   "evidence": "H:bookingRecord.cancelConfirmTitle;H:bookingRecord.viewEvent",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG16",
+   "feature": "Solicitações ao anfitrião",
+   "behavior": "Aceitar, recusar ou propor outra opção para um pedido.",
+   "evidence": "H:bookingHostRequests.decision.accept;H:bookingHostRequests.decision.propose",
+   "deps": "S/A",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG17",
+   "feature": "Chat do visitante com assistente",
+   "behavior": "Permitir conversa de agendamento conforme política de acesso.",
+   "evidence": "H:bookingProfile.chatWithAssistant",
+   "deps": "S/A",
+   "phase": "P3"
+  },
+  {
+   "id": "BKG18",
+   "feature": "Bloqueio de visitante",
+   "behavior": "Bloquear e desbloquear conversa de um convidado.",
+   "evidence": "H:bookingGuestConversation.block;H:bookingGuestConversation.unblock",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "IBX01",
+   "feature": "Caixa de entrada consolidada",
+   "behavior": "Exibir itens derivados de fontes conectadas.",
+   "evidence": "H:home.inbox.title;H:home.inbox.sources.",
+   "deps": "L/S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "IBX02",
+   "feature": "Pendências e concluídos",
+   "behavior": "Alternar itens ativos e tratados, mostrando vencimentos.",
+   "evidence": "H:home.inbox.tabs.active;H:home.inbox.tabs.done;H:home.inbox.status.overdue",
+   "deps": "L/S",
+   "phase": "P2"
+  },
+  {
+   "id": "IBX03",
+   "feature": "Aceitar ou dispensar sugestão",
+   "behavior": "Aplicar ou rejeitar proposta de ação.",
+   "evidence": "H:jsonRenderInboxProposal.accept;H:jsonRenderInboxProposal.dismiss",
+   "deps": "L/S/A",
+   "phase": "P2"
+  },
+  {
+   "id": "IBX04",
+   "feature": "Ajustar prazo da proposta",
+   "behavior": "Adicionar ou editar data de vencimento antes de aceitar.",
+   "evidence": "H:jsonRenderInboxProposal.addDueDate;H:jsonRenderInboxProposal.editDueDate",
+   "deps": "L/S",
+   "phase": "P2"
+  },
+  {
+   "id": "IBX05",
+   "feature": "Origem e mensagem original",
+   "behavior": "Exibir resumo, fonte e acesso ao conteúdo de origem.",
+   "evidence": "H:home.inbox.sourceWithSummary;H:jsonRenderInboxProposal.openOriginal",
+   "deps": "L/S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "IBX06",
+   "feature": "Rascunhar resposta de e-mail",
+   "behavior": "Editar resposta sugerida e indicar envio concluído.",
+   "evidence": "H:jsonRenderInboxProposal.mailReply.edit;H:jsonRenderInboxProposal.mailReply.replySent",
+   "deps": "S/A/X",
+   "phase": "P3"
+  },
+  {
+   "id": "IBX07",
+   "feature": "Tratamento de convites recebidos",
+   "behavior": "Avaliar convites de fonte automática, arquivo ICS ou texto colado.",
+   "evidence": "H:inviteAssistant.source.ics;H:inviteAssistant.source.paste",
+   "deps": "L/S/A",
+   "phase": "P2"
+  },
+  {
+   "id": "IBX08",
+   "feature": "Política de triagem",
+   "behavior": "Definir rigor, formalidade, instruções e assinatura para o assistente de convites.",
+   "evidence": "H:inviteAssistantEdit.screeningLabel;H:inviteAssistantEdit.signatureLabel",
+   "deps": "L/S/A",
+   "phase": "P3"
+  },
+  {
+   "id": "IBX09",
+   "feature": "Automação da triagem",
+   "behavior": "Escolher tratamento automático de todos, apenas sinalizados ou nenhum.",
+   "evidence": "H:inviteAssistant.autoHandle.flagged_only;H:inviteAssistant.autoHandle.off",
+   "deps": "S/A",
+   "phase": "P3"
+  },
+  {
+   "id": "IBX10",
+   "feature": "Central de notificações",
+   "behavior": "Agrupar atualizações, categorias e leitura de avisos.",
+   "evidence": "H:home.notifications.categories.;H:/referencia/notifications/read",
+   "deps": "L/S",
+   "phase": "P1"
+  },
+  {
+   "id": "AUT01",
+   "feature": "Criar automação por conversa",
+   "behavior": "Descrever o que acompanhar ou executar em linguagem natural.",
+   "evidence": "H:chat.emptyState.createTrigger",
+   "deps": "L/A/S",
+   "phase": "P3"
+  },
+  {
+   "id": "AUT02",
+   "feature": "Execução única",
+   "behavior": "Programar uma automação para um instante específico.",
+   "evidence": "H:triggers.onetime.runTime",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "AUT03",
+   "feature": "Execução recorrente",
+   "behavior": "Definir intervalo em horas, dias, semanas, meses ou anos.",
+   "evidence": "H:triggers.detail.scheduleUnitHour;H:triggers.detail.scheduleUnitYear",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "AUT04",
+   "feature": "Limites da programação",
+   "behavior": "Validar término, agenda e número máximo de execuções.",
+   "evidence": "H:triggers.errors.endTimeBeforeTrigger;H:triggers.errors.invalidMaxRuns",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "AUT05",
+   "feature": "Executar agora",
+   "behavior": "Disparar uma avaliação manual e mostrar conclusão.",
+   "evidence": "H:triggers.detail.runNowAction",
+   "deps": "S/A",
+   "phase": "P3"
+  },
+  {
+   "id": "AUT06",
+   "feature": "Ativar, pausar e arquivar",
+   "behavior": "Administrar automações ativas, pausadas e encerradas.",
+   "evidence": "H:triggers.recurring.paused;H:triggers.archived.label;V:Screenshot_20261021_101030_referencia.png",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "AUT07",
+   "feature": "Reiniciar ou excluir",
+   "behavior": "Reativar item arquivado ou excluir com confirmação.",
+   "evidence": "H:triggers.archived.restart;H:triggers.detail.deleteConfirmTitle",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "AUT08",
+   "feature": "Histórico de execuções",
+   "behavior": "Consultar resultados, falhas, contagem e fontes.",
+   "evidence": "H:triggers.detail.executedHistory;H:triggers.runDetail.sources",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "AUT09",
+   "feature": "Condição atendida",
+   "behavior": "Distinguir execução com condição atendida de avaliação sem correspondência.",
+   "evidence": "H:triggers.detail.matched;H:triggers.detail.unmet",
+   "deps": "S/A/X",
+   "phase": "P3"
+  },
+  {
+   "id": "AUT10",
+   "feature": "Silenciar condição não atendida",
+   "behavior": "Controlar avisos de verificações que não encontraram o resultado esperado.",
+   "evidence": "H:triggers.detail.muteUnmetResultAction",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "AUT11",
+   "feature": "Resumo diário e exemplos",
+   "behavior": "Há exemplos de resumo diário, câmbio e partidas; são modelos de uso, não garantia de fontes específicas.",
+   "evidence": "H:triggers.empty.examples.dailyBrief.title;H:triggers.empty.examples.exchangeRate.title;V:Screenshot_20261021_101030_referencia.png",
+   "deps": "S/A/X",
+   "phase": "P3"
+  },
+  {
+   "id": "AUT12",
+   "feature": "Clima diário",
+   "behavior": "Agendar atualização de clima em horário configurável.",
+   "evidence": "H:triggers.weather.changeTimeA11y;C:WeatherTask",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "AUT13",
+   "feature": "Resumo semanal programado",
+   "behavior": "Configurar envio ou geração periódica de retrospectiva.",
+   "evidence": "H:triggers.recap.changeTimeA11y;C:RecapTask;V:Screenshot_20261021_101030_referencia.png",
+   "deps": "L/S/A",
+   "phase": "P3"
+  },
+  {
+   "id": "AUT14",
+   "feature": "Conversa da automação",
+   "behavior": "Pedir explicações ou alterar instruções no contexto da automação.",
+   "evidence": "H:triggers.detail.chatInputPlaceholder",
+   "deps": "S/A",
+   "phase": "P3"
+  },
+  {
+   "id": "RAD01",
+   "feature": "Acompanhar um evento",
+   "behavior": "Ativar análise proativa sobre um compromisso específico.",
+   "evidence": "H:event.awareness.trackThisEvent",
+   "deps": "S/A/X",
+   "phase": "P3"
+  },
+  {
+   "id": "RAD02",
+   "feature": "Tipos de acompanhamento",
+   "behavior": "Representar mudanças externas, condições do tempo e deslocamento.",
+   "evidence": "H:event.awareness.watch.external;H:event.awareness.watch.route;H:event.awareness.watch.weather",
+   "deps": "S/A/X",
+   "phase": "P3"
+  },
+  {
+   "id": "RAD03",
+   "feature": "Coleta de contexto faltante",
+   "behavior": "Pedir informações adicionais, permitir pular ou editar respostas.",
+   "evidence": "H:event.awareness.detailsNeeded;H:event.awareness.skipQuestion",
+   "deps": "L/S/A",
+   "phase": "P3"
+  },
+  {
+   "id": "RAD04",
+   "feature": "Nível de risco",
+   "behavior": "Exibir risco baixo, médio, alto, desconhecido ou sem risco identificado.",
+   "evidence": "H:event.awareness.cardHighRiskTitle;H:event.awareness.cardNoRiskTitle",
+   "deps": "S/A/X",
+   "phase": "P3"
+  },
+  {
+   "id": "RAD05",
+   "feature": "Estado e próxima análise",
+   "behavior": "Mostrar monitoramento, pausa, atualização e próxima verificação.",
+   "evidence": "H:event.awareness.cardNextRun;H:event.awareness.cardPaused",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "RAD06",
+   "feature": "Histórico e fechamento",
+   "behavior": "Consultar análises anteriores e encerrar acompanhamento.",
+   "evidence": "H:event.awareness.executedHistory;H:event.awareness.cardClosedTitle",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "RAD07",
+   "feature": "Configuração geral",
+   "behavior": "Ativar ou desativar o recurso para a conta.",
+   "evidence": "H:calendarAwarenessSettings.master.title",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "RAD08",
+   "feature": "Canais e horário de silêncio",
+   "behavior": "Configurar avisos por push ou chamada e intervalo silencioso.",
+   "evidence": "H:calendarAwarenessSettings.quietHours.title;H:calendarAwarenessSettings.phone.title",
+   "deps": "L/N/S",
+   "phase": "P3"
+  },
+  {
+   "id": "RAD09",
+   "feature": "Locais salvos",
+   "behavior": "Cadastrar, editar e excluir locais habituais com rótulos.",
+   "evidence": "H:calendarAwarenessSettings.savedPlaces.addTitle;H:calendarAwarenessSettings.savedPlaces.delete",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "RAD10",
+   "feature": "Busca e escolha no mapa",
+   "behavior": "Pesquisar endereço, usar posição atual ou posicionar marcador.",
+   "evidence": "H:event.awareness.locationPicker.chooseOnMap;H:event.awareness.locationPicker.currentLocation",
+   "deps": "N/X",
+   "phase": "P2"
+  },
+  {
+   "id": "RAD11",
+   "feature": "Contexto de viagem e ocorrências externas",
+   "behavior": "Há referências a voos, shows, clima e rotas; fontes, cobertura e precisão não foram verificadas.",
+   "evidence": "H:O assistente está acompanhando este evento para mudanças de agenda, clima e deslocamento.",
+   "deps": "S/A/X",
+   "phase": "P3"
+  },
+  {
+   "id": "INT01",
+   "feature": "Google Calendar",
+   "behavior": "Conectar calendários e definir quais ler e sincronizar.",
+   "evidence": "R:calendar_account_settings_google_calendar",
+   "deps": "S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "INT02",
+   "feature": "Microsoft 365 Calendar",
+   "behavior": "Conectar calendário Microsoft e representar conta vinculada.",
+   "evidence": "R:calendar_account_settings_outlook",
+   "deps": "S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "INT03",
+   "feature": "iCloud Calendar",
+   "behavior": "Conectar calendário Apple com credenciais específicas suportadas pelo provedor.",
+   "evidence": "R:apple_account_app_specific_password",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "INT04",
+   "feature": "Conta CalDAV",
+   "behavior": "Conectar conta de calendário compatível com CalDAV.",
+   "evidence": "R:calendar_account_settings_caldav",
+   "deps": "S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "INT05",
+   "feature": "Exposição por CalDAV",
+   "behavior": "O original descreve acesso aos próprios calendários por outros aplicativos via CalDAV.",
+   "evidence": "R:calendar_caldav_description",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "INT06",
+   "feature": "Assinatura de URL ICS",
+   "behavior": "Assinar endereço público de calendário, nomear e ignorar alertas opcionais.",
+   "evidence": "R:ical_feed_url_label;R:ical_feed_remove_alerts_label",
+   "deps": "S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "INT07",
+   "feature": "Calendário do aparelho",
+   "behavior": "Selecionar calendários locais e mostrar eventos do dispositivo.",
+   "evidence": "R:device_calendar_show;R:device_calendar_description",
+   "deps": "N",
+   "phase": "P1"
+  },
+  {
+   "id": "INT08",
+   "feature": "Google Tasks",
+   "behavior": "Conectar conta, consultar listas e criar, atualizar ou concluir afazeres.",
+   "evidence": "R:permission_settings_google_tasks_desc;H:seeds.googleTasks.createTaskAction",
+   "deps": "S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "INT09",
+   "feature": "Apple Reminders",
+   "behavior": "Há referências a exibição e sincronização; tratar como integração a validar no iOS.",
+   "evidence": "H:calendar.viewOptions.showIphoneReminders;H:seeds.sheet.remindersSyncTipTitle",
+   "deps": "N/X",
+   "phase": "P3"
+  },
+  {
+   "id": "INT10",
+   "feature": "Notion",
+   "behavior": "Pesquisar conteúdo do workspace conectado.",
+   "evidence": "R:permission_settings_notion_desc",
+   "deps": "S/X/A",
+   "phase": "P3"
+  },
+  {
+   "id": "INT11",
+   "feature": "Slack",
+   "behavior": "Pesquisar conteúdo do workspace conectado.",
+   "evidence": "R:permission_settings_slack_desc",
+   "deps": "S/X/A",
+   "phase": "P3"
+  },
+  {
+   "id": "INT12",
+   "feature": "Todoist",
+   "behavior": "Ler tarefas e projetos; o texto do original declara integração somente leitura.",
+   "evidence": "R:permission_settings_todoist_read_only",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "INT13",
+   "feature": "Calendly",
+   "behavior": "Consultar disponibilidade como contexto de agendamento.",
+   "evidence": "R:permission_settings_calendly_desc",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "INT14",
+   "feature": "Lark",
+   "behavior": "Analisar mensagens diretas ou menções e sugerir itens na Inbox.",
+   "evidence": "R:permission_settings_lark_integration_desc",
+   "deps": "S/X/A",
+   "phase": "P3"
+  },
+  {
+   "id": "INT15",
+   "feature": "WhatsApp, Telegram e LINE",
+   "behavior": "Há vinculação de mensageiros para conversar e receber avisos; implementação exige conectores próprios.",
+   "evidence": "R:account_setting_whatsapp;R:account_setting_telegram;R:account_setting_line",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "INT16",
+   "feature": "Estado da conexão",
+   "behavior": "Exibir conectado, desconectado, erro e necessidade de reconectar.",
+   "evidence": "R:permission_settings_reconnect_required",
+   "deps": "L/S",
+   "phase": "P2"
+  },
+  {
+   "id": "EML01",
+   "feature": "Leitura de Gmail",
+   "behavior": "Ler comunicações conectadas para identificar acontecimentos relevantes.",
+   "evidence": "R:permission_settings_gmail_access_desc",
+   "deps": "S/X/A",
+   "phase": "P3"
+  },
+  {
+   "id": "EML02",
+   "feature": "Leitura de Outlook Mail",
+   "behavior": "Consultar mensagens Outlook e gerar sugestões.",
+   "evidence": "R:permission_settings_outlook_mail_access_desc",
+   "deps": "S/X/A",
+   "phase": "P3"
+  },
+  {
+   "id": "EML03",
+   "feature": "Extrair ações do e-mail",
+   "behavior": "Sugerir eventos, tarefas e prazos a partir das mensagens.",
+   "evidence": "R:permission_settings_gmail_desc",
+   "deps": "S/X/A",
+   "phase": "P3"
+  },
+  {
+   "id": "EML04",
+   "feature": "Permissão de envio separada",
+   "behavior": "Permitir leitura sem conceder autorização para enviar e-mails.",
+   "evidence": "R:mail_send_declined;R:mail_authorize_sending",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "EML05",
+   "feature": "Desconectar caixa postal",
+   "behavior": "Interromper leitura e explicar o efeito ao usuário.",
+   "evidence": "R:mail_disconnect_account_description",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "EML06",
+   "feature": "Endereço próprio do assistente",
+   "behavior": "Disponibilizar endereço persistente em domínio administrado pela nova instalação.",
+   "evidence": "H:assistantMail.claimAction;H:assistantMail.copyEmailAction",
+   "deps": "S/X",
+   "phase": "P3"
+  },
+  {
+   "id": "EML07",
+   "feature": "Identificador público e perfil",
+   "behavior": "Relacionar endereço, perfil e links públicos do assistente.",
+   "evidence": "H:assistantMail.profileCardTitle;H:assistantMail.profileAddressPlaceholder",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "RCP01",
+   "feature": "Retrospectiva semanal",
+   "behavior": "Apresentar resumo das atividades da semana.",
+   "evidence": "H:weeklyRecap.title",
+   "deps": "L/A",
+   "phase": "P2"
+  },
+  {
+   "id": "RCP02",
+   "feature": "Contagem e duração de eventos",
+   "behavior": "Exibir quantidade de compromissos e horas ocupadas.",
+   "evidence": "H:weeklyRecap.eventCount;H:weeklyRecap.hours",
+   "deps": "L",
+   "phase": "P2"
+  },
+  {
+   "id": "RCP03",
+   "feature": "Distribuição por categorias",
+   "behavior": "Resumir tipos de atividade e categorias.",
+   "evidence": "H:weeklyRecap.categories",
+   "deps": "L/A",
+   "phase": "P2"
+  },
+  {
+   "id": "RCP04",
+   "feature": "Compartilhar retrospectiva",
+   "behavior": "Gerar representação compartilhável do resumo.",
+   "evidence": "H:weeklyRecap.share;H:renderWeeklyRecapShareImage",
+   "deps": "L/N",
+   "phase": "P2"
+  },
+  {
+   "id": "RCP05",
+   "feature": "Conteúdo em miniaplicativo",
+   "behavior": "Exibir conteúdos ou resumos interativos embutidos.",
+   "evidence": "C:MiniAppActivity;H:WeeklyRecapMiniApp",
+   "deps": "L/S",
+   "phase": "P3"
+  },
+  {
+   "id": "SYS01",
+   "feature": "Widgets de agenda",
+   "behavior": "Oferecer widgets Android 2x2, 4x2 e 4x4.",
+   "evidence": "C:WidgetProvider2x2;C:WidgetProvider4x4",
+   "deps": "N",
+   "phase": "P2"
+  },
+  {
+   "id": "SYS02",
+   "feature": "Widget de voz",
+   "behavior": "Adicionar atalho de voz em widget 1x1.",
+   "evidence": "C:VoiceWidgetProvider1x1",
+   "deps": "N/V",
+   "phase": "P2"
+  },
+  {
+   "id": "SYS03",
+   "feature": "Atalho de voz no launcher",
+   "behavior": "Criar atalho direto para entrada de voz.",
+   "evidence": "R:add_voice_shortcut_to_home",
+   "deps": "N/V",
+   "phase": "P2"
+  },
+  {
+   "id": "SYS04",
+   "feature": "Adicionar widget pelo aplicativo",
+   "behavior": "Solicitar inclusão e oferecer instruções alternativas no launcher.",
+   "evidence": "R:settings_add_home_widget_title",
+   "deps": "N",
+   "phase": "P2"
+  },
+  {
+   "id": "SYS05",
+   "feature": "Receber compartilhamento",
+   "behavior": "Receber texto e imagens enviados por outros aplicativos.",
+   "evidence": "M:android.intent.action.SEND_MULTIPLE",
+   "deps": "N",
+   "phase": "P1"
+  },
+  {
+   "id": "SYS06",
+   "feature": "Links diretos",
+   "behavior": "Abrir áreas e objetos do aplicativo por URLs e links associados.",
+   "evidence": "M:android.intent.category.BROWSABLE",
+   "deps": "N/S",
+   "phase": "P2"
+  },
+  {
+   "id": "SYS07",
+   "feature": "Atualização de widgets",
+   "behavior": "Atualizar agenda no widget quando os dados mudarem.",
+   "evidence": "C:WidgetRefreshReceiver",
+   "deps": "L/N",
+   "phase": "P2"
+  },
+  {
+   "id": "SYS08",
+   "feature": "Ícone alternativo",
+   "behavior": "Permitir escolha de ícone e explicar eventual necessidade de reinício.",
+   "evidence": "R:appearance_section_app_icon;R:app_icon_restart_title;V:Screenshot_20261021_101122_referencia.png",
+   "deps": "N",
+   "phase": "P3"
+  },
+  {
+   "id": "DAT01",
+   "feature": "Banco local",
+   "behavior": "Guardar mensagens, eventos, relações, contatos e outros estados em armazenamento local.",
+   "evidence": "C:ChatDatabase;C:EventEntity;C:ContactDao",
+   "deps": "L",
+   "phase": "P0"
+  },
+  {
+   "id": "DAT02",
+   "feature": "Alterações offline",
+   "behavior": "Manter alterações pendentes para sincronizar ao retornar a conexão.",
+   "evidence": "R:network_offline_sync_message",
+   "deps": "L/S",
+   "phase": "P2"
+  },
+  {
+   "id": "DAT03",
+   "feature": "Sincronização incremental",
+   "behavior": "Buscar mudanças e atualizar dados de agenda.",
+   "evidence": "H:/referencia/events/sync/changes;D:/app/referencia/sync/events",
+   "deps": "L/S",
+   "phase": "P2"
+  },
+  {
+   "id": "DAT04",
+   "feature": "Atualizações de conversa",
+   "behavior": "Há infraestrutura de eventos de sincronização e WebSocket; protocolo não foi executado.",
+   "evidence": "C:WebSocketReceiveEvent;C:SyncMessagesResponse",
+   "deps": "L/S",
+   "phase": "P2"
+  },
+  {
+   "id": "DAT05",
+   "feature": "Importação e exportação",
+   "behavior": "Importar e exportar dados de eventos; formatos finais precisam ser validados.",
+   "evidence": "H:/referencia/events/transfer/export;H:/referencia/events/transfer/import",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "DAT06",
+   "feature": "Lixeira",
+   "behavior": "Listar itens removidos recentemente.",
+   "evidence": "H:recycleBin.deletedRecently",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "DAT07",
+   "feature": "Restauração seletiva",
+   "behavior": "Restaurar itens selecionados e tratar recuperação parcial.",
+   "evidence": "H:recycleBin.recover;H:recycleBin.recoverPartial",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "DAT08",
+   "feature": "Remoção definitiva",
+   "behavior": "Esvaziar a lixeira ou excluir itens escolhidos mediante confirmação.",
+   "evidence": "H:recycleBin.removeAllConfirmTitle",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "DAT09",
+   "feature": "Diagnóstico de sincronização",
+   "behavior": "Orientar revisão de conta, calendário habilitado e destino padrão.",
+   "evidence": "R:syncing_issue_title",
+   "deps": "L/S/X",
+   "phase": "P2"
+  },
+  {
+   "id": "DAT10",
+   "feature": "Estados de leitura",
+   "behavior": "Sincronizar mensagens e notificações marcadas como lidas.",
+   "evidence": "H:/referencia/chat/read-state;H:/referencia/notifications/read-state",
+   "deps": "L/S",
+   "phase": "P2"
+  },
+  {
+   "id": "CFG01",
+   "feature": "Tema claro, escuro e do sistema",
+   "behavior": "Configurar modo visual.",
+   "evidence": "R:appearance_section_theme;C:ThemeMode;V:Screenshot_20261021_101125_referencia.png",
+   "deps": "L",
+   "phase": "P0"
+  },
+  {
+   "id": "CFG02",
+   "feature": "Idiomas",
+   "behavior": "Há recursos em vários idiomas e opções de voz em português; revisar cobertura real de cada tela.",
+   "evidence": "R:settings_language;A:assets/assistant_voice_options_pt.json;V:Screenshot_20261021_101125_referencia.png",
+   "deps": "L",
+   "phase": "P0"
+  },
+  {
+   "id": "CFG03",
+   "feature": "Acessibilidade do chat",
+   "behavior": "Fornecer rótulos e ações acessíveis para anexos, mensagens e gravação.",
+   "evidence": "H:chat.accessibility.sendMessage;H:chat.accessibility.recordVoiceMessage",
+   "deps": "L",
+   "phase": "P0"
+  },
+  {
+   "id": "CFG04",
+   "feature": "Central de permissões",
+   "behavior": "Exibir estado de integrações e permissões relevantes.",
+   "evidence": "R:permission_settings_title",
+   "deps": "L/N",
+   "phase": "P1"
+  },
+  {
+   "id": "CFG05",
+   "feature": "Feedback com imagens",
+   "behavior": "Enviar relato com e-mail opcional e anexos.",
+   "evidence": "R:feedback_add_image;R:feedback_email_optional",
+   "deps": "L/S",
+   "phase": "P2"
+  },
+  {
+   "id": "CFG06",
+   "feature": "Ajuda e versão",
+   "behavior": "Exibir ajuda, versão e documentos do próprio projeto.",
+   "evidence": "R:about_version;R:about_faq",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CFG07",
+   "feature": "Atualizações do produto",
+   "behavior": "Mostrar novidades e detectar atualização disponível.",
+   "evidence": "R:settings_updates;R:about_find_new_version",
+   "deps": "S",
+   "phase": "P3"
+  },
+  {
+   "id": "CFG08",
+   "feature": "Informações de diagnóstico",
+   "behavior": "Consultar modelo do aparelho, arquitetura e versão do app.",
+   "evidence": "R:device_info_cpu_architecture;R:app_info_version_code",
+   "deps": "N",
+   "phase": "P2"
+  },
+  {
+   "id": "CFG09",
+   "feature": "Estados de erro e reconexão",
+   "behavior": "Tratar indisponibilidade sem perder dados digitados.",
+   "evidence": "R:feedback_network_error;H:chat.sessions.storageError",
+   "deps": "L/S",
+   "phase": "P0"
+  },
+  {
+   "id": "CFG10",
+   "feature": "Sistema de medidas",
+   "behavior": "Escolher métrico, imperial ou configuração do sistema.",
+   "evidence": "R:measurement_system;V:Screenshot_20261021_101125_referencia.png",
+   "deps": "L",
+   "phase": "P1"
+  },
+  {
+   "id": "CFG11",
+   "feature": "Primeiro dia da semana",
+   "behavior": "Escolher domingo, segunda-feira ou padrão do sistema.",
+   "evidence": "R:week_starts_on;V:Screenshot_20261021_101125_referencia.png",
+   "deps": "L",
+   "phase": "P1"
+  }
+ ]
+}

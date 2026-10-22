@@ -1,0 +1,169 @@
+@import "tailwindcss";
+@import "./styles/themes.css";
+
+@layer base {
+  :root {
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Previne o flash de toque cinza padrão no mobile Safari e Android WebKit */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html,
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    min-height: 100dvh;
+  }
+
+  /* Previne zoom automático indesejado no iOS Safari exigindo min 16px */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
+/* Modais, Bottom Sheets e Gavetas: overscroll-behavior-y contain para impedir rubber banding na página de fundo */
+.modal-contain-scroll,
+[role="dialog"],
+.bottom-sheet-container {
+  overscroll-behavior-y: contain;
+}
+
+/* Utilitários dinâmicos de altura viewport para evitar quebras por barra de endereço móvel */
+.h-dvh {
+  height: 100dvh;
+}
+.min-h-dvh {
+  min-height: 100dvh;
+}
+.max-h-dvh {
+  max-height: 100dvh;
+}
+
+/* Safe areas para botões flutuantes, barras inferiores e modais */
+.pb-safe {
+  padding-bottom: max(12px, env(safe-area-inset-bottom, 12px));
+}
+
+.bottom-safe {
+  bottom: max(12px, env(safe-area-inset-bottom, 12px));
+}
+
+/* Sticky hover states: aplica efeitos de hover somente em dispositivos com suporte a hover preciso */
+@media (hover: hover) and (pointer: fine) {
+  .hover-elevate:hover {
+    transform: translateY(-1px);
+    transition: transform 0.15s ease;
+  }
+}
+
+/* Custom scrollbars for Dark Mode */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 9999px;
+}
+@media (hover: hover) and (pointer: fine) {
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+  }
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideRight {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* Emil & Apple Design Spring & Fluid Cubic Bezier Easing */
+:root {
+  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.36s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-left {
+  animation: slideLeft 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-right {
+  animation: slideRight 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Microinterações táteis ativas (Press Feel) */
+.press-scale {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.press-scale:active {
+  transform: scale(0.95);
+}
+
+/* Acessibilidade: Desativação graciosa de animações para preferências de movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-slide-left,
+  .animate-slide-right {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .press-scale:active {
+    transform: none !important;
+  }
+}

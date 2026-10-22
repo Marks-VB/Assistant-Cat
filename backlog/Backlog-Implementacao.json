@@ -1,0 +1,437 @@
+{
+  "version": 2,
+  "items": [
+    {
+      "id": "B01",
+      "title": "Base local e repositório",
+      "priority": "P0",
+      "status": "Concluído no protótipo",
+      "dependsOn": [],
+      "acceptance": "IndexedDB com alternativa e estado de persistência visível.",
+      "reference": "DAT01"
+    },
+    {
+      "id": "B02",
+      "title": "Cinco menus principais",
+      "priority": "P0",
+      "status": "Concluído no protótipo",
+      "dependsOn": [
+        "B01"
+      ],
+      "acceptance": "Chat, Agora, Agenda, Ações e Eu são acessíveis.",
+      "reference": "CAL01"
+    },
+    {
+      "id": "B03",
+      "title": "Eventos manuais",
+      "priority": "P0",
+      "status": "Concluído no protótipo",
+      "dependsOn": [
+        "B01"
+      ],
+      "acceptance": "Criar, editar e excluir evento simples com data, hora e duração.",
+      "reference": "EVT01"
+    },
+    {
+      "id": "B04",
+      "title": "Afazeres básicos",
+      "priority": "P0",
+      "status": "Concluído no protótipo",
+      "dependsOn": [
+        "B01"
+      ],
+      "acceptance": "Criar, concluir, reabrir e excluir tarefa.",
+      "reference": "TSK01/TSK02"
+    },
+    {
+      "id": "B05",
+      "title": "Chat de demonstração",
+      "priority": "P0",
+      "status": "Concluído no protótipo",
+      "dependsOn": [
+        "B01"
+      ],
+      "acceptance": "20 entradas do corpus têm resultado verificado; proposta antes de gravar.",
+      "reference": "CHT02/CHT03"
+    },
+    {
+      "id": "B06",
+      "title": "Execução idempotente",
+      "priority": "P0",
+      "status": "Concluído no protótipo",
+      "dependsOn": [
+        "B03",
+        "B04",
+        "B05"
+      ],
+      "acceptance": "Repetir a confirmação da mesma chave não duplica item.",
+      "reference": "CHT12"
+    },
+    {
+      "id": "B07",
+      "title": "Editor e exportação do gato",
+      "priority": "P0",
+      "status": "Concluído no protótipo",
+      "dependsOn": [
+        "B01"
+      ],
+      "acceptance": "6 pelagens × 3 roupas × 3 óculos; salvar, descartar e baixar SVG.",
+      "reference": "CAT01–CAT08"
+    },
+    {
+      "id": "B08",
+      "title": "Tokens, temas e foco",
+      "priority": "P0",
+      "status": "Concluído no protótipo",
+      "dependsOn": [
+        "B02"
+      ],
+      "acceptance": "Tema claro/escuro, tokens compartilhados e foco visível.",
+      "reference": "CFG01/CFG03"
+    },
+    {
+      "id": "B09",
+      "title": "Backup versionado",
+      "priority": "P0",
+      "status": "Concluído no protótipo",
+      "dependsOn": [
+        "B01"
+      ],
+      "acceptance": "Exportar e validar JSON; rejeitar formato incompatível.",
+      "reference": "DAT05"
+    },
+    {
+      "id": "B10",
+      "title": "Memórias manuais",
+      "priority": "P1",
+      "status": "Concluído no protótipo",
+      "dependsOn": [
+        "B01"
+      ],
+      "acceptance": "Criar, listar e excluir memória local.",
+      "reference": "MEM01/MEM02"
+    },
+    {
+      "id": "B11",
+      "title": "Verificação visual e dispositivos",
+      "priority": "P0",
+      "status": "Planejado",
+      "dependsOn": [
+        "B02",
+        "B07",
+        "B08"
+      ],
+      "acceptance": "Conferir 360/390/768/1440 px, teclado, zoom e leitura de tela.",
+      "reference": "CFG03"
+    },
+    {
+      "id": "B12",
+      "title": "Editar títulos e detalhes de afazeres",
+      "priority": "P1",
+      "status": "Planejado",
+      "dependsOn": [
+        "B04"
+      ],
+      "acceptance": "Editar tarefa sem perder conclusão ou identidade.",
+      "reference": "TSK01/TSK03"
+    },
+    {
+      "id": "B13",
+      "title": "Listas, subtarefas e importância",
+      "priority": "P1",
+      "status": "Planejado",
+      "dependsOn": [
+        "B12"
+      ],
+      "acceptance": "Mover listas e preservar hierarquia sem ciclos.",
+      "reference": "TSK04–TSK08"
+    },
+    {
+      "id": "B14",
+      "title": "Dia inteiro e vários dias",
+      "priority": "P1",
+      "status": "Planejado",
+      "dependsOn": [
+        "B03"
+      ],
+      "acceptance": "Datas civis preservadas na visualização e backup.",
+      "reference": "EVT02"
+    },
+    {
+      "id": "B15",
+      "title": "Modelo de fuso e conversões",
+      "priority": "P1",
+      "status": "Planejado",
+      "dependsOn": [
+        "B03"
+      ],
+      "acceptance": "Armazenar intenção local e instante; casos de DST verificados.",
+      "reference": "EVT01"
+    },
+    {
+      "id": "B16",
+      "title": "Recorrência de eventos",
+      "priority": "P1",
+      "status": "Planejado",
+      "dependsOn": [
+        "B14",
+        "B15"
+      ],
+      "acceptance": "Regras, contagem, término e exceções por ocorrência.",
+      "reference": "EVT07–EVT10"
+    },
+    {
+      "id": "B17",
+      "title": "Recorrência após conclusão",
+      "priority": "P2",
+      "status": "Planejado",
+      "dependsOn": [
+        "B13"
+      ],
+      "acceptance": "Próxima tarefa depende da conclusão real e não duplica a série.",
+      "reference": "TSK10"
+    },
+    {
+      "id": "B18",
+      "title": "Lixeira e restauração",
+      "priority": "P1",
+      "status": "Planejado",
+      "dependsOn": [
+        "B03",
+        "B04"
+      ],
+      "acceptance": "Excluir passa a ser recuperável; restauração mantém relações.",
+      "reference": "DAT06–DAT08"
+    },
+    {
+      "id": "B19",
+      "title": "Pesquisa local",
+      "priority": "P1",
+      "status": "Planejado",
+      "dependsOn": [
+        "B03",
+        "B04"
+      ],
+      "acceptance": "Buscar por título, data, tipo e conclusão com resultados claros.",
+      "reference": "CAL06/CAL07"
+    },
+    {
+      "id": "B20",
+      "title": "Provedor real de IA",
+      "priority": "P1",
+      "status": "Planejado",
+      "dependsOn": [
+        "B05",
+        "B06"
+      ],
+      "acceptance": "Adaptador substituível, payload validado, erro e cancelamento.",
+      "reference": "CHT01"
+    },
+    {
+      "id": "B21",
+      "title": "Memória usada pela IA",
+      "priority": "P2",
+      "status": "Planejado",
+      "dependsOn": [
+        "B10",
+        "B20"
+      ],
+      "acceptance": "Selecionar contexto aprovado; editar, excluir e desativar uso.",
+      "reference": "MEM03/MEM07"
+    },
+    {
+      "id": "B22",
+      "title": "Entrada e síntese de voz",
+      "priority": "P2",
+      "status": "Planejado",
+      "dependsOn": [
+        "B20"
+      ],
+      "acceptance": "Permissão de microfone explícita, transcrição revisável e alternativa textual.",
+      "reference": "INP06–INP09"
+    },
+    {
+      "id": "B23",
+      "title": "Cliente Android e lembretes",
+      "priority": "P1",
+      "status": "Planejado",
+      "dependsOn": [
+        "B15"
+      ],
+      "acceptance": "Agendar, cancelar e reconciliar após reinício em aparelho real.",
+      "reference": "REM01/REM08"
+    },
+    {
+      "id": "B24",
+      "title": "Widgets Android",
+      "priority": "P2",
+      "status": "Planejado",
+      "dependsOn": [
+        "B23"
+      ],
+      "acceptance": "2x2 e 4x2 atualizam a agenda; widget de voz separado.",
+      "reference": "SYS01–SYS03"
+    },
+    {
+      "id": "B25",
+      "title": "Primeiro conector de calendário",
+      "priority": "P2",
+      "status": "Planejado",
+      "dependsOn": [
+        "B15",
+        "B16"
+      ],
+      "acceptance": "Conectar uma conta própria, sincronizar e tratar revogação.",
+      "reference": "INT01/INT04"
+    },
+    {
+      "id": "B26",
+      "title": "Sincronização entre dispositivos",
+      "priority": "P2",
+      "status": "Planejado",
+      "dependsOn": [
+        "B01",
+        "B25"
+      ],
+      "acceptance": "Fila durável, cursores, autorização e conflito de revisão.",
+      "reference": "DAT02–DAT04"
+    },
+    {
+      "id": "B27",
+      "title": "Contatos e participantes",
+      "priority": "P2",
+      "status": "Planejado",
+      "dependsOn": [
+        "B25"
+      ],
+      "acceptance": "Importação selecionada, duplicados, convites e respostas.",
+      "reference": "CON01–CON10"
+    },
+    {
+      "id": "B28",
+      "title": "Retrospectiva semanal",
+      "priority": "P2",
+      "status": "Planejado",
+      "dependsOn": [
+        "B19"
+      ],
+      "acceptance": "Contagem, horas e categorias com cálculo verificável.",
+      "reference": "RCP01–RCP04"
+    },
+    {
+      "id": "B29",
+      "title": "Worker e automação simples",
+      "priority": "P3",
+      "status": "Planejado",
+      "dependsOn": [
+        "B20",
+        "B26"
+      ],
+      "acceptance": "Executar rotina em horário definido com histórico e idempotência.",
+      "reference": "AUT01–AUT08"
+    },
+    {
+      "id": "B30",
+      "title": "Condições e fontes externas",
+      "priority": "P3",
+      "status": "Planejado",
+      "dependsOn": [
+        "B29"
+      ],
+      "acceptance": "Registrar condição atendida ou não, fontes e orçamento.",
+      "reference": "AUT09–AUT14"
+    },
+    {
+      "id": "B31",
+      "title": "Inbox e triagem",
+      "priority": "P3",
+      "status": "Planejado",
+      "dependsOn": [
+        "B20",
+        "B25"
+      ],
+      "acceptance": "Sugestão tem origem, revisão, aceitação ou descarte.",
+      "reference": "IBX01–IBX05"
+    },
+    {
+      "id": "B32",
+      "title": "Conector de e-mail",
+      "priority": "P3",
+      "status": "Planejado",
+      "dependsOn": [
+        "B26",
+        "B31"
+      ],
+      "acceptance": "Leitura e envio têm capacidades separadas e autorização própria.",
+      "reference": "EML01–EML05"
+    },
+    {
+      "id": "B33",
+      "title": "Coordenação de reuniões",
+      "priority": "P3",
+      "status": "Planejado",
+      "dependsOn": [
+        "B27",
+        "B32"
+      ],
+      "acceptance": "Participantes, estados, rascunhos, respostas e confirmação de evento.",
+      "reference": "COL06–COL12"
+    },
+    {
+      "id": "B34",
+      "title": "Página pública de agendamento",
+      "priority": "P3",
+      "status": "Planejado",
+      "dependsOn": [
+        "B25",
+        "B26"
+      ],
+      "acceptance": "Disponibilidade e reserva atômica; duas abas não reservam a mesma vaga.",
+      "reference": "BKG01–BKG18"
+    },
+    {
+      "id": "B35",
+      "title": "Radar de agenda",
+      "priority": "P3",
+      "status": "Planejado",
+      "dependsOn": [
+        "B30"
+      ],
+      "acceptance": "Explicar risco, origem, última avaliação e próximo acompanhamento.",
+      "reference": "RAD01–RAD11"
+    },
+    {
+      "id": "B36",
+      "title": "Novas pelagens e peças",
+      "priority": "P1",
+      "status": "Planejado",
+      "dependsOn": [
+        "B07"
+      ],
+      "acceptance": "Persa/branco e novas roupas preservam geometria e compatibilidade.",
+      "reference": "CAT12"
+    },
+    {
+      "id": "B37",
+      "title": "Adaptação para arquitetura de produto",
+      "priority": "P1",
+      "status": "Planejado",
+      "dependsOn": [
+        "B11"
+      ],
+      "acceptance": "Separar pacotes e migrar interface conforme decisão documentada, preservando dados.",
+      "reference": "NEW10"
+    },
+    {
+      "id": "B38",
+      "title": "Preparação do repositório público",
+      "priority": "P1",
+      "status": "Planejado",
+      "dependsOn": [
+        "B11"
+      ],
+      "acceptance": "README, licença, contribuição, execução reproduzível e revisão de dependências.",
+      "reference": "CFG06"
+    }
+  ]
+}

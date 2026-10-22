@@ -1,0 +1,152 @@
+[
+  {
+    "file": "artes/icones/01-default.png",
+    "title": "Ícone Default",
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG",
+    "bytes": 1452363,
+    "sha256": "4255190eb9623da1b0fc7d2274e65b5a1a8381ce4c83d42495c68e341bb6a403",
+    "generation": "imagegen"
+  },
+  {
+    "file": "artes/icones/02-cyberpunk-neon.png",
+    "title": "Ícone Cyberpunk / Neon",
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG",
+    "bytes": 1916963,
+    "sha256": "f4820e9541dfda7948a4b85ba226c0acd07b3c47e7ff4c540c94bd811275715f",
+    "generation": "imagegen"
+  },
+  {
+    "file": "artes/icones/03-dark-pitch-black.png",
+    "title": "Ícone Dark / Pitch Black",
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG",
+    "bytes": 885839,
+    "sha256": "b6618d60020e5fa73b0fc032124351a3d208b1b95f5f2a92f903f5ba363859c9",
+    "generation": "imagegen"
+  },
+  {
+    "file": "artes/icones/04-white-ceramic.png",
+    "title": "Ícone White / Ceramic",
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG",
+    "bytes": 1627274,
+    "sha256": "847ddb258fdf929313c8b94c3f8566963a28372abe7494c83a96dd1c832d1810",
+    "generation": "imagegen"
+  },
+  {
+    "file": "artes/icones/05-anime-neo-tokyo.png",
+    "title": "Ícone Anime / Neo-Tokyo",
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG",
+    "bytes": 2000547,
+    "sha256": "38ca011d40d81a276bd6076b821e041c7e7ed99f6e6f8a97f1e60c0902ad2ba8",
+    "generation": "imagegen"
+  },
+  {
+    "file": "artes/icones/06-golden-obsidian.png",
+    "title": "Ícone Golden / Obsidian",
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG",
+    "bytes": 1788474,
+    "sha256": "07ff280fa5b7dba8aa6c46e3d482de63b698d23ad253588486ab799f1e7f4495",
+    "generation": "imagegen"
+  },
+  {
+    "file": "artes/avatares/00-quatro-avatares-minimalistas.png",
+    "title": "Prancha inicial: quatro avatares",
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG",
+    "bytes": 1303653,
+    "sha256": "69b02c14070af5cfa856270f281dbc0796995f705aff29b92c7c8a2550340d79",
+    "generation": "imagegen"
+  },
+  {
+    "file": "artes/estudos/dark-estudo-olhos-coloridos.png",
+    "title": "Estudo Dark anterior à versão monocromática",
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG",
+    "bytes": 888601,
+    "sha256": "09f8ed80c30306755bebb2d697f14a8d8875afaba909e608930279af56cc1b86",
+    "generation": "imagegen"
+  },
+  {
+    "file": "artes/estudos/laranja-cartoon-flat.png",
+    "title": "Estudo Laranja em estilo cartoon flat",
+    "width": 2172,
+    "height": 724,
+    "format": "PNG",
+    "bytes": 1497066,
+    "sha256": "897cea64008ee09cf3fd17aabafe3eff496cca39d4fa069c2ebd497eed14c2cb",
+    "generation": "imagegen"
+  },
+  {
+    "file": "artes/avatares/minimalistas/01-frajola-minimalista.png",
+    "title": "01 Frajola Minimalista",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "bytes": 1230873,
+    "sha256": "8b938be94aecd6d3985a99183191d284880ab8d6c1e8463d3bd62b9e22153f31",
+    "generation": "imagegen"
+  },
+  {
+    "file": "artes/avatares/minimalistas/02-laranja-minimalista.png",
+    "title": "02 Laranja Minimalista",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "bytes": 1195388,
+    "sha256": "dcd156ad670b0c23d7bd0e7dfb9254d81a7f651e5ce03813386d69cb32ba146b",
+    "generation": "imagegen"
+  },
+  {
+    "file": "artes/avatares/minimalistas/03-siames-minimalista.png",
+    "title": "03 Siames Minimalista",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "bytes": 1224135,
+    "sha256": "02016c02715788cf44e75f8583d3bd48f6c77513f150fe049f33c7db6e48eb7b",
+    "generation": "imagegen"
+  },
+  {
+    "file": "artes/avatares/minimalistas/04-tricolor-minimalista.png",
+    "title": "04 Tricolor Minimalista",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "bytes": 1238441,
+    "sha256": "cfbd74a868fb9af099d5c26448ac34462c6a64910cd4242e358e2dea70d5259c",
+    "generation": "imagegen"
+  },
+  {
+    "file": "artes/avatares/minimalistas/05-preto-minimalista.png",
+    "title": "05 Preto Minimalista",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "bytes": 1200145,
+    "sha256": "1e6d10cc1ddb44f28183b03e18cc411cd5b2d9460bccc3b8d31eac166388a458",
+    "generation": "imagegen"
+  },
+  {
+    "file": "artes/avatares/minimalistas/06-cinza-minimalista.png",
+    "title": "06 Cinza Minimalista",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "bytes": 1194103,
+    "sha256": "732cb9d32a50a5269c768528886d42c1a9aa638fc7c0ba77903207f9f9dbfbab",
+    "generation": "imagegen"
+  }
+]

@@ -1,0 +1,18 @@
+.env
+.env.*
+!.env.example
+**/node_modules/
+**/dist/
+**/*.tsbuildinfo
+
+# Android / Capacitor
+app/android/.gradle/
+app/android/build/
+app/android/app/build/
+app/android/.cxx/
+app/android/captures/
+app/android/local.properties
+app/android/keystore.properties
+app/android/keystore/
+*.jks
+*.keystore

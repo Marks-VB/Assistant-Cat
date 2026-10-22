@@ -1,0 +1,695 @@
+{
+  "package_version": "2.0",
+  "created_date": "2026-10-21",
+  "reference_capabilities": 256,
+  "png_artworks": 15,
+  "svg_combinations": 54,
+  "svg_layers": 28,
+  "automated_tests_passed": 35,
+  "assistant_cases_current": 20,
+  "assistant_cases_planned": 20,
+  "backlog_tickets": 38,
+  "browser_visual_validation": "pending",
+  "files": [
+    {
+      "file": "ASSETS.md",
+      "bytes": 1055,
+      "sha256": "794141f0150031a2f1844062f68f090858656ec869a91bf77ff1d8cd86daee10"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "bytes": 2234,
+      "sha256": "c50d8cf84bd2bdbc0229afc619b57c770b70aec25dbb13fe22cf07cc9b041f87"
+    },
+    {
+      "file": "LEIA-ME.md",
+      "bytes": 670,
+      "sha256": "bb019bc7d44765fb7243352a5fcdc4595bb4379c58aefb4383a7855240ae26d9"
+    },
+    {
+      "file": "LICENSE",
+      "bytes": 1085,
+      "sha256": "86aea9c364519da0f66ebfd68df3550bedaf7bb026e2dbd8033de3d2dffc47ba"
+    },
+    {
+      "file": "README.md",
+      "bytes": 2542,
+      "sha256": "6d0c43c79c404e6e6b3285455afa72da285c844bb52721714e5de855c5a91ae5"
+    },
+    {
+      "file": "artes/avatares/00-quatro-avatares-minimalistas.png",
+      "bytes": 1303653,
+      "sha256": "69b02c14070af5cfa856270f281dbc0796995f705aff29b92c7c8a2550340d79"
+    },
+    {
+      "file": "artes/avatares/minimalistas/01-frajola-minimalista.png",
+      "bytes": 1230873,
+      "sha256": "8b938be94aecd6d3985a99183191d284880ab8d6c1e8463d3bd62b9e22153f31"
+    },
+    {
+      "file": "artes/avatares/minimalistas/02-laranja-minimalista.png",
+      "bytes": 1195388,
+      "sha256": "dcd156ad670b0c23d7bd0e7dfb9254d81a7f651e5ce03813386d69cb32ba146b"
+    },
+    {
+      "file": "artes/avatares/minimalistas/03-siames-minimalista.png",
+      "bytes": 1224135,
+      "sha256": "02016c02715788cf44e75f8583d3bd48f6c77513f150fe049f33c7db6e48eb7b"
+    },
+    {
+      "file": "artes/avatares/minimalistas/04-tricolor-minimalista.png",
+      "bytes": 1238441,
+      "sha256": "cfbd74a868fb9af099d5c26448ac34462c6a64910cd4242e358e2dea70d5259c"
+    },
+    {
+      "file": "artes/avatares/minimalistas/05-preto-minimalista.png",
+      "bytes": 1200145,
+      "sha256": "1e6d10cc1ddb44f28183b03e18cc411cd5b2d9460bccc3b8d31eac166388a458"
+    },
+    {
+      "file": "artes/avatares/minimalistas/06-cinza-minimalista.png",
+      "bytes": 1194103,
+      "sha256": "732cb9d32a50a5269c768528886d42c1a9aa638fc7c0ba77903207f9f9dbfbab"
+    },
+    {
+      "file": "artes/estudos/dark-estudo-olhos-coloridos.png",
+      "bytes": 888601,
+      "sha256": "09f8ed80c30306755bebb2d697f14a8d8875afaba909e608930279af56cc1b86"
+    },
+    {
+      "file": "artes/estudos/laranja-cartoon-flat.png",
+      "bytes": 1497066,
+      "sha256": "897cea64008ee09cf3fd17aabafe3eff496cca39d4fa069c2ebd497eed14c2cb"
+    },
+    {
+      "file": "artes/icones/01-default.png",
+      "bytes": 1452363,
+      "sha256": "4255190eb9623da1b0fc7d2274e65b5a1a8381ce4c83d42495c68e341bb6a403"
+    },
+    {
+      "file": "artes/icones/02-cyberpunk-neon.png",
+      "bytes": 1916963,
+      "sha256": "f4820e9541dfda7948a4b85ba226c0acd07b3c47e7ff4c540c94bd811275715f"
+    },
+    {
+      "file": "artes/icones/03-dark-pitch-black.png",
+      "bytes": 885839,
+      "sha256": "b6618d60020e5fa73b0fc032124351a3d208b1b95f5f2a92f903f5ba363859c9"
+    },
+    {
+      "file": "artes/icones/04-white-ceramic.png",
+      "bytes": 1627274,
+      "sha256": "847ddb258fdf929313c8b94c3f8566963a28372abe7494c83a96dd1c832d1810"
+    },
+    {
+      "file": "artes/icones/05-anime-neo-tokyo.png",
+      "bytes": 2000547,
+      "sha256": "38ca011d40d81a276bd6076b821e041c7e7ed99f6e6f8a97f1e60c0902ad2ba8"
+    },
+    {
+      "file": "artes/icones/06-golden-obsidian.png",
+      "bytes": 1788474,
+      "sha256": "07ff280fa5b7dba8aa6c46e3d482de63b698d23ad253588486ab799f1e7f4495"
+    },
+    {
+      "file": "artes/svg-modular/camadas/black/body.svg",
+      "bytes": 196,
+      "sha256": "92ed2243406365e168f6477735adc002c3d19f729ed3302b54dafde6c83cac48"
+    },
+    {
+      "file": "artes/svg-modular/camadas/black/features.svg",
+      "bytes": 427,
+      "sha256": "50c94b5267e0f6cd2f9b35e18ef2b73bee23802b6940dd3f50dfabb9704edaed"
+    },
+    {
+      "file": "artes/svg-modular/camadas/black/head.svg",
+      "bytes": 432,
+      "sha256": "0b52c2ed0be6a980cd98b4dc511f317900b13f749c42814331fea79cbddcf66e"
+    },
+    {
+      "file": "artes/svg-modular/camadas/black/markings.svg",
+      "bytes": 136,
+      "sha256": "630b59dccd9c45780a7dcb608269b4ecb34abfc871f2edd81c7282b89486c9d0"
+    },
+    {
+      "file": "artes/svg-modular/camadas/calico/body.svg",
+      "bytes": 196,
+      "sha256": "1ef423d5316008fa69d6bd66de51ad2ecd30ab044621cfc200aa7d75a24e4b87"
+    },
+    {
+      "file": "artes/svg-modular/camadas/calico/features.svg",
+      "bytes": 427,
+      "sha256": "e68cf5ba538e3b6fd05f788aabdc345eecaf58c939f3b2e039ecf9aab56363ff"
+    },
+    {
+      "file": "artes/svg-modular/camadas/calico/head.svg",
+      "bytes": 432,
+      "sha256": "b922d13e18d53a5f991ffee24af7e4ec4a100191783917653aa26aaf33cce509"
+    },
+    {
+      "file": "artes/svg-modular/camadas/calico/markings.svg",
+      "bytes": 300,
+      "sha256": "933693501bda21dca98cf99f5e9b7d9e4b831d17395ee435804eefabbc913189"
+    },
+    {
+      "file": "artes/svg-modular/camadas/ginger/body.svg",
+      "bytes": 196,
+      "sha256": "8e4b0d2b71cece788d063fc63d7b47cf5a82ce093ff36815276823f1bdd73c5a"
+    },
+    {
+      "file": "artes/svg-modular/camadas/ginger/features.svg",
+      "bytes": 427,
+      "sha256": "a046ec4f83ac83d1bec44312a81049399dc5d3bf427741385082469947256ef0"
+    },
+    {
+      "file": "artes/svg-modular/camadas/ginger/head.svg",
+      "bytes": 432,
+      "sha256": "92767d86c30dacd5f0591f34d38c60e29e1eb6d3eee0da937a37179128fd33d0"
+    },
+    {
+      "file": "artes/svg-modular/camadas/ginger/markings.svg",
+      "bytes": 308,
+      "sha256": "e654ddd7dbf18f524506b521de4d74f33a7ae5eb867f7b6bea4a201dc4e73860"
+    },
+    {
+      "file": "artes/svg-modular/camadas/oculos/round.svg",
+      "bytes": 330,
+      "sha256": "6e81340c6a24dcd16128ea0aad6dd6ccf92fe13943516a1ee18134fc1d796b23"
+    },
+    {
+      "file": "artes/svg-modular/camadas/oculos/square.svg",
+      "bytes": 362,
+      "sha256": "042dc44cc6ed020dda1a9a038bb38f396335358d3e590ae459e1a4393e71b7c3"
+    },
+    {
+      "file": "artes/svg-modular/camadas/roupas/hoodie.svg",
+      "bytes": 373,
+      "sha256": "6c8acbd2b44237e28a92a8dec7e93244d98e0c828775ddad5e301862dd48acd0"
+    },
+    {
+      "file": "artes/svg-modular/camadas/roupas/suit.svg",
+      "bytes": 424,
+      "sha256": "5a159da9b3a68cf6e2d23df7d4de0341e8de596c80ac40c80724cb74e5091aeb"
+    },
+    {
+      "file": "artes/svg-modular/camadas/siamese/body.svg",
+      "bytes": 196,
+      "sha256": "f832427738b5320d1a0b43bb4a80607d03953a8c49b0a0351cb43138ecacb98d"
+    },
+    {
+      "file": "artes/svg-modular/camadas/siamese/features.svg",
+      "bytes": 427,
+      "sha256": "ceab5cb6c845d54095565dfe100015ce25f915d57faec09a15f468997d22ee19"
+    },
+    {
+      "file": "artes/svg-modular/camadas/siamese/head.svg",
+      "bytes": 432,
+      "sha256": "1a4ce3756cc6850600f1b7ef4dd0cecc1b09f49253450aa8e8c50b14777da8af"
+    },
+    {
+      "file": "artes/svg-modular/camadas/siamese/markings.svg",
+      "bytes": 234,
+      "sha256": "71bf5c7c502ae0a1133890cbd2707cbe4646ed0ab031c5cf7ad64af79ae046b9"
+    },
+    {
+      "file": "artes/svg-modular/camadas/solid_gray/body.svg",
+      "bytes": 196,
+      "sha256": "1992ab57ef5b4de8ccff8045548499f9e40ce5059ccef6648767a18401b83166"
+    },
+    {
+      "file": "artes/svg-modular/camadas/solid_gray/features.svg",
+      "bytes": 427,
+      "sha256": "103c0ee7ad8cb6c4a1885ed23feef6fdf616aa4b74c373fb15dcbaf5f0a81be9"
+    },
+    {
+      "file": "artes/svg-modular/camadas/solid_gray/head.svg",
+      "bytes": 432,
+      "sha256": "42b277dc806971463ab4b24bdaf82636fd4540ec5aacc505a4a5c9362631909b"
+    },
+    {
+      "file": "artes/svg-modular/camadas/solid_gray/markings.svg",
+      "bytes": 136,
+      "sha256": "630b59dccd9c45780a7dcb608269b4ecb34abfc871f2edd81c7282b89486c9d0"
+    },
+    {
+      "file": "artes/svg-modular/camadas/tuxedo/body.svg",
+      "bytes": 196,
+      "sha256": "92ed2243406365e168f6477735adc002c3d19f729ed3302b54dafde6c83cac48"
+    },
+    {
+      "file": "artes/svg-modular/camadas/tuxedo/features.svg",
+      "bytes": 427,
+      "sha256": "ab9be14a3b905a02e4dda552c6acb135046c4af181ac56026cd1950dd3f0b6ec"
+    },
+    {
+      "file": "artes/svg-modular/camadas/tuxedo/head.svg",
+      "bytes": 432,
+      "sha256": "a39f8cef23b0c779a1b85546a1de1b2fbccb8debd750b63d1132100a50a1bf9e"
+    },
+    {
+      "file": "artes/svg-modular/camadas/tuxedo/markings.svg",
+      "bytes": 239,
+      "sha256": "b5b0da812997a8d8bc6851b8de2e3f99d2d3e812196c9a5c2e356771261e22ec"
+    },
+    {
+      "file": "artes/svg-modular/colecao.svg",
+      "bytes": 10185,
+      "sha256": "f7aeb9797f849758c9cf969cb61b1006302a1492b7eddd5aea22d0febfcb0630"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/black-hoodie-none.svg",
+      "bytes": 1504,
+      "sha256": "5e105c500993a55ddd34d031739c419b580a998a9b9db36f2d825d920c7d29c2"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/black-hoodie-round.svg",
+      "bytes": 1616,
+      "sha256": "c610c5feb3e5fec8bc290cb172fdd71f12183a24ea492b15f7e591a7f63fa00f"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/black-hoodie-square.svg",
+      "bytes": 1656,
+      "sha256": "365c0e98d1eaff323d5cd38f2c5097ef0c569416237b89f989664babfc43c1c5"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/black-none-none.svg",
+      "bytes": 1267,
+      "sha256": "ce825b68c84c06c8332d439dffa05a891d25a5ec5b265f96b5a860060ea7c77f"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/black-none-round.svg",
+      "bytes": 1379,
+      "sha256": "7cd93734e1ee07810463048e31bde96c47e89184bfdbbe2a8b08b306d3c7cd4b"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/black-none-square.svg",
+      "bytes": 1419,
+      "sha256": "7e52b3a40bd4e5c51b7b1bf0e5726375747b982fbeece171cc7f171cd57edf7a"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/black-suit-none.svg",
+      "bytes": 1551,
+      "sha256": "6b547bda5a2400aca3f0b4a743993605b0854bdd5f3fba8e6e0f3a4028a575f3"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/black-suit-round.svg",
+      "bytes": 1663,
+      "sha256": "270bd22d3449fde9533ee43feeb78a8154aaa79394074df2a93cd820265e33e2"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/black-suit-square.svg",
+      "bytes": 1703,
+      "sha256": "7aebb0399657429b88af5d89c332fa5380015b2c8a4f957b0ae0519bc5b04679"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/calico-hoodie-none.svg",
+      "bytes": 1674,
+      "sha256": "331e9427fc55cfa9b0c14fa6d569553574da23e5dad738b3094d6344a2e60108"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/calico-hoodie-round.svg",
+      "bytes": 1786,
+      "sha256": "18cf3bdb728ee5fc013e892a680e60df98027b9854ab0ce36756f90f1423c3c1"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/calico-hoodie-square.svg",
+      "bytes": 1826,
+      "sha256": "a599366b076a94150b7ea41ac2b34109bdbda5dfe1982ee64f62361f28d5723c"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/calico-none-none.svg",
+      "bytes": 1437,
+      "sha256": "346996790a94cf235d6019686383d808fe26428569006a76d89c86f169f7b185"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/calico-none-round.svg",
+      "bytes": 1549,
+      "sha256": "e45f3be8e11cbadbe90d95483087758a8cef70df187904f68b0edfe52bda3c54"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/calico-none-square.svg",
+      "bytes": 1589,
+      "sha256": "8c986c04766437147bb67dba41437024072d9022abab6fdca0e664c765d0c321"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/calico-suit-none.svg",
+      "bytes": 1721,
+      "sha256": "5b9bb8fb8a92e467f71349c10fa9d8a6baf81ce5245bff92d23bec052db6341c"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/calico-suit-round.svg",
+      "bytes": 1833,
+      "sha256": "6851d440639d71563169700a4cfb67d62fd81556ee11e9e7e6e3d0924e4c74ec"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/calico-suit-square.svg",
+      "bytes": 1873,
+      "sha256": "bb78702867f2645129767a8396c417f9eec49431ee4852a44e3e72102b3d61b3"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/ginger-hoodie-none.svg",
+      "bytes": 1680,
+      "sha256": "26b39d06f1f98dc5d28b17c7d7f6ad320f1754065f0ec085abb7a5c84fc7b00c"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/ginger-hoodie-round.svg",
+      "bytes": 1792,
+      "sha256": "6ccd0d5a19df2e08ff2fa8012e802fe4db2503ec1fc9a7d4691c03ea6a09cf10"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/ginger-hoodie-square.svg",
+      "bytes": 1832,
+      "sha256": "d7596806596d91a141b79043851d4c3b432a12a95de5601bba9a1100e085ed42"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/ginger-none-none.svg",
+      "bytes": 1443,
+      "sha256": "6b18d1c939ade52bc50156069448a9339cc79da2e094d67c5aa47832cf3d2575"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/ginger-none-round.svg",
+      "bytes": 1555,
+      "sha256": "fe3017de8508706035d6983873bb4b2cbf841d0647cc570978a16086ab49a867"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/ginger-none-square.svg",
+      "bytes": 1595,
+      "sha256": "289d9f6dd44f369ac7ed821a93e473e4f816ae73a7206b04d841e29a7f2c2f9f"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/ginger-suit-none.svg",
+      "bytes": 1727,
+      "sha256": "bedf19a6bda5d5347545a99225c310933999038a118cffc20538f49be2263766"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/ginger-suit-round.svg",
+      "bytes": 1839,
+      "sha256": "f9fa03c40bfad5e5527be3628ad9f34726d451354e9a30c3cadb0830e5673ac7"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/ginger-suit-square.svg",
+      "bytes": 1879,
+      "sha256": "8eb1bd93513dc09857f25d8aee24d0a641a63c6d39c0e2889d3b9bf81b8a17f1"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/siamese-hoodie-none.svg",
+      "bytes": 1606,
+      "sha256": "0c84996b3b23c8d40d2054e484fc54893477a63ca8e9ef4427292c9ded572a7c"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/siamese-hoodie-round.svg",
+      "bytes": 1718,
+      "sha256": "a8dc3b943fd195e86d37263780e56df5e2e13c4f4ee0aede3203fbd7d2c56107"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/siamese-hoodie-square.svg",
+      "bytes": 1758,
+      "sha256": "56abc4a04053700441a5d0504a62d76a8f42a39b60c76029723fb1def49d1f77"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/siamese-none-none.svg",
+      "bytes": 1369,
+      "sha256": "61a0065bcdc8f12a10d658d14164b48c2658dae5ed7d230c0fff7453f18ec2e8"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/siamese-none-round.svg",
+      "bytes": 1481,
+      "sha256": "e89ddef72f8d54e6d2146c539fc81f4e2906fee824c00c32f90adfe3163d39e8"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/siamese-none-square.svg",
+      "bytes": 1521,
+      "sha256": "54f320b017eb44a3e230cb02db171a106f23f920073f45290e9c6ddef3a566a4"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/siamese-suit-none.svg",
+      "bytes": 1653,
+      "sha256": "ed666244fcd16efc275b147304f826b0b9ebd4681cfa1dd429fe3d2266f3422c"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/siamese-suit-round.svg",
+      "bytes": 1765,
+      "sha256": "89fa43f92bd18dab2ffbd8ca0fb5d545b1685827a4ee4d1a004c472a9afb18cf"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/siamese-suit-square.svg",
+      "bytes": 1805,
+      "sha256": "c3a9c9e6ff9ed6a4e7ee7862c46283fdb1f386f268ed0ef9000b7caa53267f62"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/solid_gray-hoodie-none.svg",
+      "bytes": 1504,
+      "sha256": "9f50169aa0f118aae2a657d0cd9fdcc15898ed45b89572566e791747c1d86d4a"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/solid_gray-hoodie-round.svg",
+      "bytes": 1616,
+      "sha256": "5d3ac25616d6b894564f630e6872b53de057969c6aa5f5fd67cad99bcaea3264"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/solid_gray-hoodie-square.svg",
+      "bytes": 1656,
+      "sha256": "21a9031f0585363703f587324aee9f9bb658f01b5601bc0f694569a8e7cdf809"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/solid_gray-none-none.svg",
+      "bytes": 1267,
+      "sha256": "b3030d87406a7c2f4e27888aff07eaa744008366630f847eb9f7d43b8d72489c"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/solid_gray-none-round.svg",
+      "bytes": 1379,
+      "sha256": "1316d26e508be7d4da37d26762b96a7114f0372cd12e197e58cd8baed9366119"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/solid_gray-none-square.svg",
+      "bytes": 1419,
+      "sha256": "4dfaaec21c208779a2237f12b27b309c37308643b251ef8b7418f791c04cbb6f"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/solid_gray-suit-none.svg",
+      "bytes": 1551,
+      "sha256": "767c3fdc064e75f881ebc37409ba02c0887bc090e35aa23a54742bf18eb60498"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/solid_gray-suit-round.svg",
+      "bytes": 1663,
+      "sha256": "ea5b63315eea34ceda633066875040232b9ab76cf2aba7b45b7bd3c1bc72105b"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/solid_gray-suit-square.svg",
+      "bytes": 1703,
+      "sha256": "e035c4224748ed6f162908a108f618fb7514f9936402618f1a90bad692279ade"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/tuxedo-hoodie-none.svg",
+      "bytes": 1611,
+      "sha256": "6069c3866d21e01fbd7915481ae6a7da6500d34a20bcd9e59bb3bc3e607ce109"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/tuxedo-hoodie-round.svg",
+      "bytes": 1723,
+      "sha256": "6412b17b93b0d7d23152f05fc43b3217bf2639d559478674ca5eccba912ae52d"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/tuxedo-hoodie-square.svg",
+      "bytes": 1763,
+      "sha256": "2013e073fd9bc4fa29470a2acf57a4ca2c99e6bde416fdab0d4407a73d3c3178"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/tuxedo-none-none.svg",
+      "bytes": 1374,
+      "sha256": "189bf843150ac06439e0ac24117342f31663aae8437d400d1d995030d2b0ae37"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/tuxedo-none-round.svg",
+      "bytes": 1486,
+      "sha256": "fbeba29fe2103185e47858dd8e390aeb1c4f18d7a2a2fbae30d3e1c1e21d902d"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/tuxedo-none-square.svg",
+      "bytes": 1526,
+      "sha256": "bb5cd87542e76ceb06fdf8d36e21514721751cdfc5e9286d60f4d55a9a5718e9"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/tuxedo-suit-none.svg",
+      "bytes": 1658,
+      "sha256": "709ba1de1f395ae848742042a5a4708465551e43b2c04e2825a2675fb4e3d211"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/tuxedo-suit-round.svg",
+      "bytes": 1770,
+      "sha256": "c487b5bbed5a9d9d43c1b766420ed82a710fa1e78dac629db44ab9de87d8623c"
+    },
+    {
+      "file": "artes/svg-modular/combinacoes/tuxedo-suit-square.svg",
+      "bytes": 1810,
+      "sha256": "b30667716bb5440616cfbeff458136e72f9268897d9408a3b3664b282e557988"
+    },
+    {
+      "file": "artes/svg-modular/manifesto.json",
+      "bytes": 7604,
+      "sha256": "f1fc1e462303fb4bef8ff6fdbb6834c596df7584ef4e57f5e86c0c3dfaf2fe42"
+    },
+    {
+      "file": "backlog/Backlog-Implementacao.json",
+      "bytes": 11450,
+      "sha256": "97c7e446d76d9da2780a284741975a1bb5fae2d39a0b18de6479dc642fb7f85b"
+    },
+    {
+      "file": "backlog/Backlog-Implementacao.md",
+      "bytes": 5982,
+      "sha256": "a3ac08fdc1f21c3f7e7b836df369d18a2a05b223ff12c88831eb54c1b8e74cd0"
+    },
+    {
+      "file": "dados/Catalogo-Recursos.json",
+      "bytes": 64880,
+      "sha256": "63bb35dbfd552d3d3abdcdbec336c3f6a55e275354f0a770060d12f58789eb91"
+    },
+    {
+      "file": "dados/Inventario-Artes.json",
+      "bytes": 4546,
+      "sha256": "f7eb034a5d2c06fb823363838aef3b3b0b8713722546900d62f9235230b5a118"
+    },
+    {
+      "file": "design-system/Design-System.md",
+      "bytes": 3782,
+      "sha256": "78937b307ec3b9b9139ba73d624492b227f0ca8a8d258a9737031b964ed35f73"
+    },
+    {
+      "file": "design-system/tokens.css",
+      "bytes": 695,
+      "sha256": "3601940a214d6a2d77c277fe10af32376a731c3b60a8cb1f3a5a68132ff24b1c"
+    },
+    {
+      "file": "design-system/tokens.json",
+      "bytes": 1157,
+      "sha256": "0fc6244c6553698013bf81965a512ff1dcc3008dc2d0ae694140265f7f82bf67"
+    },
+    {
+      "file": "docs/Analise-dos-ZIPs.md",
+      "bytes": 2197,
+      "sha256": "574de3f003367ebd053878ba6b53d84311f0340c26a11a42b6fafc16c729b1a0"
+    },
+    {
+      "file": "docs/Direcao-Visual-Gatos.md",
+      "bytes": 13158,
+      "sha256": "a8e96cfd8b42aa7806d000cc39a952b1e901dfb64d67590fa7003a612c8f4d46"
+    },
+    {
+      "file": "docs/Especificacao-Completa.md",
+      "bytes": 116724,
+      "sha256": "fde8f91cc534e44db91468168dd62706ed7c9684324fbb6488b3027ce9f6bd1b"
+    },
+    {
+      "file": "docs/Instalacao-e-Execucao.md",
+      "bytes": 2893,
+      "sha256": "76cd65accdbcde8863dbab4cf234e1a8a3913287ce18ce54f8f9f29807cad38c"
+    },
+    {
+      "file": "docs/Plano-MVP.md",
+      "bytes": 5927,
+      "sha256": "5c998b839a848f3c1c490340d020b87e393116b6c178ea1c8ac591ee05268374"
+    },
+    {
+      "file": "galeria.html",
+      "bytes": 5241,
+      "sha256": "93760d59803957eaabe30124a8c0e8b211e2e4bb810f70c9e9881a5a366d070b"
+    },
+    {
+      "file": "prompts/Avatares-Cartoon-Flat.md",
+      "bytes": 1766,
+      "sha256": "281560a30bee8c9bfa54df9d086be54e959080c6345e2b8c79130af3dcb551ed"
+    },
+    {
+      "file": "prompts/Avatares-Minimalistas.md",
+      "bytes": 8224,
+      "sha256": "58f5255ec4d97f5a40d5ac45519ebc6955256961b7910d6d499a248487169218"
+    },
+    {
+      "file": "prompts/Evoluir-Prototipo.md",
+      "bytes": 1571,
+      "sha256": "09634075808d378e61c782479d3beefa4d7d6106b6faf774a38f179299d9e2fd"
+    },
+    {
+      "file": "prompts/Icones-App.md",
+      "bytes": 2546,
+      "sha256": "e465c9c45ce32caf095b469268a5dc8a3f813049a0c0a6da57e85c7dd9c01f2f"
+    },
+    {
+      "file": "prompts/Iniciar-Prototipo.md",
+      "bytes": 3554,
+      "sha256": "85e78358e818ff7a1261f057605df91ef320fbced97d0bc67e100da597a724a1"
+    },
+    {
+      "file": "prompts/Prompts-Minimalistas.json",
+      "bytes": 8145,
+      "sha256": "cb5266ab37f0e77c7c59b54287b73fb3cc65fea96d690f2088329fa0e9e7122f"
+    },
+    {
+      "file": "prototipo/index.html",
+      "bytes": 1781,
+      "sha256": "17eb221401209eced82c5a627e86ff0f3b85c73688e73e6c45cae45a517da3c8"
+    },
+    {
+      "file": "prototipo/package.json",
+      "bytes": 280,
+      "sha256": "28b730b2783b73b637116b472964f0b15bf3cb970324d3261ddde48ea7d0d7c3"
+    },
+    {
+      "file": "prototipo/scripts/export-cats.cjs",
+      "bytes": 1659,
+      "sha256": "44c975b807b62f1c2ff1a25551a571c225a1b9b5a56d5b55cd81b507b6f34b19"
+    },
+    {
+      "file": "prototipo/src/app.css",
+      "bytes": 12446,
+      "sha256": "35f8c38203a528f99dd82cf2c0d34fe9ada1e396b7df4d2d98fcb7738f2453a3"
+    },
+    {
+      "file": "prototipo/src/app.js",
+      "bytes": 25507,
+      "sha256": "cb4c6879b28ad8fa94148708529a032471c9da2650f806891669946266e89855"
+    },
+    {
+      "file": "prototipo/src/cat-avatar.js",
+      "bytes": 5516,
+      "sha256": "0035125164788ad69cea4ec737c1990a1d404e92b9008a7dda130c328c0d25e7"
+    },
+    {
+      "file": "prototipo/src/domain.js",
+      "bytes": 6762,
+      "sha256": "2e23958644d05265c9399a6dbbcf84e99008da1c9276161ffc6eed7a30b56b69"
+    },
+    {
+      "file": "prototipo/src/storage.js",
+      "bytes": 1350,
+      "sha256": "52fb17e301a544a5bbae01ce93c196d67eff658f87338bf14103826944f4c815"
+    },
+    {
+      "file": "prototipo/tests/app.integration.test.cjs",
+      "bytes": 5858,
+      "sha256": "1ff28b551cbd43af3fe264bac330ea55dd6b30e62ce61c1672f652bc27f33c74"
+    },
+    {
+      "file": "prototipo/tests/domain.test.cjs",
+      "bytes": 3379,
+      "sha256": "07f76616a314b242790e541a7a9a1f77ed06d90d5bc4b5c5468a011f2dac6740"
+    },
+    {
+      "file": "testes/Casos-Assistente.json",
+      "bytes": 16262,
+      "sha256": "45c586163c7dc03231bb2ef42602fd43e54869aa8e25f93e7ac91e359c956d46"
+    },
+    {
+      "file": "testes/Casos-Assistente.md",
+      "bytes": 5978,
+      "sha256": "694bbe6961bd770a0104bee4f52958a143a901d756d127a7fc79be87b06224ec"
+    },
+    {
+      "file": "testes/Relatorio-Verificacao.md",
+      "bytes": 2046,
+      "sha256": "3459f45cdd9170333a92fd910d0812e0a057331fe5db5b52c2cb11a460d5b67c"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Assistant Cat</string>
+    <string name="title_activity_main">Assistant Cat</string>
+    <string name="package_name">dev.marksvb.assistantcat</string>
+    <string name="custom_url_scheme">dev.marksvb.assistantcat</string>
+</resources>

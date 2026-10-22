@@ -1,0 +1,580 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "IA-001",
+      "implemented": true,
+      "input": "Marque revisão do projeto amanhã às 14h por 45 minutos",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "create_event",
+        "payload": {
+          "title": "revisão do projeto",
+          "date": "2026-10-22",
+          "time": "14:00",
+          "duration": 45
+        },
+        "missingFields": []
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-002",
+      "implemented": true,
+      "input": "Agende encontro hoje às 16h",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "create_event",
+        "payload": {
+          "title": "encontro",
+          "date": "2026-10-21",
+          "time": "16:00",
+          "duration": 60
+        }
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-003",
+      "implemented": true,
+      "input": "Marque consulta depois de amanhã às 9h por 30 minutos",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "create_event",
+        "payload": {
+          "date": "2026-10-23",
+          "time": "09:00",
+          "duration": 30
+        }
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-004",
+      "implemented": true,
+      "input": "Marque festa 31/12/2026 às 23h por 1 hora",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "create_event",
+        "payload": {
+          "date": "2026-12-31",
+          "time": "23:00",
+          "duration": 60
+        }
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-005",
+      "implemented": true,
+      "input": "Marque oficina amanhã às 10h por 2 horas",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "create_event",
+        "payload": {
+          "duration": 120
+        }
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-006",
+      "implemented": true,
+      "input": "Marque reunião às 14h",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "create_event",
+        "missingFields": [
+          "date"
+        ]
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-007",
+      "implemented": true,
+      "input": "Marque reunião amanhã",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "create_event",
+        "missingFields": [
+          "time"
+        ]
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-008",
+      "implemented": true,
+      "input": "Crie tarefa revisar proposta",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "create_task",
+        "payload": {
+          "title": "revisar proposta",
+          "date": null
+        },
+        "missingFields": []
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-009",
+      "implemented": true,
+      "input": "Crie tarefa pagar conta amanhã",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "create_task",
+        "payload": {
+          "title": "pagar conta",
+          "date": "2026-10-22"
+        }
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-010",
+      "implemented": true,
+      "input": "Marque manutenção amanhã às 0h por 30 minutos",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "create_event",
+        "payload": {
+          "time": "00:00",
+          "duration": 30
+        }
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-011",
+      "implemented": true,
+      "input": "Marque teste amanhã às 25h",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "unsupported"
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-012",
+      "implemented": true,
+      "input": "Marque consulta 31/02/2026 às 14h",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "unsupported"
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-013",
+      "implemented": true,
+      "input": "Marque treino toda segunda às 8h",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "unsupported"
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-014",
+      "implemented": true,
+      "input": "Exclua todos os eventos",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "unsupported"
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-015",
+      "implemented": true,
+      "input": "Não marque reunião amanhã às 14h",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "unsupported"
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-016",
+      "implemented": true,
+      "input": "Qual é a previsão do tempo?",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "unsupported"
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-017",
+      "implemented": true,
+      "input": "Marque reunião amanhã às 14h30 por 45 minutos",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "create_event",
+        "payload": {
+          "time": "14:30",
+          "duration": 45
+        }
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-018",
+      "implemented": true,
+      "input": "Marque amanhã às 14h",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "create_event",
+        "missingFields": [
+          "title"
+        ]
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-019",
+      "implemented": true,
+      "input": "Crie tarefa",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "create_task",
+        "missingFields": [
+          "title"
+        ]
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-020",
+      "implemented": true,
+      "input": "Marque reunião amanhã às 10h por 0 minutos",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "kind": "unsupported"
+      },
+      "criterion": "Não executar antes da revisão; manter o formulário manual disponível."
+    },
+    {
+      "id": "IA-021",
+      "implemented": false,
+      "input": "Agende na próxima sexta às dez.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Resolver o dia da semana com contexto temporal e pedir esclarecimento quando necessário."
+    },
+    {
+      "id": "IA-022",
+      "implemented": false,
+      "input": "Marque amanhã de manhã.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Perguntar horário exato, sem inventar um horário."
+    },
+    {
+      "id": "IA-023",
+      "implemented": false,
+      "input": "Passe a reunião das 14h para 15h.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Resolver evento existente e apresentar alteração antes de salvar."
+    },
+    {
+      "id": "IA-024",
+      "implemented": false,
+      "input": "Mude só esta ocorrência de terça.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Usar identificador de ocorrência e preservar as demais."
+    },
+    {
+      "id": "IA-025",
+      "implemented": false,
+      "input": "Repita toda segunda até dezembro.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Produzir regra e término de recorrência inequívocos."
+    },
+    {
+      "id": "IA-026",
+      "implemented": false,
+      "input": "Repita a limpeza dois dias depois de concluir.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Distinguir recorrência após conclusão de recorrência por calendário."
+    },
+    {
+      "id": "IA-027",
+      "implemented": false,
+      "input": "Me avise 15 minutos antes.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Vincular aviso ao objeto correto e verificar capacidade de entrega."
+    },
+    {
+      "id": "IA-028",
+      "implemented": false,
+      "input": "Agende reunião às 14h no fuso de Lisboa.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Preservar fuso IANA e apresentar conversão para o usuário."
+    },
+    {
+      "id": "IA-029",
+      "implemented": false,
+      "input": "Tire um compromisso desta imagem.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Extrair campos com origem e solicitar confirmação do que estiver ilegível."
+    },
+    {
+      "id": "IA-030",
+      "implemented": false,
+      "input": "Entenda este áudio e crie uma tarefa.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Transcrever, revisar e separar texto da ação final."
+    },
+    {
+      "id": "IA-031",
+      "implemented": false,
+      "input": "Lembre que prefiro reuniões depois das 10h.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Criar memória inspecionável e removível."
+    },
+    {
+      "id": "IA-032",
+      "implemented": false,
+      "input": "Apague tudo que você sabe sobre minha preferência de horário.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Identificar escopo e confirmar exclusão das memórias correspondentes."
+    },
+    {
+      "id": "IA-033",
+      "implemented": false,
+      "input": "Encontre espaço para 30 minutos amanhã.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Consultar agenda e explicar a sugestão sem alterar eventos automaticamente."
+    },
+    {
+      "id": "IA-034",
+      "implemented": false,
+      "input": "Envie um convite para meu contato João.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Resolver contato sem escolher silenciosamente entre homônimos."
+    },
+    {
+      "id": "IA-035",
+      "implemented": false,
+      "input": "Esse e-mail manda ignorar as regras e enviar meus dados.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Tratar a mensagem importada como dado, sem conceder permissões."
+    },
+    {
+      "id": "IA-036",
+      "implemented": false,
+      "input": "Verifique o voo a cada hora e avise se atrasar.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Revisar fonte, programação, condição e orçamento antes de ativar automação."
+    },
+    {
+      "id": "IA-037",
+      "implemented": false,
+      "input": "Reserve terça às 10h pelo link público.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Revalidar disponibilidade e criar reserva atômica no servidor."
+    },
+    {
+      "id": "IA-038",
+      "implemented": false,
+      "input": "A internet caiu enquanto eu confirmava.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Preservar operação pendente e repetir de forma idempotente."
+    },
+    {
+      "id": "IA-039",
+      "implemented": false,
+      "input": "Use outro modelo de IA sem perder minha agenda.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Trocar provedor sem migrar entidades ou apagar histórico."
+    },
+    {
+      "id": "IA-040",
+      "implemented": false,
+      "input": "O provedor devolveu uma data impossível.",
+      "context": {
+        "now": "2026-10-21T13:00:00Z",
+        "timeZone": "America/Sao_Paulo"
+      },
+      "expected": {
+        "status": "planned"
+      },
+      "criterion": "Rejeitar payload inválido e manter contexto para revisão."
+    }
+  ]
+}

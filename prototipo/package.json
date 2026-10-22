@@ -1,0 +1,11 @@
+{
+  "name": "assistente-gato-prototipo",
+  "version": "0.2.0",
+  "private": true,
+  "license": "AGPL-3.0-or-later",
+  "description": "Protótipo local navegável sem dependências de execução",
+  "scripts": {
+    "test": "node --test",
+    "export:cats": "node scripts/export-cats.cjs"
+  }
+}

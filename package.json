@@ -1,0 +1,17 @@
+{
+  "name": "assistant-cat",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Assistant Cat — build web + Worker (assets e proxy /api/ai)",
+  "scripts": {
+    "install:app": "npm --prefix app ci",
+    "build": "npm --prefix app run build",
+    "dev": "wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "typecheck": "npm --prefix app exec tsc -b"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  },
+  "license": "AGPL-3.0-or-later"
+}

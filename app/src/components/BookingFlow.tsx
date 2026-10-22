@@ -2,6 +2,7 @@
 // BookingFlow - Fluxo de Criação de Link de Agendamento com IA Híbrida (Chat ao Vivo + Formulário)
 
 import React, { useState } from 'react';
+import { ArrowUp, Check, Circle, Link2, MessageSquare, Settings, X } from 'lucide-react';
 
 interface BookingFlowProps {
   isOpen: boolean;
@@ -56,7 +57,7 @@ export const BookingFlow: React.FC<BookingFlowProps> = ({ isOpen, onClose, assis
           onClick={onClose}
           className="w-9 h-9 rounded-full bg-[var(--surface-card)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] hover:text-[var(--text-primary)]"
         >
-          ✕
+          <X size={16} aria-hidden="true" />
         </button>
         <h2 className="font-bold text-sm">Booking Link & Agendamento</h2>
         <div className="w-9" />
@@ -65,8 +66,8 @@ export const BookingFlow: React.FC<BookingFlowProps> = ({ isOpen, onClose, assis
       <div className="max-w-md mx-auto w-full p-5 space-y-6 flex-1 flex flex-col justify-between">
         {step === 'main' && (
           <div className="space-y-6 text-center pt-8">
-            <div className="w-20 h-20 mx-auto rounded-3xl bg-[var(--surface-card)] border border-[var(--border-strong)] flex items-center justify-center text-4xl shadow-2xl">
-              🔗
+            <div className="w-20 h-20 mx-auto rounded-3xl bg-[var(--surface-card)] border border-[var(--border-strong)] text-[var(--accent)] flex items-center justify-center shadow-2xl">
+              <Link2 size={34} strokeWidth={1.7} aria-hidden="true" />
             </div>
             <div>
               <h3 className="text-xl font-bold">Seu Link Público de Agendamento</h3>
@@ -101,7 +102,9 @@ export const BookingFlow: React.FC<BookingFlowProps> = ({ isOpen, onClose, assis
               onClick={() => setStep('hybrid_chat')}
               className="w-full p-4 rounded-2xl bg-[var(--surface-card)] border border-[var(--border-strong)] hover:border-[var(--accent)] flex items-center gap-3 text-left transition"
             >
-              <span className="text-2xl">💬</span>
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]" aria-hidden="true">
+                <MessageSquare size={18} strokeWidth={1.9} />
+              </span>
               <div>
                 <div className="font-bold text-sm text-[var(--text-primary)]">Create by chatting with {assistantName}</div>
                 <div className="text-xs text-[var(--text-secondary)]">Fale normalmente e a IA preenche as regras e horários</div>
@@ -112,7 +115,9 @@ export const BookingFlow: React.FC<BookingFlowProps> = ({ isOpen, onClose, assis
               onClick={() => setStep('hybrid_chat')}
               className="w-full p-4 rounded-2xl bg-[var(--surface-card)] border border-[var(--border-strong)] hover:bg-[var(--surface-elevated)] flex items-center gap-3 text-left transition"
             >
-              <span className="text-2xl">⚙️</span>
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]" aria-hidden="true">
+                <Settings size={18} strokeWidth={1.9} />
+              </span>
               <div>
                 <div className="font-bold text-sm text-[var(--text-primary)]">Set up manually</div>
                 <div className="text-xs text-[var(--text-secondary)]">Definir disponibilidade e durações manualmente</div>
@@ -145,19 +150,29 @@ export const BookingFlow: React.FC<BookingFlowProps> = ({ isOpen, onClose, assis
                 </div>
                 <div className="space-y-1.5 text-xs text-[var(--text-primary)]">
                   <div className="flex items-center gap-2">
-                    <span className="text-emerald-400">✓</span> <span>Name: {bookingData.name}</span>
+                    <Check size={14} className="text-[var(--accent)]" aria-hidden="true" /> <span>Name: {bookingData.name}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-emerald-400">✓</span> <span>Duration: {bookingData.duration}</span>
+                    <Check size={14} className="text-[var(--accent)]" aria-hidden="true" /> <span>Duration: {bookingData.duration}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-emerald-400">✓</span> <span>Availability: {bookingData.availability}</span>
+                    <Check size={14} className="text-[var(--accent)]" aria-hidden="true" /> <span>Availability: {bookingData.availability}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span>{completedSteps >= 4 ? '✓' : '○'}</span> <span>Calendar: {bookingData.calendar}</span>
+                    {completedSteps >= 4 ? (
+                      <Check size={14} className="text-[var(--accent)]" aria-hidden="true" />
+                    ) : (
+                      <Circle size={14} className="text-[var(--text-secondary)]" aria-hidden="true" />
+                    )}{' '}
+                    <span>Calendar: {bookingData.calendar}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span>{completedSteps >= 5 ? '✓' : '○'}</span> <span>Link: Ativo</span>
+                    {completedSteps >= 5 ? (
+                      <Check size={14} className="text-[var(--accent)]" aria-hidden="true" />
+                    ) : (
+                      <Circle size={14} className="text-[var(--text-secondary)]" aria-hidden="true" />
+                    )}{' '}
+                    <span>Link: Ativo</span>
                   </div>
                 </div>
               </div>
@@ -175,7 +190,7 @@ export const BookingFlow: React.FC<BookingFlowProps> = ({ isOpen, onClose, assis
                 type="submit"
                 className="w-8 h-8 rounded-full bg-[var(--accent)] text-[var(--text-primary)] flex items-center justify-center font-bold text-xs"
               >
-                ↑
+                <ArrowUp size={16} strokeWidth={2.2} aria-hidden="true" />
               </button>
             </form>
           </div>

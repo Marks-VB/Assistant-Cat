@@ -3,6 +3,7 @@
 // Todas as escolhas aplicam ao vivo e são persistidas pelo App.
 
 import React, { useEffect, useState } from 'react';
+import { Compass, Palette, PartyPopper, ShieldCheck } from 'lucide-react';
 import { CatAppearance, NavLayout, ThemeId } from '../types';
 import { THEME_OPTIONS } from '../core/themes';
 import { AVATAR_PRESETS } from '../core/avatar-presets';
@@ -153,15 +154,17 @@ export const OnboardingFlow: React.FC<OnboardingFlowProps> = ({
               </div>
               <ul className="w-full space-y-2 text-left">
                 {[
-                  ['🐈', 'Privado e local', 'Seus dados ficam neste aparelho.'],
-                  ['🎨', 'Visual flexível', 'Temas, vidro, retrô, neon — com efeitos próprios.'],
-                  ['🧭', 'Menu do seu jeito', 'Barra inferior ou menu lateral no desktop.']
-                ].map(([icon, title, text]) => (
+                  { Icon: ShieldCheck, title: 'Privado e local', text: 'Seus dados ficam neste aparelho.' },
+                  { Icon: Palette, title: 'Visual flexível', text: 'Temas, vidro, retrô, neon — com efeitos próprios.' },
+                  { Icon: Compass, title: 'Menu do seu jeito', text: 'Barra inferior ou menu lateral no desktop.' }
+                ].map(({ Icon, title, text }) => (
                   <li
                     key={title}
                     className="flex items-start gap-3 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] p-3 shadow-[var(--surface-shadow)]"
                   >
-                    <span className="text-xl" aria-hidden="true">{icon}</span>
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]" aria-hidden="true">
+                      <Icon size={18} strokeWidth={1.9} />
+                    </span>
                     <span>
                       <span className="block text-sm font-bold">{title}</span>
                       <span className="block text-xs text-[var(--text-secondary)]">{text}</span>
@@ -404,8 +407,8 @@ export const OnboardingFlow: React.FC<OnboardingFlowProps> = ({
           {/* Passo 6: Pronto */}
           {step === 'done' && (
             <div className="flex min-h-[52dvh] flex-col items-center justify-center space-y-6 text-center animate-fade-in">
-              <div className="flex h-24 w-24 items-center justify-center rounded-full bg-[var(--accent-soft)] text-4xl shadow-[var(--surface-shadow)]">
-                🎉
+              <div className="flex h-24 w-24 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)] shadow-[var(--surface-shadow)]">
+                <PartyPopper size={40} strokeWidth={1.8} aria-hidden="true" />
               </div>
               <div className="space-y-2">
                 <h2 className="text-2xl font-bold tracking-tight">Tudo pronto!</h2>

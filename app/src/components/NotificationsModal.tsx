@@ -2,6 +2,7 @@
 // NotificationsModal - Central de Avisos com Slide-in e 4 Cards Empilhados
 
 import React from 'react';
+import { Sparkles, X } from 'lucide-react';
 
 interface NotificationsModalProps {
   isOpen: boolean;
@@ -31,7 +32,7 @@ export const NotificationsModal: React.FC<NotificationsModalProps> = ({ isOpen, 
               onClick={onClose}
               className="w-8 h-8 rounded-full bg-[var(--surface-card)] text-[var(--text-primary)] hover:text-[var(--text-primary)] flex items-center justify-center border border-[var(--border-strong)]"
             >
-              ✕
+              <X size={15} aria-hidden="true" />
             </button>
           </div>
 
@@ -57,7 +58,7 @@ export const NotificationsModal: React.FC<NotificationsModalProps> = ({ isOpen, 
             <div className="rounded-[20px] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-4 text-[var(--text-primary)]">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-1.5 font-bold text-sm">
-                  <span>✨</span>
+                  <Sparkles size={14} className="text-[var(--accent)]" aria-hidden="true" />
                   <span>Usage</span>
                 </div>
                 <span className="bg-[var(--accent)] text-[var(--text-primary)] text-[10px] font-bold px-2 py-0.5 rounded-full">1 &gt;</span>

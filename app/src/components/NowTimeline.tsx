@@ -2,6 +2,7 @@
 // NowTimeline - Timeline Contínua (Yesterday, Today, Tomorrow) com Linha Vermelha de Hora Atual
 
 import React from 'react';
+import { BookOpen, CalendarDays, Check, ChevronRight, Phone, Stethoscope } from 'lucide-react';
 import { CalendarEvent } from '../types';
 
 interface NowTimelineProps {
@@ -13,19 +14,19 @@ interface NowTimelineProps {
 export const NowTimeline: React.FC<NowTimelineProps> = ({ events, onOpenEvent, onNewEvent }) => {
   const currentTimeStr = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
-  // Ícone por categoria
+  // Ícone por categoria (SVG com currentColor, sem depender de emoji do sistema)
   const getCategoryIcon = (title: string) => {
     const t = title.toLowerCase();
     if (t.includes('call') || t.includes('reuni') || t.includes('alinhamento')) {
-      return { icon: '📞', bg: '#7C4DFF' };
+      return { Icon: Phone };
     }
     if (t.includes('treino') || t.includes('estudo') || t.includes('aula') || t.includes('livro')) {
-      return { icon: '📚', bg: '#00B0FF' };
+      return { Icon: BookOpen };
     }
     if (t.includes('saude') || t.includes('medico') || t.includes('consulta')) {
-      return { icon: '🩺', bg: '#00E676' };
+      return { Icon: Stethoscope };
     }
-    return { icon: '🗓️', bg: '#FF9100' };
+    return { Icon: CalendarDays };
   };
 
   return (
@@ -45,8 +46,8 @@ export const NowTimeline: React.FC<NowTimelineProps> = ({ events, onOpenEvent, o
       <div className="space-y-3 opacity-60">
         <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)]">Yesterday</h3>
         <div className="rounded-[20px] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-3.5 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-[var(--surface-elevated)] flex items-center justify-center text-lg">
-            ✓
+          <div className="w-10 h-10 rounded-2xl bg-[var(--surface-elevated)] text-[var(--accent)] flex items-center justify-center">
+            <Check size={18} strokeWidth={2} aria-hidden="true" />
           </div>
           <div>
             <div className="text-xs text-[var(--text-secondary)]">16:00 - 17:00</div>
@@ -74,7 +75,7 @@ export const NowTimeline: React.FC<NowTimelineProps> = ({ events, onOpenEvent, o
             <p className="text-xs text-[var(--text-secondary)] italic py-2">Nenhum evento restante para hoje.</p>
           ) : (
             events.map((ev) => {
-              const cat = getCategoryIcon(ev.title);
+              const { Icon } = getCategoryIcon(ev.title);
               return (
                 <div
                   key={ev.id}
@@ -82,11 +83,8 @@ export const NowTimeline: React.FC<NowTimelineProps> = ({ events, onOpenEvent, o
                   className="rounded-[20px] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-4 flex items-center justify-between hover:bg-[var(--surface-elevated)] transition cursor-pointer shadow-lg group"
                 >
                   <div className="flex items-center gap-3.5">
-                    <div
-                      className="w-11 h-11 rounded-2xl flex items-center justify-center text-xl shadow-md"
-                      style={{ backgroundColor: cat.bg }}
-                    >
-                      {cat.icon}
+                    <div className="w-11 h-11 rounded-2xl flex items-center justify-center bg-[var(--accent-soft)] text-[var(--accent)] shadow-md">
+                      <Icon size={20} strokeWidth={1.9} aria-hidden="true" />
                     </div>
                     <div>
                       <div className="text-xs font-mono font-semibold text-[var(--accent)]">
@@ -98,7 +96,7 @@ export const NowTimeline: React.FC<NowTimelineProps> = ({ events, onOpenEvent, o
                       {ev.notes && <div className="text-[11px] text-[var(--text-secondary)] mt-0.5 line-clamp-1">{ev.notes}</div>}
                     </div>
                   </div>
-                  <span className="text-[var(--text-primary)] text-xs">›</span>
+                  <ChevronRight size={16} className="text-[var(--text-secondary)]" aria-hidden="true" />
                 </div>
               );
             })
@@ -110,8 +108,8 @@ export const NowTimeline: React.FC<NowTimelineProps> = ({ events, onOpenEvent, o
       <div className="space-y-3 pt-3 opacity-90">
         <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)]">Tomorrow</h3>
         <div className="rounded-[20px] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-3.5 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-[var(--surface-elevated)] flex items-center justify-center text-lg">
-            🗓️
+          <div className="w-10 h-10 rounded-2xl bg-[var(--surface-elevated)] text-[var(--accent)] flex items-center justify-center">
+            <CalendarDays size={18} strokeWidth={1.9} aria-hidden="true" />
           </div>
           <div>
             <div className="text-xs text-[var(--text-secondary)]">09:00 - 10:00</div>

@@ -73,7 +73,7 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
           onClick={onClose}
           className="w-9 h-9 rounded-full bg-[var(--surface-card)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] hover:text-[var(--text-primary)]"
         >
-          ✕
+          <X size={16} aria-hidden="true" />
         </button>
         <h2 className="font-bold text-base tracking-tight">Personalizar Assistente</h2>
         <button

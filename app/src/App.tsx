@@ -2,7 +2,7 @@
 // Assistant Cat - Multiplatform Native Theme (Web, Mobile & Microsoft Store)
 
 import React, { useState, useEffect, useRef } from 'react';
-import { X, Bell } from 'lucide-react';
+import { X, Bell, Check, ChevronRight, Handshake, Link2, MailCheck, Repeat, User, Users, Zap } from 'lucide-react';
 import {
   AppState,
   CalendarEvent,
@@ -822,8 +822,8 @@ export function App() {
                 {state.tasks.length === 0 ? (
                   /* Empty State: Foco e produtividade em dia */
                   <div className="rounded-[24px] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-8 text-center space-y-4 my-8">
-                    <div className="w-16 h-16 mx-auto rounded-full bg-[var(--surface-elevated)] flex items-center justify-center text-2xl text-emerald-400 shadow-inner">
-                      ✓
+                    <div className="w-16 h-16 mx-auto rounded-full bg-[var(--surface-elevated)] flex items-center justify-center text-[var(--accent)] shadow-inner">
+                      <Check size={26} strokeWidth={2} aria-hidden="true" />
                     </div>
                     <div>
                       <h4 className="font-bold text-base text-[var(--text-primary)]">Nenhum afazer pendente</h4>
@@ -849,11 +849,12 @@ export function App() {
                         <div className="flex items-center gap-3">
                           <button
                             onClick={() => handleToggleTask(t)}
-                            className={`w-5 h-5 rounded-full border flex items-center justify-center text-xs transition ${
+                            aria-label={t.done ? `Marcar ${t.title} como pendente` : `Concluir ${t.title}`}
+                            className={`w-5 h-5 rounded-full border flex items-center justify-center transition ${
                               t.done ? 'bg-[var(--accent)] border-[var(--accent)] text-[var(--text-primary)]' : 'border-[var(--border-strong)] text-transparent'
                             }`}
                           >
-                            ✓
+                            <Check size={12} strokeWidth={2.6} aria-hidden="true" />
                           </button>
                           <div>
                             <span
@@ -869,7 +870,10 @@ export function App() {
                                 </span>
                               )}
                               {t.repeatAfter && (
-                                <span>🔁 Repete a cada {t.repeatAfter.amount} {t.repeatAfter.unit}</span>
+                                <span className="inline-flex items-center gap-1">
+                                  <Repeat size={11} strokeWidth={2} aria-hidden="true" />
+                                  Repete a cada {t.repeatAfter.amount} {t.repeatAfter.unit}
+                                </span>
                               )}
                             </div>
                           </div>
@@ -936,18 +940,18 @@ export function App() {
                 {/* Animação com linhas pontilhadas e avatares (00:16 - 00:19) */}
                 <div className="relative py-6 max-w-xs mx-auto">
                   <div className="flex justify-between items-center mb-6">
-                    <div className="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500 flex items-center justify-center text-lg shadow-lg">
-                      👤
+                    <div className="w-12 h-12 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] shadow-lg">
+                      <User size={20} strokeWidth={1.9} aria-hidden="true" />
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-purple-500/20 border border-purple-500 flex items-center justify-center text-lg shadow-lg">
-                      👥
+                    <div className="w-12 h-12 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] shadow-lg">
+                      <Users size={20} strokeWidth={1.9} aria-hidden="true" />
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500 flex items-center justify-center text-lg shadow-lg">
-                      🤝
+                    <div className="w-12 h-12 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] shadow-lg">
+                      <Handshake size={20} strokeWidth={1.9} aria-hidden="true" />
                     </div>
                   </div>
-                  <div className="w-16 h-16 mx-auto rounded-full bg-[var(--surface-elevated)] border-2 border-[var(--accent)] flex items-center justify-center text-2xl shadow-2xl">
-                    🐱✉️
+                  <div className="w-16 h-16 mx-auto rounded-full bg-[var(--surface-elevated)] border-2 border-[var(--accent)] flex items-center justify-center text-[var(--accent)] shadow-2xl">
+                    <MailCheck size={26} strokeWidth={1.8} aria-hidden="true" />
                   </div>
                   <div className="mt-2 text-[10px] font-mono text-[var(--text-secondary)]">Negociação autônoma via IA</div>
                 </div>
@@ -971,8 +975,8 @@ export function App() {
 
             {tasksSubTab === 'triggers' && (
               <div className="rounded-[24px] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-6 text-center space-y-4">
-                <div className="w-16 h-16 mx-auto rounded-full bg-[var(--surface-elevated)] flex items-center justify-center text-3xl">
-                  ⚡
+                <div className="w-16 h-16 mx-auto rounded-full bg-[var(--surface-elevated)] flex items-center justify-center text-[var(--accent)]">
+                  <Zap size={26} strokeWidth={1.9} aria-hidden="true" />
                 </div>
                 <div>
                   <h4 className="font-bold text-base text-[var(--text-primary)]">Disparadores em Tempo Real</h4>
@@ -1034,15 +1038,15 @@ export function App() {
               className="rounded-[20px] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-4 flex items-center justify-between cursor-pointer hover:bg-[var(--surface-elevated)] transition"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-[var(--accent-soft)] flex items-center justify-center text-lg">
-                  🔗
+                <div className="w-10 h-10 rounded-2xl bg-[var(--accent-soft)] flex items-center justify-center text-[var(--accent)]">
+                  <Link2 size={18} strokeWidth={1.9} aria-hidden="true" />
                 </div>
                 <div>
                   <div className="font-bold text-sm text-[var(--text-primary)]">Booking Link (Estilo Calendly)</div>
                   <div className="text-xs text-[var(--text-secondary)]">Crie sua página pública com auxílio da IA</div>
                 </div>
               </div>
-              <span className="text-[var(--text-primary)] font-bold">&gt;</span>
+              <ChevronRight size={18} className="text-[var(--text-secondary)]" aria-hidden="true" />
             </div>
 
             {/* Customização do Gato */}
@@ -1057,7 +1061,7 @@ export function App() {
                   <div className="text-xs text-[var(--text-secondary)]">Pelagens, roupas, personalidade e tom de voz</div>
                 </div>
               </div>
-              <span className="text-[var(--text-primary)] font-bold">&gt;</span>
+              <ChevronRight size={18} className="text-[var(--text-secondary)]" aria-hidden="true" />
             </div>
 
             {/* Tema do aplicativo */}

@@ -112,11 +112,19 @@ export interface AISettingsState {
   baseUrl?: string;
 }
 
+/** Posição da navegação principal. `auto` usa lateral no desktop e inferior no celular. */
+export type NavLayout = 'auto' | 'bottom' | 'side';
+
 export interface AppState {
   schemaVersion: number;
   profile: Profile;
   appearance: CatAppearance;
   theme: ThemeId;
+  layout?: NavLayout;
+  /** false até concluir as boas-vindas de primeiro acesso. */
+  onboarded?: boolean;
+  /** Duração padrão (minutos) ao criar compromisso manualmente. */
+  defaultDuration?: number;
   tab: 'now' | 'chat' | 'calendar' | 'actions' | 'me';
   events: CalendarEvent[];
   tasks: Task[];

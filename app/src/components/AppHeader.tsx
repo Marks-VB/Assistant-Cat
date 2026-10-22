@@ -23,7 +23,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   unreadNotificationsCount = 2
 }) => {
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between px-4 py-3 bg-[var(--bg-primary)] backdrop-blur-md border-b border-[var(--border-subtle)]">
+    <header className="app-header sticky top-0 z-30 flex items-center justify-between gap-2 px-4 py-3 border-b border-[var(--border-subtle)]">
       {/* Botão Circular Esquerdo: Lista de Chats */}
       <button
         onClick={onOpenChatsDrawer}
@@ -45,7 +45,10 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         <div className="w-11 h-11 rounded-full bg-[var(--surface-card)] border-2 border-[var(--border-strong)] group-hover:border-[var(--accent-border)] flex items-center justify-center overflow-hidden transition shadow-lg">
           <CatAvatar appearance={appearance} className="w-11 h-11" />
         </div>
-        <span className="absolute -bottom-2 bg-[var(--surface-elevated)] text-[var(--text-primary)] border border-[var(--border-strong)] text-[10px] font-bold px-2.5 py-0.2 rounded-full shadow-md tracking-wide">
+        <span
+          title={assistantName}
+          className="absolute -bottom-2 max-w-[160px] truncate whitespace-nowrap rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-2.5 py-0.5 text-[10px] font-bold leading-none tracking-tight text-[var(--text-primary)] shadow-md"
+        >
           {assistantName}
         </span>
       </div>

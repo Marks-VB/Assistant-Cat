@@ -62,16 +62,22 @@ As razões abaixo foram calculadas a partir das cores sólidas dos tokens, sem c
 
 Usar controles nativos, rótulos, foco visível de 3 px, navegação por teclado e texto que explique cada estado. Respeitar `prefers-reduced-motion`. A cor sozinha não deve comunicar erro ou seleção. Verificar a interface em 360, 390, 768 e 1440 px e com texto ampliado.
 
+Alvos de toque têm no mínimo 44 px nas ações principais (e nunca menos de 24 px), e o foco não fica escondido atrás dos cabeçalhos fixos — `html { scroll-padding-top: 76px }` (WCAG 2.4.11).
+
 Os tokens já são usados pelo protótipo. A inspeção visual em navegador e a validação em dispositivos reais permanecem parte do aceite de publicação.
 
 ## Temas do aplicativo (React/Android)
 
 O app de produção oferece **8 temas** selecionáveis em **Me → Tema do aplicativo**. As variáveis ficam em `app/src/styles/themes.css` e o catálogo em `app/src/core/themes.ts`.
 
+### Identidade
+
+O acento do produto é o **verde-menta do gato** — não o vermelho de referência. Escuro usa `#7ECFB6`; claro usa `#2B7A6B`. O restante de cada tema pode variar, mas a marca permanece reconhecível.
+
 | Tema | ID | Fundo | Superfície | Acento |
 | :--- | :--- | :--- | :--- | :--- |
-| Escuro | `midnight` | `#121212` | `#1E1E1E` | `#FF4D4D` |
-| Claro | `porcelain` | `#F7F4EE` | `#FFFFFF` | `#C9453A` |
+| Escuro | `midnight` | `#121212` | `#1C1C1F` | `#7ECFB6` |
+| Claro | `porcelain` | `#F7F4EE` | `#FFFFFF` | `#2B7A6B` |
 | Minimalista | `minimal` | `#FAFAFA` | `#FFFFFF` | `#111111` |
 | Vidro | `glass` | `#0B1220` | translúcido | `#7DD3FC` |
 | Nord | `nord` | `#2E3440` | `#3B4252` | `#88C0D0` |
@@ -79,4 +85,35 @@ O app de produção oferece **8 temas** selecionáveis em **Me → Tema do aplic
 | Retrô | `retro` | `#F3E7CE` | `#FBF3E2` | `#B5462F` |
 | Sistema | `system` | segue o aparelho | — | — |
 
-Os componentes usam utilitários semânticos (`bg-[var(--surface-card)]`, `text-[var(--text-primary)]`, `bg-[var(--accent)]`). O tema é aplicado via `data-theme` no `<html>`; `system` escuta `prefers-color-scheme`. Botões de acento herdam `--on-accent` para manter contraste, e cada tema declara `color-scheme` para campos nativos.
+### Temas mudam efeitos, não só cores
+
+Além das cores, cada tema declara tokens de efeito consumidos pelos componentes:
+
+| Token | Para que serve |
+| :--- | :--- |
+| `--surface-blur` | `backdrop-filter` das superfícies (vidro: `blur(22px) saturate(160%)`) |
+| `--surface-sheen` | gradiente interno de brilho nas superfícies de vidro |
+| `--surface-shadow` | profundidade: sombras suaves no Nord, nenhuma no Minimalista |
+| `--page-gradient` | fundo da página: gradiente no Vidro, grade/brilho no Cyberpunk, textura no Retrô |
+| `--header-bg` / `--nav-bg` | superfícies fixas do cabeçalho e da navegação |
+| `--heading-font` | tipografia de títulos (serifada no Retrô, mono no Cyberpunk/minimal) |
+
+Regras escopadas em `[data-theme="..."]` aplicam efeitos estruturais (grade neon, textura de papel, ausência de sombra). Transições de tema são curtas (260–320 ms) e limitadas a cor/sombra, para não deslocar o avatar ou o layout. `prefers-reduced-motion` desliga tudo.
+
+### Navegação configurável
+
+`AppState.layout` guarda a preferência (`auto`, `bottom`, `side`):
+
+- **Automático** — menu lateral em telas ≥ 1024 px; barra inferior no celular.
+- **Lateral** — menu fixo à esquerda a partir de 768 px (rail de 220 px com marca, itens e tema ativo).
+- **Inferior** — barra flutuante sempre, inclusive no desktop.
+
+A preferência é escolhida nas boas-vindas e pode ser trocada em **Me → Menu de navegação**, com prévia em wireframe (`LayoutPreview`).
+
+### Boas-vindas de primeiro acesso
+
+`OnboardingFlow` abre sozinho quando `AppState.onboarded === false` (instalações antigas migram para `true`). Passos: boas-vindas → assistente e nomes (como o usuário quer ser chamado) → tema → navegação → preferências (duração padrão de compromissos e leitura em voz alta) → pronto. Todas as escolhas aplicam ao vivo; o botão **Pular** conclui imediatamente. Pode ser revisto em **Me → Rever boas-vindas**.
+
+### Implementação
+
+Os componentes usam utilitários semânticos (`bg-[var(--surface-card)]`, `text-[var(--text-primary)]`, `bg-[var(--accent)]`). O tema é aplicado via `data-theme` no `<html>`; `system` escuta `prefers-color-scheme`. Botões de acento herdam `--on-accent` para manter contraste, e cada tema declara `color-scheme` para campos nativos. A criação manual de tarefa fica no botão **+ Nova tarefa** em Calendar → To-dos (e no menu **+**).

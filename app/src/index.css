@@ -11,6 +11,11 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  html {
+    /* WCAG 2.4.11: item focado não fica escondido atrás do cabeçalho fixo. */
+    scroll-padding-top: 76px;
+  }
+
   html,
   body {
     background-color: var(--bg-primary);

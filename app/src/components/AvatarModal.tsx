@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { CatAppearance, Profile, AISettingsState } from '../types';
 import { AI_PROVIDERS, DEFAULT_AI_SETTINGS } from '../core/providers';
+import { AVATAR_PRESETS } from '../core/avatar-presets';
 import { CatAvatar } from './CatAvatar';
 
 interface AvatarModalProps {
@@ -40,13 +41,7 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
 
   // 5 variações de destaque conforme a timeline do app:
   // 1) Normal (fundo azul), 2) Laranja (fundo amarelo), 3) Festeiro, 4) Executivo (terno), 5) Nerd (óculos)
-  const avatarVariations: Array<{ label: string; appearance: CatAppearance; bgCircle: string }> = [
-    { label: 'Normal', appearance: { coat: 'white', outfit: 'none', glasses: 'none' }, bgCircle: '#64B5F6' },
-    { label: 'Laranja', appearance: { coat: 'ginger', outfit: 'none', glasses: 'none' }, bgCircle: '#FFD54F' },
-    { label: 'Festeiro', appearance: { coat: 'calico', outfit: 'none', glasses: 'round' }, bgCircle: '#BA68C8' },
-    { label: 'Executivo', appearance: { coat: 'tuxedo', outfit: 'suit', glasses: 'none' }, bgCircle: '#4FC3F7' },
-    { label: 'Nerd', appearance: { coat: 'gray_tabby', outfit: 'hoodie', glasses: 'square' }, bgCircle: '#4DB6AC' }
-  ];
+  const avatarVariations = AVATAR_PRESETS;
 
   const handleSelectVariation = (idx: number) => {
     setActiveAvatarIndex(idx);

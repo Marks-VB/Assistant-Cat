@@ -12,7 +12,8 @@ import {
   CatAppearance,
   ChatMessage,
   Priority,
-  Recurrence
+  Recurrence,
+  NavLayout
 } from './types';
 import { GatoStorage } from './core/storage';
 import { CatAvatar } from './components/CatAvatar';
@@ -24,6 +25,7 @@ import { coats, outfits, glasses } from './core/cat-avatar';
 
 // Componentes
 import { FloatingBottomBar, AppTabKey } from './components/FloatingBottomBar';
+import { SideNav } from './components/SideNav';
 import { TabBar, TabKey } from './components/TabBar';
 import { AppHeader } from './components/AppHeader';
 import { EventCard } from './components/EventCard';
@@ -34,6 +36,9 @@ import { BottomSheet } from './components/BottomSheet';
 import { AvatarModal } from './components/AvatarModal';
 import { NowTimeline } from './components/NowTimeline';
 import { BookingFlow } from './components/BookingFlow';
+import { OnboardingFlow } from './components/OnboardingFlow';
+import { LayoutPreview } from './components/LayoutPreview';
+import { LAYOUT_OPTIONS } from './core/layout';
 
 const uid = () =>
   typeof crypto !== 'undefined' && crypto.randomUUID
@@ -50,6 +55,9 @@ const initialAppState: AppState = {
   profile: { name: 'Você', assistantName: defaultAssistantName },
   appearance: { coat: 'white', outfit: 'none', glasses: 'none', state: 'idle' },
   theme: 'midnight',
+  layout: 'auto',
+  onboarded: false,
+  defaultDuration: 60,
   tab: 'chat',
   events: [
     {
@@ -131,6 +139,7 @@ export function App() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [isBookingFlowOpen, setIsBookingFlowOpen] = useState(false);
   const [isChatsDrawerOpen, setIsChatsDrawerOpen] = useState(false);
+  const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
 
   // Modais de Edição
   const [eventModalOpen, setEventModalOpen] = useState(false);
@@ -145,6 +154,8 @@ export function App() {
   const [speakingMsgId, setSpeakingMsgId] = useState<string | null>(null);
   const chatScrollRef = useRef<HTMLDivElement>(null);
   const confirmingProposals = useRef(new Set<Proposal>());
+  const themeMountedRef = useRef(false);
+  const themeTimerRef = useRef<number | null>(null);
 
   // Inicialização do storage
   useEffect(() => {
@@ -156,6 +167,9 @@ export function App() {
           saved.profile.assistantName = defaultAssistantName;
         }
         saved.theme = normalizeTheme(saved.theme);
+        saved.layout = saved.layout === 'bottom' || saved.layout === 'side' ? saved.layout : 'auto';
+        // Instalações antigas (com estado salvo) não devem ver as boas-vindas de novo.
+        saved.onboarded = saved.onboarded === undefined ? true : saved.onboarded;
         setState(saved);
         void syncEventReminders(saved.events);
       }
@@ -196,6 +210,17 @@ export function App() {
     const media = window.matchMedia('(prefers-color-scheme: dark)');
     const apply = () => {
       const resolved = resolveTheme(state.theme, media.matches);
+      if (themeMountedRef.current) {
+        // Transição curta só de cor/sombra; sem animar layout (evita o "pulo" do avatar).
+        const root = document.documentElement;
+        root.classList.add('theme-transition');
+        if (themeTimerRef.current) window.clearTimeout(themeTimerRef.current);
+        themeTimerRef.current = window.setTimeout(() => {
+          root.classList.remove('theme-transition');
+          themeTimerRef.current = null;
+        }, 320);
+      }
+      themeMountedRef.current = true;
       document.documentElement.dataset.theme = resolved;
       const option = THEME_OPTIONS.find((item) => item.id === resolved);
       const meta = document.querySelector('meta[name="theme-color"]');
@@ -211,8 +236,20 @@ export function App() {
       if (state.theme === 'system') apply();
     };
     media.addEventListener('change', onChange);
-    return () => media.removeEventListener('change', onChange);
+    return () => {
+      media.removeEventListener('change', onChange);
+      if (themeTimerRef.current) {
+        window.clearTimeout(themeTimerRef.current);
+        themeTimerRef.current = null;
+      }
+    };
   }, [state.theme]);
+
+  // Expõe o layout escolhido para CSS/testes e normaliza valores antigos.
+  const navLayout: NavLayout = state.layout === 'bottom' || state.layout === 'side' ? state.layout : 'auto';
+  useEffect(() => {
+    document.documentElement.dataset.nav = navLayout;
+  }, [navLayout]);
 
   // Scroll automático no chat
   useEffect(() => {
@@ -456,8 +493,15 @@ export function App() {
     );
   }
 
+  const sideNavVisibility =
+    navLayout === 'side' ? 'md:flex' : navLayout === 'auto' ? 'lg:flex' : 'hidden';
+  const contentOffset =
+    navLayout === 'side' ? 'md:pl-[240px]' : navLayout === 'auto' ? 'lg:pl-[240px]' : '';
+  const bottomNavVisibility =
+    navLayout === 'side' ? 'md:hidden' : navLayout === 'auto' ? 'lg:hidden' : '';
+
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] flex flex-col font-sans select-none antialiased">
+    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans select-none antialiased">
       <a href="#main" className="skip-link">Pular para conteúdo</a>
       {/* Toast flutuante */}
       {toastMessage && (
@@ -467,6 +511,18 @@ export function App() {
         </div>
       )}
 
+      <SideNav
+        currentTab={currentTab}
+        onChangeTab={(tab) => setCurrentTab(tab)}
+        badgeCounts={{ calendar: 3 }}
+        assistantName={state.profile.assistantName}
+        appearance={state.appearance}
+        themeLabel={THEME_OPTIONS.find((option) => option.id === state.theme)?.label || 'Escuro'}
+        onOpenAvatarModal={() => setIsAvatarModalOpen(true)}
+        className={sideNavVisibility}
+      />
+
+      <div className={`flex min-h-screen flex-col ${contentOffset}`}>
       {/* Header Nativo (exibido nas abas Now, Calendar, Tasks e Me) */}
       {currentTab !== 'chat' && (
         <AppHeader
@@ -483,7 +539,7 @@ export function App() {
       <main
         id="main"
         tabIndex={-1}
-        className={`flex-1 w-full max-w-2xl mx-auto transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`flex-1 w-full max-w-2xl lg:max-w-4xl mx-auto transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           isBottomSheetOpen ? 'scale-[0.98] opacity-85 brightness-90 rounded-2xl overflow-hidden' : 'scale-100 opacity-100'
         } ${currentTab === 'chat' ? 'px-0 pt-0 pb-16' : 'px-4 pt-3 pb-24'}`}
       >
@@ -612,7 +668,7 @@ export function App() {
                 setEventModalOpen(true);
               }}
               onNewEvent={() => {
-                setEditingEvent({ date: Domain.civilDate(), time: '14:00', duration: 60 });
+                setEditingEvent({ date: Domain.civilDate(), time: '14:00', duration: state.defaultDuration || 60 });
                 setEventModalOpen(true);
               }}
             />
@@ -665,13 +721,14 @@ export function App() {
                     setEditingTask({ due: Domain.civilDate(), priority: 'normal' });
                     setTaskModalOpen(true);
                   } else {
-                    setEditingEvent({ date: Domain.civilDate(), time: '10:00', duration: 60 });
+                    setEditingEvent({ date: Domain.civilDate(), time: '10:00', duration: state.defaultDuration || 60 });
                     setEventModalOpen(true);
                   }
                 }}
-                className="w-8 h-8 rounded-full bg-[var(--accent)] text-[var(--text-primary)] flex items-center justify-center font-bold text-sm shadow-lg hover:bg-[var(--accent-hover)]"
+                aria-label={calendarSubTab === 'todos' ? 'Criar nova tarefa' : 'Criar novo compromisso'}
+                className="press-scale h-9 shrink-0 rounded-full bg-[var(--accent)] px-3 text-xs font-bold text-[var(--text-primary)] shadow-[var(--nav-shadow)] transition hover:bg-[var(--accent-hover)]"
               >
-                +
+                {calendarSubTab === 'todos' ? '+ Nova tarefa' : '+ Novo compromisso'}
               </button>
             </div>
 
@@ -1015,7 +1072,7 @@ export function App() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                 {THEME_OPTIONS.map((option) => {
                   const active = state.theme === option.id;
                   return (
@@ -1024,7 +1081,7 @@ export function App() {
                       type="button"
                       onClick={() => updateState((s) => ({ ...s, theme: option.id }))}
                       aria-pressed={active}
-                      className={`rounded-2xl border p-2.5 text-left transition ${
+                      className={`press-scale rounded-2xl border p-2.5 text-left transition ${
                         active
                           ? 'border-[var(--accent)] ring-2 ring-[var(--accent-ring)]'
                           : 'border-[var(--border-subtle)] hover:border-[var(--border-strong)]'
@@ -1045,6 +1102,50 @@ export function App() {
                   );
                 })}
               </div>
+            </div>
+
+            {/* Navegação / Menu */}
+            <div className="rounded-[24px] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-4 space-y-3">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <div className="font-semibold text-[var(--text-primary)]">Menu de navegação</div>
+                  <div className="text-xs text-[var(--text-secondary)]">Onde os menus aparecem em cada tela</div>
+                </div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--accent)]">
+                  {LAYOUT_OPTIONS.find((option) => option.id === navLayout)?.label}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                {LAYOUT_OPTIONS.map((option) => {
+                  const active = navLayout === option.id;
+                  return (
+                    <button
+                      key={option.id}
+                      type="button"
+                      onClick={() => updateState((s) => ({ ...s, layout: option.id }))}
+                      aria-pressed={active}
+                      className={`press-scale rounded-2xl border p-2.5 text-left transition ${
+                        active
+                          ? 'border-[var(--accent)] ring-2 ring-[var(--accent-ring)]'
+                          : 'border-[var(--border-subtle)] hover:border-[var(--border-strong)]'
+                      }`}
+                    >
+                      <LayoutPreview layout={option.id} />
+                      <div className="mt-2 text-xs font-bold text-[var(--text-primary)]">{option.label}</div>
+                      <div className="text-[10px] leading-tight text-[var(--text-secondary)]">{option.hint}</div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsOnboardingOpen(true)}
+                className="text-xs font-semibold text-[var(--text-secondary)] underline underline-offset-2 hover:text-[var(--accent)]"
+              >
+                Rever boas-vindas (tema, assistente e menu em passos)
+              </button>
             </div>
 
             {/* Seções de Configuração */}
@@ -1106,15 +1207,18 @@ export function App() {
           </div>
         )}
       </main>
+      </div>
 
       {/* ========================================================= */}
       {/* BARRA DE NAVEGAÇÃO INFERIOR FLUTUANTE (FLOATING PILL TAB BAR) */}
       {/* ========================================================= */}
-      <FloatingBottomBar
-        currentTab={currentTab}
-        onChangeTab={(tab) => setCurrentTab(tab)}
-        badgeCounts={{ calendar: 3 }}
-      />
+      <div className={bottomNavVisibility}>
+        <FloatingBottomBar
+          currentTab={currentTab}
+          onChangeTab={(tab) => setCurrentTab(tab)}
+          badgeCounts={{ calendar: 3 }}
+        />
+      </div>
 
       {/* ========================================================= */}
       {/* MODAIS INTEGRADOS */}
@@ -1158,6 +1262,9 @@ export function App() {
           } else if (tool === 'todo') {
             setCurrentTab('calendar');
             setCalendarSubTab('todos');
+            // Abre direto a criação manual de tarefa, em vez de só navegar.
+            setEditingTask({ due: Domain.civilDate(), priority: 'normal' });
+            setTaskModalOpen(true);
           } else if (tool === 'trigger') {
             setCurrentTab('tasks');
             setTasksSubTab('triggers');
@@ -1495,6 +1602,34 @@ export function App() {
           </div>
         </div>
       )}
+
+      {/* 9. Boas-vindas de primeiro acesso (ou refeitas a partir de Me) */}
+      <OnboardingFlow
+        open={isOnboardingOpen || (!loading && state.onboarded === false)}
+        theme={state.theme}
+        layout={navLayout}
+        appearance={state.appearance}
+        assistantName={state.profile.assistantName}
+        userName={state.profile.name}
+        autoSpeak={state.autoSpeak || false}
+        defaultDuration={state.defaultDuration || 60}
+        onSelectTheme={(id) => updateState((s) => ({ ...s, theme: id }))}
+        onSelectLayout={(id) => updateState((s) => ({ ...s, layout: id }))}
+        onSelectAppearance={(appearance) => updateState((s) => ({ ...s, appearance }))}
+        onSetAssistantName={(name) =>
+          updateState((s) => ({ ...s, profile: { ...s.profile, assistantName: name } }))
+        }
+        onSetUserName={(name) =>
+          updateState((s) => ({ ...s, profile: { ...s.profile, name } }))
+        }
+        onSetAutoSpeak={(enabled) => updateState((s) => ({ ...s, autoSpeak: enabled }))}
+        onSetDefaultDuration={(minutes) => updateState((s) => ({ ...s, defaultDuration: minutes }))}
+        onFinish={async () => {
+          setIsOnboardingOpen(false);
+          await updateState((s) => ({ ...s, onboarded: true }));
+          showToast('Boas-vindas concluídas. Bem-vindo!');
+        }}
+      />
     </div>
   );
 }

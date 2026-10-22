@@ -17,15 +17,15 @@ export const THEME_OPTIONS: ThemeOption[] = [
   {
     id: 'midnight',
     label: 'Escuro',
-    description: 'Coral sobre carvão',
-    preview: ['#121212', '#1E1E1E', '#FF4D4D'],
+    description: 'Verde-gato sobre carvão',
+    preview: ['#121212', '#1C1C1F', '#7ECFB6'],
     themeColor: '#121212'
   },
   {
     id: 'porcelain',
     label: 'Claro',
-    description: 'Papel quente e suave',
-    preview: ['#F7F4EE', '#FFFFFF', '#C9453A'],
+    description: 'Papel quente e sereno',
+    preview: ['#F7F4EE', '#FFFFFF', '#2B7A6B'],
     themeColor: '#F7F4EE'
   },
   {
@@ -67,7 +67,7 @@ export const THEME_OPTIONS: ThemeOption[] = [
     id: 'system',
     label: 'Sistema',
     description: 'Segue o aparelho',
-    preview: ['#121212', '#F7F4EE', '#FF4D4D'],
+    preview: ['#121212', '#F7F4EE', '#7ECFB6'],
     themeColor: '#121212'
   }
 ];

@@ -1,26 +1,31 @@
 /* Temas visuais do Assistant Cat.
    As cores são expostas como variáveis CSS e consumidas pelos utilitários
-   Tailwind no formato bg-[var(--surface-card)], text-[var(--text-primary)] etc. */
+   Tailwind no formato bg-[var(--surface-card)], text-[var(--text-primary)] etc.
+
+   Além das cores, cada tema declara "efeitos" (blur, brilho, sombra, textura
+   de fundo, tipografia de títulos). Assim trocar de tema muda a linguagem
+   visual — não apenas a paleta. */
 
 :root,
 [data-theme="midnight"] {
   color-scheme: dark;
   --bg-primary: #121212;
-  --surface-card: #1e1e1e;
-  --surface-elevated: #252525;
+  --surface-card: #1c1c1f;
+  --surface-elevated: #252529;
   --surface-input: #2a2a2c;
-  --surface-hover: #2c2c2e;
+  --surface-hover: #303034;
   --text-primary: #ffffff;
-  --text-secondary: #9e9e9e;
-  --accent: #d63a3a;
-  --accent-hover: #b92f2f;
-  --accent-soft: rgba(214, 58, 58, 0.14);
-  --accent-border: rgba(214, 58, 58, 0.35);
-  --accent-ring: rgba(214, 58, 58, 0.25);
-  --accent-glow: rgba(214, 58, 58, 0.35);
-  --on-accent: #ffffff;
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-strong: rgba(255, 255, 255, 0.12);
+  --text-secondary: #a3a3a8;
+  /* Identidade do produto: verde-gato, não o vermelho da referência. */
+  --accent: #7ecfb6;
+  --accent-hover: #9adfc9;
+  --accent-soft: rgba(126, 207, 182, 0.14);
+  --accent-border: rgba(126, 207, 182, 0.38);
+  --accent-ring: rgba(126, 207, 182, 0.28);
+  --accent-glow: rgba(126, 207, 182, 0.3);
+  --on-accent: #07120e;
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.14);
   --overlay-weak: rgba(255, 255, 255, 0.05);
   --overlay: rgba(255, 255, 255, 0.1);
   --overlay-strong: rgba(255, 255, 255, 0.2);
@@ -29,7 +34,17 @@
   --inverted-text: #121212;
   --scrollbar-track: #121212;
   --scrollbar-thumb: #2a2a2c;
-  --page-gradient: none;
+  --page-gradient:
+    radial-gradient(circle at 15% 0%, rgba(126, 207, 182, 0.07), transparent 45%),
+    radial-gradient(circle at 90% 100%, rgba(94, 158, 255, 0.05), transparent 50%);
+  --header-bg: rgba(18, 18, 18, 0.82);
+  --nav-bg: rgba(28, 28, 31, 0.86);
+  --surface-blur: none;
+  --surface-sheen: none;
+  --surface-shadow: 0 1px 2px rgba(0, 0, 0, 0.28), 0 10px 30px rgba(0, 0, 0, 0.16);
+  --nav-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  --heading-font: inherit;
+  --heading-tracking: -0.015em;
 }
 
 [data-theme="porcelain"] {
@@ -41,15 +56,15 @@
   --surface-hover: #e7e0d2;
   --text-primary: #1f1d1a;
   --text-secondary: #6f6a61;
-  --accent: #c9453a;
-  --accent-hover: #b23a30;
-  --accent-soft: rgba(201, 69, 58, 0.12);
-  --accent-border: rgba(201, 69, 58, 0.3);
-  --accent-ring: rgba(201, 69, 58, 0.2);
-  --accent-glow: rgba(201, 69, 58, 0.25);
+  --accent: #2b7a6b;
+  --accent-hover: #23665a;
+  --accent-soft: rgba(43, 122, 107, 0.12);
+  --accent-border: rgba(43, 122, 107, 0.3);
+  --accent-ring: rgba(43, 122, 107, 0.2);
+  --accent-glow: rgba(43, 122, 107, 0.25);
   --on-accent: #ffffff;
-  --border-subtle: rgba(31, 29, 26, 0.08);
-  --border-strong: rgba(31, 29, 26, 0.16);
+  --border-subtle: rgba(31, 29, 26, 0.09);
+  --border-strong: rgba(31, 29, 26, 0.18);
   --overlay-weak: rgba(31, 29, 26, 0.04);
   --overlay: rgba(31, 29, 26, 0.07);
   --overlay-strong: rgba(31, 29, 26, 0.12);
@@ -59,8 +74,16 @@
   --scrollbar-track: #f7f4ee;
   --scrollbar-thumb: #d8d0c2;
   --page-gradient:
-    radial-gradient(circle at 12% 8%, rgba(201, 69, 58, 0.09), transparent 42%),
+    radial-gradient(circle at 12% 8%, rgba(43, 122, 107, 0.09), transparent 42%),
     radial-gradient(circle at 88% 92%, rgba(111, 106, 97, 0.1), transparent 46%);
+  --header-bg: rgba(247, 244, 238, 0.86);
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --surface-blur: none;
+  --surface-sheen: none;
+  --surface-shadow: 0 1px 2px rgba(31, 29, 26, 0.05), 0 12px 28px rgba(31, 29, 26, 0.07);
+  --nav-shadow: 0 18px 38px rgba(31, 29, 26, 0.14);
+  --heading-font: inherit;
+  --heading-tracking: -0.015em;
 }
 
 [data-theme="minimal"] {
@@ -71,7 +94,7 @@
   --surface-input: #eaeaea;
   --surface-hover: #e3e3e3;
   --text-primary: #111111;
-  --text-secondary: #6b6b6b;
+  --text-secondary: #5f5f5f;
   --accent: #111111;
   --accent-hover: #000000;
   --accent-soft: rgba(17, 17, 17, 0.08);
@@ -79,8 +102,8 @@
   --accent-ring: rgba(17, 17, 17, 0.15);
   --accent-glow: rgba(17, 17, 17, 0.18);
   --on-accent: #ffffff;
-  --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-strong: rgba(0, 0, 0, 0.18);
+  --border-subtle: rgba(0, 0, 0, 0.12);
+  --border-strong: rgba(0, 0, 0, 0.24);
   --overlay-weak: rgba(0, 0, 0, 0.04);
   --overlay: rgba(0, 0, 0, 0.07);
   --overlay-strong: rgba(0, 0, 0, 0.12);
@@ -90,6 +113,14 @@
   --scrollbar-track: #fafafa;
   --scrollbar-thumb: #d4d4d4;
   --page-gradient: none;
+  --header-bg: rgba(250, 250, 250, 0.92);
+  --nav-bg: #ffffff;
+  --surface-blur: none;
+  --surface-sheen: none;
+  --surface-shadow: none;
+  --nav-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  --heading-font: inherit;
+  --heading-tracking: -0.035em;
 }
 
 [data-theme="glass"] {
@@ -100,7 +131,7 @@
   --surface-input: rgba(255, 255, 255, 0.13);
   --surface-hover: rgba(255, 255, 255, 0.17);
   --text-primary: #f8fafc;
-  --text-secondary: #a9b4c6;
+  --text-secondary: #b3bfd0;
   --accent: #7dd3fc;
   --accent-hover: #38bdf8;
   --accent-soft: rgba(125, 211, 252, 0.16);
@@ -108,8 +139,8 @@
   --accent-ring: rgba(125, 211, 252, 0.28);
   --accent-glow: rgba(125, 211, 252, 0.35);
   --on-accent: #07131f;
-  --border-subtle: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.22);
+  --border-subtle: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(255, 255, 255, 0.26);
   --overlay-weak: rgba(255, 255, 255, 0.08);
   --overlay: rgba(255, 255, 255, 0.14);
   --overlay-strong: rgba(255, 255, 255, 0.22);
@@ -118,10 +149,28 @@
   --inverted-text: #0b1220;
   --scrollbar-track: #0b1220;
   --scrollbar-thumb: rgba(255, 255, 255, 0.18);
+  /* Blobs mais fortes para o desfoque ter o que mostrar atrás do vidro. */
   --page-gradient:
-    radial-gradient(circle at 15% 10%, rgba(125, 211, 252, 0.22), transparent 45%),
-    radial-gradient(circle at 85% 20%, rgba(167, 139, 250, 0.18), transparent 50%),
-    radial-gradient(circle at 50% 100%, rgba(56, 189, 248, 0.16), transparent 55%);
+    radial-gradient(circle at 12% 6%, rgba(125, 211, 252, 0.34), transparent 42%),
+    radial-gradient(circle at 88% 16%, rgba(167, 139, 250, 0.28), transparent 46%),
+    radial-gradient(circle at 50% 108%, rgba(56, 189, 248, 0.26), transparent 55%),
+    linear-gradient(165deg, #0b1220 0%, #0e1b2f 55%, #091120 100%);
+  --header-bg: rgba(11, 18, 32, 0.55);
+  --nav-bg: rgba(13, 23, 40, 0.6);
+  --surface-blur: blur(22px) saturate(160%);
+  --surface-sheen: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.02) 42%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  --surface-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+    0 24px 48px rgba(2, 8, 23, 0.45);
+  --nav-shadow: 0 24px 60px rgba(2, 8, 23, 0.55);
+  --heading-font: inherit;
+  --heading-tracking: -0.02em;
 }
 
 [data-theme="nord"] {
@@ -132,7 +181,7 @@
   --surface-input: #4c566a;
   --surface-hover: #4c566a;
   --text-primary: #eceff4;
-  --text-secondary: #a3abb8;
+  --text-secondary: #a9b2c0;
   --accent: #88c0d0;
   --accent-hover: #9fd3e0;
   --accent-soft: rgba(136, 192, 208, 0.16);
@@ -153,6 +202,17 @@
   --page-gradient:
     radial-gradient(circle at 20% 0%, rgba(136, 192, 208, 0.14), transparent 45%),
     radial-gradient(circle at 90% 80%, rgba(94, 129, 172, 0.18), transparent 50%);
+  --header-bg: rgba(46, 52, 64, 0.84);
+  --nav-bg: rgba(59, 66, 82, 0.9);
+  --surface-blur: none;
+  --surface-sheen: none;
+  --surface-shadow:
+    inset 0 1px 0 rgba(236, 239, 244, 0.06),
+    0 2px 4px rgba(20, 24, 31, 0.22),
+    0 16px 34px rgba(20, 24, 31, 0.24);
+  --nav-shadow: 0 20px 44px rgba(20, 24, 31, 0.4);
+  --heading-font: inherit;
+  --heading-tracking: -0.02em;
 }
 
 [data-theme="cyberpunk"] {
@@ -163,7 +223,7 @@
   --surface-input: #26013d;
   --surface-hover: #31014d;
   --text-primary: #f2fffd;
-  --text-secondary: #b69ad6;
+  --text-secondary: #bda6dd;
   --accent: #ff2e97;
   --accent-hover: #ff5fb0;
   --accent-soft: rgba(255, 46, 151, 0.16);
@@ -181,9 +241,22 @@
   --inverted-text: #07010f;
   --scrollbar-track: #07010f;
   --scrollbar-thumb: #3a0a5c;
+  /* Grade sutil de terminal + halos neon. */
   --page-gradient:
-    radial-gradient(circle at 12% 6%, rgba(255, 46, 151, 0.22), transparent 42%),
-    radial-gradient(circle at 88% 90%, rgba(0, 255, 240, 0.16), transparent 48%);
+    repeating-linear-gradient(0deg, rgba(0, 255, 240, 0.05) 0 1px, transparent 1px 48px),
+    repeating-linear-gradient(90deg, rgba(255, 46, 151, 0.045) 0 1px, transparent 1px 48px),
+    radial-gradient(circle at 12% 6%, rgba(255, 46, 151, 0.24), transparent 42%),
+    radial-gradient(circle at 88% 90%, rgba(0, 255, 240, 0.17), transparent 48%);
+  --header-bg: rgba(7, 1, 15, 0.82);
+  --nav-bg: rgba(18, 0, 31, 0.9);
+  --surface-blur: none;
+  --surface-sheen: none;
+  --surface-shadow:
+    0 0 0 1px rgba(0, 255, 240, 0.1),
+    0 0 28px rgba(255, 46, 151, 0.1);
+  --nav-shadow: 0 0 30px rgba(255, 46, 151, 0.25);
+  --heading-font: inherit;
+  --heading-tracking: 0.05em;
 }
 
 [data-theme="retro"] {
@@ -194,7 +267,7 @@
   --surface-input: #e2cfa8;
   --surface-hover: #d8c296;
   --text-primary: #3a2b22;
-  --text-secondary: #7a6552;
+  --text-secondary: #75614f;
   --accent: #b5462f;
   --accent-hover: #9c3b27;
   --accent-soft: rgba(181, 70, 47, 0.13);
@@ -202,8 +275,8 @@
   --accent-ring: rgba(181, 70, 47, 0.22);
   --accent-glow: rgba(181, 70, 47, 0.25);
   --on-accent: #fff7ec;
-  --border-subtle: rgba(58, 43, 34, 0.12);
-  --border-strong: rgba(58, 43, 34, 0.22);
+  --border-subtle: rgba(58, 43, 34, 0.14);
+  --border-strong: rgba(58, 43, 34, 0.26);
   --overlay-weak: rgba(58, 43, 34, 0.05);
   --overlay: rgba(58, 43, 34, 0.09);
   --overlay-strong: rgba(58, 43, 34, 0.15);
@@ -212,9 +285,21 @@
   --inverted-text: #fbf3e2;
   --scrollbar-track: #f3e7ce;
   --scrollbar-thumb: #cbb489;
+  /* Fibras de papel bem discretas. */
   --page-gradient:
+    repeating-linear-gradient(0deg, rgba(58, 43, 34, 0.035) 0 1px, transparent 1px 4px),
     radial-gradient(circle at 15% 10%, rgba(181, 70, 47, 0.1), transparent 45%),
     radial-gradient(circle at 85% 90%, rgba(122, 101, 82, 0.12), transparent 50%);
+  --header-bg: rgba(243, 231, 206, 0.88);
+  --nav-bg: rgba(251, 243, 226, 0.94);
+  --surface-blur: none;
+  --surface-sheen: none;
+  --surface-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    3px 3px 0 rgba(58, 43, 34, 0.14);
+  --nav-shadow: 4px 4px 0 rgba(58, 43, 34, 0.18);
+  --heading-font: Georgia, "Times New Roman", serif;
+  --heading-tracking: -0.01em;
 }
 
 html,
@@ -230,22 +315,46 @@ body {
   --text-primary: var(--on-accent);
 }
 
-/* Glassmorphism: superfícies translúcidas com desfoque real. */
-[data-theme="glass"] .bg-\[var\(--surface-card\)\],
-[data-theme="glass"] .bg-\[var\(--surface-elevated\)\] {
+/* Superfícies: cada tema define sombra/brilho próprios. */
+[class~="bg-[var(--surface-card)]"],
+[class~="bg-[var(--surface-elevated)]"] {
+  box-shadow: var(--surface-shadow);
+}
+
+/* Cabeçalhos e navegação usam tokens para poderem ficar translúcidos. */
+header.app-header,
+header.chat-header {
+  background-color: var(--header-bg);
   backdrop-filter: blur(18px) saturate(140%);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
 }
 
-/* Minimalismo: sombras discretas e bordas mais definidas. */
-[data-theme="minimal"] .shadow-xl,
-[data-theme="minimal"] .shadow-2xl,
-[data-theme="minimal"] .shadow-lg,
-[data-theme="minimal"] .shadow-md {
-  box-shadow: none;
+/* Glassmorphism: vidro real — blur, saturação, brilho de borda e véu. */
+[data-theme="glass"] [class~="bg-[var(--surface-card)]"],
+[data-theme="glass"] [class~="bg-[var(--surface-elevated)]"],
+[data-theme="glass"] [class~="bg-[var(--surface-input)]"] {
+  backdrop-filter: var(--surface-blur);
+  -webkit-backdrop-filter: var(--surface-blur);
+  background-image: var(--surface-sheen);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
-/* Cyberpunk: brilho neon nos elementos de acento. */
+[data-theme="glass"] nav[role="tablist"],
+[data-theme="glass"] aside.app-sidenav {
+  backdrop-filter: var(--surface-blur);
+  -webkit-backdrop-filter: var(--surface-blur);
+  background-image: var(--surface-sheen);
+}
+
+/* Minimalismo: sem sombras, bordas mais definidas e títulos compactos. */
+[data-theme="minimal"] h1,
+[data-theme="minimal"] h2,
+[data-theme="minimal"] h3,
+[data-theme="minimal"] h4 {
+  letter-spacing: var(--heading-tracking);
+}
+
+/* Cyberpunk: brilho neon nos elementos de acento, títulos e bordas. */
 [data-theme="cyberpunk"] .bg-\[var\(--accent\)\] {
   box-shadow: 0 0 18px var(--accent-glow);
 }
@@ -256,15 +365,21 @@ body {
 [data-theme="cyberpunk"] h4 {
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  text-shadow: 0 0 22px rgba(255, 46, 151, 0.35);
 }
 
-/* Retrô: títulos com serifa editorial. */
+[data-theme="cyberpunk"] [class~="bg-[var(--surface-card)]"] {
+  border-color: rgba(0, 255, 240, 0.16);
+}
+
+/* Retrô: títulos com serifa editorial e cartões com relevo de impressão. */
 [data-theme="retro"] h1,
 [data-theme="retro"] h2,
 [data-theme="retro"] h3,
-[data-theme="retro"] h4 {
-  font-family: Georgia, "Times New Roman", serif;
-  letter-spacing: -0.01em;
+[data-theme="retro"] h4,
+[data-theme="retro"] .app-brand-name {
+  font-family: var(--heading-font);
+  letter-spacing: var(--heading-tracking);
 }
 
 /* Rolagem e campos nativos acompanham o tema. */
@@ -278,4 +393,32 @@ input,
 textarea,
 select {
   color-scheme: inherit;
+}
+
+/* Troca de tema: transição curta de cor/sombra, sem animar layout. */
+html.theme-transition,
+html.theme-transition body,
+html.theme-transition header.app-header,
+html.theme-transition header.chat-header,
+html.theme-transition aside.app-sidenav,
+html.theme-transition nav[role="tablist"],
+html.theme-transition [class~="bg-[var(--surface-card)]"],
+html.theme-transition [class~="bg-[var(--surface-elevated)]"] {
+  transition:
+    background-color 260ms ease,
+    border-color 260ms ease,
+    color 200ms ease,
+    box-shadow 260ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transition,
+  html.theme-transition body,
+  html.theme-transition header,
+  html.theme-transition nav,
+  html.theme-transition aside,
+  html.theme-transition [class~="bg-[var(--surface-card)]"],
+  html.theme-transition [class~="bg-[var(--surface-elevated)]"] {
+    transition: none !important;
+  }
 }

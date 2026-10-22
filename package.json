@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "description": "Assistant Cat — build web + Worker (assets e proxy /api/ai)",
   "scripts": {
-    "install:app": "npm --prefix app ci",
-    "build": "npm --prefix app run build",
+    "install:app": "npm --prefix app ci --no-audit --no-fund",
+    "build": "npm --prefix app install --no-audit --no-fund && npm --prefix app run build",
     "dev": "wrangler dev",
     "deploy": "npm run build && wrangler deploy",
     "typecheck": "npm --prefix app exec tsc -b"

@@ -6,6 +6,11 @@
   "observability": {
     "enabled": true
   },
+  // Roda antes de `wrangler deploy`/`dev`: instala as deps de `app/` e gera `app/dist`.
+  // Sem isto, um deploy limpo (Workers Builds) falha com "assets.directory does not exist".
+  "build": {
+    "command": "npm run build"
+  },
   "assets": {
     "directory": "./app/dist",
     "binding": "ASSETS",

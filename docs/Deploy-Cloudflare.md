@@ -19,6 +19,7 @@ npm run deploy              # build + wrangler deploy
 | --- | --- |
 | `name` | `assistant-cat` |
 | `main` | `worker/index.ts` |
+| `build.command` | `npm run build` (instala as deps de `app/` e gera `app/dist`) |
 | `assets.directory` | `./app/dist` |
 | `assets.not_found_handling` | `single-page-application` |
 | `assets.run_worker_first` | `true` |
@@ -27,9 +28,26 @@ npm run deploy              # build + wrangler deploy
 
 No dashboard, projeto do Worker:
 
-- Build command: `npm run build`
+- Build command: **deixe vazio** (o `wrangler.jsonc` roda `npm run build` sozinho antes do deploy)
 - Deploy command: `npx wrangler deploy`
 - Root directory: raiz do repositório
+
+Se preferir manter um build command no dashboard, use `npm run build`. Ele roda duas vezes
+(dashboard + wrangler), mas o resultado é o mesmo.
+
+### Por que o deploy limpo falhava
+
+O `bun install`/`npm install` da raiz instala apenas o `wrangler`; as dependências do app
+ficam em `app/package-lock.json`. Sem um passo de build, `app/dist` não existia e o wrangler
+abortava com:
+
+```
+The directory specified by the "assets.directory" field in your configuration file does not exist:
+.../app/dist
+```
+
+Agora `npm run build` é autossuficiente: roda `npm --prefix app install` e depois o
+`vite build`.
 
 ## Segredos (opcional)
 

@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-// GatoAI - Adaptador para o modelo Google Gemini 3.5 Flash-Lite
+// GatoAI - Adaptador multi-provider OpenAI-compatível (/v1/chat/completions)
+// Legado Gemini (/api/gemini) mantido como fallback.
 
 import { AppState, Memory, Proposal } from '../types';
+import { AISettings, DEFAULT_AI_SETTINGS, effectiveModel, resolveBaseUrl } from './providers';
 
 export const GEMINI_CONFIG = Object.freeze({
   model: 'gemini-3.5-flash-lite' as const
@@ -48,9 +50,13 @@ export async function requestInference(
     userName: state.profile?.name,
     memories: state.memories || []
   };
+  const ai: AISettings = {
+    ...DEFAULT_AI_SETTINGS,
+    ...(state.ai || {}),
+  } as AISettings;
 
   try {
-    const rawResult = await generateChatResponse(userText, options);
+    const rawResult = await generateChatResponse(userText, options, ai);
     const action = rawResult.action || { kind: 'none' };
     const replyText = rawResult.reply || 'Entendido.';
 
@@ -80,18 +86,19 @@ export async function requestInference(
       action
     };
   } catch (err: any) {
-    console.warn('[AI Adapter] Falha na inferência remota do Gemini, acionando fallback local:', err.message);
+    console.warn('[AI Adapter] Falha na inferência remota, acionando fallback local:', err.message);
     return {
-      replyText: `Não foi possível consultar o modelo Gemini no momento (${err.message}). Verifique se GEMINI_API_KEY está configurada no servidor local (/api/gemini).`,
+      replyText: `Não foi possível consultar o modelo no momento (${err.message}). Verifique provider, modelo e chave em Personalizar > IA.`,
       proposal: undefined
     };
   }
 }
 
 /**
- * Executa a chamada estruturada à API do Gemini
+ * Executa a chamada estruturada via proxy OpenAI-compatível (/api/ai).
+ * Fallback: proxy legado Gemini (/api/gemini).
  */
-export async function generateChatResponse(userText: string, options: ChatOptions = {}): Promise<AIResponse> {
+export async function generateChatResponse(userText: string, options: ChatOptions = {}, ai: AISettings = DEFAULT_AI_SETTINGS): Promise<AIResponse> {
   const userName = options.userName || 'Você';
   const today = options.today || new Date().toISOString().slice(0, 10);
   const timeZone = options.timeZone || 'America/Sao_Paulo';
@@ -138,75 +145,105 @@ DIRETRIZES DE COMUNICAÇÃO E CONDUTA:
 
   const prompt = `Mensagem do usuário: "${userText}"`;
 
-  const payload = {
-    contents: [
-      {
-        role: 'user',
-        parts: [{ text: `${systemInstruction}\n\n${prompt}` }]
-      }
-    ],
-    generationConfig: {
-      temperature: 0.2,
-      responseMimeType: 'application/json',
-      responseSchema: {
-        type: 'OBJECT',
-        properties: {
-          reply: {
-            type: 'STRING',
-            description: 'Mensagem de resposta concisa, educada e direta, sem clichês de IA (sem "Certamente!", "Com prazer!"), sem onomatopeias e sem metáforas de gato'
+  const messages = [
+    { role: 'system', content: systemInstruction },
+    { role: 'user', content: prompt },
+  ];
+
+  const openaiBody = {
+    provider: ai.provider,
+    model: effectiveModel(ai),
+    baseUrl: resolveBaseUrl(ai) || undefined,
+    apiKey: ai.apiKey || undefined,
+    temperature: 0.2,
+    response_format: {
+      type: 'json_schema',
+      json_schema: {
+        name: 'assistant_action',
+        strict: true,
+        schema: {
+          type: 'object',
+          properties: {
+            reply: { type: 'string' },
+            action: {
+              type: 'object',
+              properties: {
+                kind: { type: 'string', enum: ['create_event', 'create_task', 'create_memory', 'none'] },
+                title: { type: 'string' },
+                content: { type: 'string' },
+                date: { type: 'string' },
+                time: { type: 'string' },
+                duration: { type: 'number' }
+              },
+              required: ['kind'],
+              additionalProperties: false
+            }
           },
-          action: {
-            type: 'OBJECT',
-            properties: {
-              kind: { type: 'STRING', enum: ['create_event', 'create_task', 'create_memory', 'none'] },
-              title: { type: 'STRING' },
-              content: { type: 'STRING' },
-              date: { type: 'STRING' },
-              time: { type: 'STRING' },
-              duration: { type: 'INTEGER' }
-            },
-            required: ['kind']
-          }
-        },
-        required: ['reply', 'action']
+          required: ['reply', 'action'],
+          additionalProperties: false
+        }
       }
-    }
+    },
+    messages,
+  };
+
+  // Payload legado Gemini (fallback /api/gemini)
+  const legacyPayload = {
+    contents: [{ role: 'user', parts: [{ text: `${systemInstruction}\n\n${prompt}` }] }],
+    generationConfig: { temperature: 0.2, responseMimeType: 'application/json' },
   };
 
   let response: Response | null = null;
+  let usedLegacy = false;
   const isBrowserHttp =
     typeof window !== 'undefined' &&
     window.location &&
     (window.location.protocol === 'http:' || window.location.protocol === 'https:');
 
-  // No navegador via HTTP/HTTPS, tentar prioritariamente o proxy seguro /api/gemini
+  // 1) Proxy novo OpenAI-compatível
   if (isBrowserHttp) {
     try {
-      response = await fetch('/api/gemini', {
+      const r = await fetch('/api/ai', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(openaiBody)
       });
-      if (!response.ok && response.status === 404) {
-        response = null;
-      }
+      if (r.ok || r.status !== 404) response = r;
+    } catch {
+      response = null;
+    }
+  }
+
+  // 2) Fallback legado Gemini
+  if (!response && isBrowserHttp) {
+    try {
+      const r = await fetch('/api/gemini', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(legacyPayload)
+      });
+      if (r.ok || r.status !== 404) { response = r; usedLegacy = r.ok; }
     } catch {
       response = null;
     }
   }
 
   if (!response) {
-    throw new Error('Proxy de IA indisponível. Verifique o servidor local /api/gemini e GEMINI_API_KEY.');
+    throw new Error('Proxy de IA indisponível. Verifique /api/ai (provider, modelo e chave).');
   }
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData?.error?.message || `Erro na comunicação com a API Gemini (${response.status})`);
+    throw new Error(errorData?.error?.message || `Erro na comunicação com a IA (${response.status})`);
   }
 
   const data = await response.json();
-  const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!rawText) throw new Error('A IA não retornou conteúdo legível.');
-
-  return JSON.parse(rawText) as AIResponse;
+  if (usedLegacy) {
+    const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!rawText) throw new Error('A IA não retornou conteúdo legível.');
+    return JSON.parse(rawText) as AIResponse;
+  }
+  const content = data?.choices?.[0]?.message?.content;
+  if (!content) throw new Error('A IA não retornou conteúdo legível.');
+  return (typeof content === 'string' ? JSON.parse(content) : content) as AIResponse;
 }

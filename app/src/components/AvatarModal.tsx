@@ -2,7 +2,9 @@
 // AvatarModal - Modal de Personalização "Meu Assistente" com Carrossel Snap-Center e Configurações
 
 import React, { useState } from 'react';
-import { CatAppearance, Profile } from '../types';
+import { X } from 'lucide-react';
+import { CatAppearance, Profile, AISettingsState } from '../types';
+import { AI_PROVIDERS, DEFAULT_AI_SETTINGS } from '../core/providers';
 import { CatAvatar } from './CatAvatar';
 
 interface AvatarModalProps {
@@ -11,7 +13,8 @@ interface AvatarModalProps {
   appearance: CatAppearance;
   profile: Profile;
   autoSpeak: boolean;
-  onSave: (newAppearance: CatAppearance, newProfile: Profile, autoSpeak: boolean) => void;
+  ai?: AISettingsState;
+  onSave: (newAppearance: CatAppearance, newProfile: Profile, autoSpeak: boolean, ai: AISettingsState) => void;
 }
 
 export const AvatarModal: React.FC<AvatarModalProps> = ({
@@ -20,6 +23,7 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
   appearance,
   profile,
   autoSpeak: initialAutoSpeak,
+  ai: initialAi,
   onSave
 }) => {
   const [activeAvatarIndex, setActiveAvatarIndex] = useState(0);
@@ -27,6 +31,10 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
   const [userName, setUserName] = useState(profile.name);
   const [personality, setPersonality] = useState('Friendly');
   const [autoSpeak, setAutoSpeak] = useState(initialAutoSpeak);
+  const [aiProvider, setAiProvider] = useState(initialAi?.provider || DEFAULT_AI_SETTINGS.provider);
+  const [aiModel, setAiModel] = useState(initialAi?.model || DEFAULT_AI_SETTINGS.model);
+  const [aiKey, setAiKey] = useState(initialAi?.apiKey || '');
+  const [aiBase, setAiBase] = useState(initialAi?.baseUrl || '');
 
   if (!isOpen) return null;
 
@@ -46,7 +54,12 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
 
   const handleApply = () => {
     const selected = avatarVariations[activeAvatarIndex].appearance;
-    onSave(selected, { name: userName, assistantName: name }, autoSpeak);
+    onSave(selected, { name: userName, assistantName: name }, autoSpeak, {
+      provider: aiProvider,
+      model: aiModel.trim(),
+      apiKey: aiKey.trim(),
+      baseUrl: aiBase.trim(),
+    });
     onClose();
   };
 
@@ -162,8 +175,7 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
             <div>
               <div className="font-semibold text-[var(--text-primary)] text-xs">Auto-read responses</div>
               <div className="text-[11px] text-[var(--text-secondary)]">Ler respostas de voz via TTS automaticamente</div>
-            </div>
-            <button
+            </div>            <button
               onClick={() => setAutoSpeak(!autoSpeak)}
               className={`w-10 h-5 rounded-full p-0.5 transition-colors duration-200 ${
                 autoSpeak ? 'bg-[var(--accent)]' : 'bg-[var(--surface-hover)]'
@@ -176,6 +188,63 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
               />
             </button>
           </div>
+        </div>
+
+        {/* IA: provider + modelo + chave (OpenAI-compatível) */}
+        <div className="rounded-[20px] bg-[var(--surface-card)] border border-[var(--border-subtle)] divide-y divide-[var(--border-subtle)] text-sm shadow-xl">
+          <div className="p-4">
+            <div className="font-semibold text-[var(--text-primary)] text-xs mb-1">IA — Provider</div>
+            <select
+              value={aiProvider}
+              onChange={(e) => {
+                const id = e.target.value;
+                setAiProvider(id);
+                const def = AI_PROVIDERS.find((p) => p.id === id);
+                if (def && !aiModel.trim()) setAiModel(def.defaultModel);
+              }}
+              className="w-full bg-transparent font-semibold text-[var(--text-primary)] text-xs focus:outline-none"
+              aria-label="Provider de IA"
+            >
+              {AI_PROVIDERS.map((p) => (
+                <option key={p.id} value={p.id} className="bg-[var(--surface-card)]">{p.label}</option>
+              ))}
+            </select>
+          </div>
+          <div className="p-4">
+            <div className="font-semibold text-[var(--text-primary)] text-xs mb-1">Modelo</div>
+            <input
+              value={aiModel}
+              onChange={(e) => setAiModel(e.target.value)}
+              placeholder={AI_PROVIDERS.find((p) => p.id === aiProvider)?.defaultModel}
+              className="w-full bg-transparent font-semibold text-[var(--text-primary)] text-xs focus:outline-none"
+              aria-label="Modelo de IA"
+            />
+          </div>
+          <div className="p-4">
+            <div className="font-semibold text-[var(--text-primary)] text-xs mb-1">Chave (só neste aparelho)</div>
+            <input
+              value={aiKey}
+              onChange={(e) => setAiKey(e.target.value)}
+              type="password"
+              autoComplete="off"
+              placeholder={AI_PROVIDERS.find((p) => p.id === aiProvider)?.hint}
+              className="w-full bg-transparent font-semibold text-[var(--text-primary)] text-xs focus:outline-none"
+              aria-label="Chave da IA"
+            />
+            <div className="text-[11px] text-[var(--text-secondary)] mt-1">Vazia = usa secret do servidor. Com chave, vai direto via proxy sem salvar em servidor.</div>
+          </div>
+          {aiProvider === 'custom' && (
+            <div className="p-4">
+              <div className="font-semibold text-[var(--text-primary)] text-xs mb-1">Base URL</div>
+              <input
+                value={aiBase}
+                onChange={(e) => setAiBase(e.target.value)}
+                placeholder="https://.../v1"
+                className="w-full bg-transparent font-semibold text-[var(--text-primary)] text-xs focus:outline-none"
+                aria-label="Base URL custom"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

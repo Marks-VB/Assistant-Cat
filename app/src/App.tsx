@@ -1127,12 +1127,14 @@ export function App() {
         appearance={state.appearance}
         profile={state.profile}
         autoSpeak={state.autoSpeak || false}
-        onSave={async (newAppearance, newProfile, autoSpeak) => {
+        ai={state.ai}
+        onSave={async (newAppearance, newProfile, autoSpeak, ai) => {
           await updateState((s) => ({
             ...s,
             appearance: newAppearance,
             profile: newProfile,
-            autoSpeak
+            autoSpeak,
+            ai
           }));
           showToast('Assistente atualizado com sucesso!');
         }}

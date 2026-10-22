@@ -324,6 +324,99 @@ const server = http.createServer((req, res) => {
     }
   }
 
+  // Endpoint proxy multi-provider OpenAI-compatível (/api/ai)
+  const isAiProxyPath = reqPath === '/api/ai' || reqPath === '/prototipo/api/ai';
+  if (isAiProxyPath) {
+    if (req.method === 'OPTIONS') {
+      if (isAllowedProxyOrigin) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Vary', 'Origin');
+        res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+      }
+      res.writeHead(204);
+      res.end();
+      return;
+    }
+    if (!isAllowedProxyOrigin) {
+      res.writeHead(403, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: { message: 'Origem não autorizada para o proxy de IA.' } }));
+      return;
+    }
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+    if (req.method !== 'POST') {
+      res.writeHead(405, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: { message: 'Use POST.' } }));
+      return;
+    }
+    const chunks = [];
+    let bytes = 0;
+    let tooLarge = false;
+    req.on('data', (c) => {
+      if (tooLarge) return;
+      bytes += c.length;
+      if (bytes > MAX_PROXY_BODY_BYTES) {
+        tooLarge = true;
+        res.writeHead(413, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ error: { message: 'Corpo excede 1 MiB.' } }));
+        req.resume();
+        return;
+      }
+      chunks.push(c);
+    });
+    req.on('end', () => {
+      if (tooLarge) return;
+      let p;
+      try { p = JSON.parse(Buffer.concat(chunks).toString('utf8')); }
+      catch { res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: { message: 'JSON inválido.' } })); return; }
+      const DEFAULT_BASE = { openai: 'https://api.openai.com/v1', gemini: 'https://generativelanguage.googleapis.com/v1beta/openai', deepseek: 'https://api.deepseek.com/v1', groq: 'https://api.groq.com/openai/v1', openrouter: 'https://openrouter.ai/api/v1' };
+      const ENV_KEY = { openai: 'OPENAI_API_KEY', gemini: 'GEMINI_API_KEY', deepseek: 'DEEPSEEK_API_KEY', groq: 'GROQ_API_KEY', openrouter: 'OPENROUTER_API_KEY' };
+      const provider = String(p.provider || 'gemini');
+      const model = String(p.model || '').trim();
+      const messages = p.messages;
+      if (!model || !Array.isArray(messages) || messages.length === 0) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ error: { message: 'Informe model e messages.' } }));
+        return;
+      }
+      const baseUrl = String(p.baseUrl || DEFAULT_BASE[provider] || '').replace(/\/$/, '');
+      if (!baseUrl || !/^https?:\/\//.test(baseUrl)) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ error: { message: 'Provider ou baseUrl inválida.' } }));
+        return;
+      }
+      if (/localhost|127\.0\.0\.1|0\.0\.0\.0/.test(baseUrl) && provider !== 'ollama' && !baseUrl.includes('localhost:300')) {
+        // permite apenas loopback explícito de Ollama/dev
+        if (provider !== 'ollama') {
+          res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+          res.end(JSON.stringify({ error: { message: 'baseUrl interna bloqueada.' } }));
+          return;
+        }
+      }
+      const apiKey = String(p.apiKey || process.env[ENV_KEY[provider]] || '').trim();
+      if (!apiKey && provider !== 'ollama') {
+        res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ error: { message: 'Chave ausente. Informe no app ou configure no .env.' } }));
+        return;
+      }
+      const out = JSON.stringify({ model, messages, temperature: typeof p.temperature === 'number' ? p.temperature : 0.2, ...(p.response_format ? { response_format: p.response_format } : {}) });
+      const target = `${baseUrl}/chat/completions`;
+      console.log(`[Proxy AI] ${provider}/${model} -> ${baseUrl}`);
+      const up = https.request(target, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(out), ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {}) } }, (upRes) => {
+        res.writeHead(upRes.statusCode, { 'Content-Type': 'application/json; charset=utf-8' });
+        upRes.pipe(res);
+      });
+      up.on('error', (err) => {
+        res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ error: { message: 'Erro de conexão com o provider: ' + err.message } }));
+      });
+      up.write(out);
+      up.end();
+    });
+    return;
+  }
+
   // Redirecionamentos de rota
   if (reqPath === '/' || reqPath === '') reqPath = '/prototipo/index.html';
   else if (reqPath === '/prototipo' || reqPath === '/prototipo/') reqPath = '/prototipo/index.html';

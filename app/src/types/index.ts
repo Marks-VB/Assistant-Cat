@@ -105,6 +105,13 @@ export interface Profile {
   assistantName: string;
 }
 
+export interface AISettingsState {
+  provider: string;
+  model: string;
+  apiKey: string;
+  baseUrl?: string;
+}
+
 export interface AppState {
   schemaVersion: number;
   profile: Profile;
@@ -118,6 +125,7 @@ export interface AppState {
   trash?: TrashItem[];
   executedProposalKeys: string[];
   autoSpeak?: boolean;
+  ai?: AISettingsState;
 }
 
 export interface WeeklyRecap {

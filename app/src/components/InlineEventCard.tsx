@@ -2,6 +2,8 @@
 // InlineEventCard - Card Interativo de Compromisso/Tarefa no Chat (estilo do app)
 
 import React, { useState } from 'react';
+import { TriangleAlert, CalendarDays, History } from 'lucide-react';
+import { cn } from '../lib/utils';
 
 export interface InlineEventData {
   id?: string;
@@ -65,7 +67,7 @@ export const InlineEventCard: React.FC<InlineEventCardProps> = ({
       {/* Alerta Inteligente de Sobreposição de Horário */}
       {conflictWarning && (
         <div className="rounded-2xl bg-[var(--accent-soft)] border border-[var(--accent-border)] p-3 flex items-start gap-2.5 text-[var(--accent)] shadow-sm max-w-full overflow-hidden">
-          <span className="text-sm mt-0.5 leading-none shrink-0 select-none">⚠️</span>
+          <TriangleAlert size={14} className="mt-0.5 shrink-0" aria-hidden="true" />
           <div className="text-xs leading-relaxed flex-1 min-w-0 break-words [overflow-wrap:anywhere]">
             <span className="font-bold shrink-0">Atenção: </span>{conflictWarning}
           </div>
@@ -121,15 +123,20 @@ export const InlineEventCard: React.FC<InlineEventCardProps> = ({
             <span className="text-[var(--text-secondary)] font-medium truncate">Call Me (ligar no horário)</span>
             <button
               type="button"
+              role="switch"
+              aria-checked={callMe}
+              aria-label="Ligar no horário do compromisso"
               onClick={() => setCallMe(!callMe)}
-              className={`w-9 h-5 rounded-full p-0.5 shrink-0 transition-colors duration-200 focus:outline-none ${
+              className={cn(
+                'h-6 w-11 rounded-full p-0.5 shrink-0 transition-colors duration-200',
                 callMe ? 'bg-[var(--accent)]' : 'bg-[var(--surface-hover)]'
-              }`}
+              )}
             >
               <div
-                className={`w-4 h-4 rounded-full bg-white shadow-sm transition-transform duration-200 ${
-                  callMe ? 'translate-x-4' : 'translate-x-0'
-                }`}
+                className={cn(
+                  'h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-200',
+                  callMe ? 'translate-x-5' : 'translate-x-0'
+                )}
               />
             </button>
           </div>
@@ -158,9 +165,9 @@ export const InlineEventCard: React.FC<InlineEventCardProps> = ({
         <div className="mt-3 pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between gap-2 flex-wrap sm:flex-nowrap">
           <button
             onClick={onViewAgenda}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--overlay-weak)] hover:bg-[var(--overlay)] text-[11px] font-semibold text-[var(--text-primary)] transition shrink-0"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--overlay-weak)] hover:bg-[var(--overlay)] text-[11px] font-semibold text-[var(--text-primary)] transition shrink-0 min-h-[44px]"
           >
-            <span>📅</span>
+            <CalendarDays size={14} aria-hidden="true" />
             <span>Ver agenda</span>
           </button>
 
@@ -176,10 +183,11 @@ export const InlineEventCard: React.FC<InlineEventCardProps> = ({
             {onRevert && (
               <button
                 onClick={onRevert}
-                className="w-7 h-7 rounded-full bg-[var(--surface-elevated)] hover:bg-[var(--overlay)] flex items-center justify-center text-[var(--text-primary)] hover:text-[var(--text-primary)] transition shrink-0"
+                aria-label="Reverter alteração"
+                className="w-11 h-11 rounded-full bg-[var(--surface-elevated)] hover:bg-[var(--overlay)] flex items-center justify-center text-[var(--text-primary)] hover:text-[var(--text-primary)] transition shrink-0"
                 title="Reverter / Histórico"
               >
-                ↺
+                <History size={14} aria-hidden="true" />
               </button>
             )}
           </div>

@@ -143,6 +143,32 @@
   transform: scale(0.95);
 }
 
+/* Acessibilidade: foco visível, skip-link e alvos mínimos (WCAG 2.2) */
+:root {
+  --focus-ring: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: #111;
+  color: #fff;
+  border-radius: 0.375rem;
+  transition: top 120ms ease-out;
+}
+.skip-link:focus-visible {
+  top: 12px;
+}
+
 /* Acessibilidade: Desativação graciosa de animações para preferências de movimento reduzido */
 @media (prefers-reduced-motion: reduce) {
   *,

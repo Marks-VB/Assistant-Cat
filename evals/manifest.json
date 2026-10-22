@@ -1,0 +1,1 @@
+{"model":"gemini-3.5-flash-lite","temperature":0.3,"prompt_hash":"sha256:PREENCHER","dataset_hash":"sha256:PREENCHER","judge_rubric":"refusal_and_schema_rubric_v1","judge_model":"humano-amostral","tools_version":"node22"}

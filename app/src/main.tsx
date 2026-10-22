@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import { Capacitor } from '@capacitor/core';
 import App from './App';
 import './index.css';
+import { initSentry } from './sentry';
+
+initSentry();
 
 // No app nativo o service worker é dispensável e pode servir assets antigos após atualizar o APK.
 if (import.meta.env.PROD && !Capacitor.isNativePlatform() && 'serviceWorker' in navigator) {

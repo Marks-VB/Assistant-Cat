@@ -12,12 +12,12 @@
   --surface-hover: #2c2c2e;
   --text-primary: #ffffff;
   --text-secondary: #9e9e9e;
-  --accent: #ff4d4d;
-  --accent-hover: #ff3b3b;
-  --accent-soft: rgba(255, 77, 77, 0.14);
-  --accent-border: rgba(255, 77, 77, 0.35);
-  --accent-ring: rgba(255, 77, 77, 0.25);
-  --accent-glow: rgba(255, 77, 77, 0.35);
+  --accent: #d63a3a;
+  --accent-hover: #b92f2f;
+  --accent-soft: rgba(214, 58, 58, 0.14);
+  --accent-border: rgba(214, 58, 58, 0.35);
+  --accent-ring: rgba(214, 58, 58, 0.25);
+  --accent-glow: rgba(214, 58, 58, 0.35);
   --on-accent: #ffffff;
   --border-subtle: rgba(255, 255, 255, 0.06);
   --border-strong: rgba(255, 255, 255, 0.12);

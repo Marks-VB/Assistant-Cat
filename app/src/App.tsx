@@ -2,6 +2,7 @@
 // Assistant Cat - Multiplatform Native Theme (Web, Mobile & Microsoft Store)
 
 import React, { useState, useEffect, useRef } from 'react';
+import { X, Bell } from 'lucide-react';
 import {
   AppState,
   CalendarEvent,
@@ -162,6 +163,18 @@ export function App() {
     }
     init();
   }, []);
+
+  // Título por aba (SEO/a11y SPA)
+  useEffect(() => {
+    const titles: Record<string, string> = {
+      chat: 'Chat',
+      now: 'Agora',
+      calendar: 'Agenda',
+      tasks: 'Afazeres',
+      me: 'Eu',
+    };
+    document.title = `${titles[currentTab] || 'Assistente Gato'} — Assistant Cat`;
+  }, [currentTab]);
 
   const updateState = async (updater: (prev: AppState) => AppState) => {
     const prev = state;
@@ -445,9 +458,10 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] flex flex-col font-sans select-none antialiased">
+      <a href="#main" className="skip-link">Pular para conteúdo</a>
       {/* Toast flutuante */}
       {toastMessage && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-[var(--surface-card)] border border-[var(--border-strong)] text-[var(--text-primary)] text-xs font-semibold px-4 py-2 rounded-full shadow-2xl animate-fade-in flex items-center gap-2">
+        <div role="status" aria-live="polite" className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-[var(--surface-card)] border border-[var(--border-strong)] text-[var(--text-primary)] text-xs font-semibold px-4 py-2 rounded-full shadow-2xl animate-fade-in flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-[var(--accent)]" />
           <span>{toastMessage}</span>
         </div>
@@ -467,6 +481,8 @@ export function App() {
 
       {/* Área Principal de Conteúdo (com profundidade Apple ao abrir sheets/modais) */}
       <main
+        id="main"
+        tabIndex={-1}
         className={`flex-1 w-full max-w-2xl mx-auto transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           isBottomSheetOpen ? 'scale-[0.98] opacity-85 brightness-90 rounded-2xl overflow-hidden' : 'scale-100 opacity-100'
         } ${currentTab === 'chat' ? 'px-0 pt-0 pb-16' : 'px-4 pt-3 pb-24'}`}
@@ -725,16 +741,17 @@ export function App() {
                           <span>{e.date} · {e.allDay ? 'Dia inteiro' : `${e.time} (${e.duration} min)`}</span>
                           {e.reminderMinutes ? (
                             <span className="text-[var(--accent)] font-medium" title={`Notificar ${e.reminderMinutes} minutos antes`}>
-                              🔔 {e.reminderMinutes} min antes
+                              <Bell size={12} className="inline -mt-0.5 mr-1" aria-hidden="true" />{e.reminderMinutes} min antes
                             </span>
                           ) : null}
                         </div>
                       </div>
                       <button
                         onClick={() => handleDeleteEvent(e)}
-                        className="text-[var(--text-secondary)] hover:text-[var(--accent)] text-sm p-1"
+                        aria-label={`Excluir evento ${e.title}`}
+                        className="text-[var(--text-secondary)] hover:text-[var(--accent)] text-sm p-1 min-h-[44px] min-w-[44px] flex items-center justify-center"
                       >
-                        ✕
+                        <X size={14} aria-hidden="true" />
                       </button>
                     </div>
                   ))}
@@ -802,9 +819,10 @@ export function App() {
                         </div>
                         <button
                           onClick={() => handleDeleteTask(t)}
-                          className="text-[var(--text-secondary)] hover:text-[var(--accent)] text-sm p-1"
+                          aria-label={`Excluir tarefa ${t.title}`}
+                          className="text-[var(--text-secondary)] hover:text-[var(--accent)] text-sm p-1 min-h-[44px] min-w-[44px] flex items-center justify-center"
                         >
-                          ✕
+                          <X size={14} aria-hidden="true" />
                         </button>
                       </div>
                     ))}
@@ -1163,9 +1181,10 @@ export function App() {
                 <h3 className="font-bold text-base text-[var(--text-primary)]">Chats</h3>
                 <button
                   onClick={() => setIsChatsDrawerOpen(false)}
-                  className="w-8 h-8 rounded-full bg-[var(--surface-card)] text-[var(--text-primary)] hover:text-[var(--text-primary)] flex items-center justify-center border border-[var(--border-strong)]"
+                  aria-label="Fechar histórico de chats"
+                  className="w-11 h-11 rounded-full bg-[var(--surface-card)] text-[var(--text-primary)] hover:text-[var(--text-primary)] flex items-center justify-center border border-[var(--border-strong)]"
                 >
-                  ✕
+                  <X size={14} aria-hidden="true" />
                 </button>
               </div>
 

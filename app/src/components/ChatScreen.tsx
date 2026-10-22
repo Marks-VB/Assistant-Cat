@@ -2,6 +2,7 @@
 // ChatScreen - Ecrã Principal de Conversação do app com InlineEventCard e Header Nativo
 
 import React, { useRef, useEffect } from 'react';
+import { Mic, Plus, Send } from 'lucide-react';
 import { CatAvatar } from './CatAvatar';
 import { CatAppearance, ChatMessage } from '../types';
 import { InlineEventCard } from './InlineEventCard';
@@ -129,7 +130,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
                       onClick={() => onToggleSpeak(msg.text, msg.id)}
                       className="text-[10px] font-semibold text-[var(--accent)] hover:underline shrink-0"
                     >
-                      {speakingMsgId === msg.id ? 'Parar áudio' : 'Ouvir 🔊'}
+                      {speakingMsgId === msg.id ? 'Parar áudio' : 'Ouvir'}
                     </button>
                   </div>
 
@@ -191,11 +192,11 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
           <button
             type="button"
             onClick={onOpenBottomSheet}
-            className="w-9 h-9 rounded-full bg-[var(--surface-input)] text-[var(--text-primary)] hover:bg-[var(--accent)] flex items-center justify-center font-bold text-lg transition duration-200"
+            className="w-9 h-9 rounded-full bg-[var(--surface-input)] text-[var(--text-primary)] hover:bg-[var(--accent)] flex items-center justify-center font-bold text-lg transition duration-200 min-h-[44px] min-w-[44px]"
             title="Ações e Anexos"
             aria-label="Abrir menu de ações"
           >
-            +
+            <Plus size={16} aria-hidden="true" />
           </button>
 
           {/* Campo de Texto */}
@@ -211,24 +212,25 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
           <button
             type="button"
             onClick={onToggleVoice}
-            className={`w-9 h-9 rounded-full flex items-center justify-center text-sm transition ${
+            className={`w-9 h-9 rounded-full flex items-center justify-center text-sm transition min-h-[44px] min-w-[44px] ${
               isListening ? 'bg-[var(--accent)] text-[var(--text-primary)] animate-pulse' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
             title="Ditar por voz"
             aria-label="Gravar áudio"
+            aria-pressed={isListening}
           >
-            🎙️
+            <Mic size={16} aria-hidden="true" />
           </button>
 
           {/* Botão de Envio Rápido */}
           <button
             type="submit"
             disabled={!chatInput.trim()}
-            className="w-9 h-9 rounded-full bg-[var(--accent)] disabled:opacity-40 text-[var(--text-primary)] flex items-center justify-center font-bold text-sm shadow-md transition hover:bg-[var(--accent-hover)]"
+            className="w-9 h-9 rounded-full bg-[var(--accent)] disabled:opacity-40 text-[var(--text-primary)] flex items-center justify-center font-bold text-sm shadow-md transition hover:bg-[var(--accent-hover)] min-h-[44px] min-w-[44px]"
             title="Enviar mensagem"
             aria-label="Enviar mensagem"
           >
-            ↑
+            <Send size={16} aria-hidden="true" />
           </button>
         </form>
       </div>

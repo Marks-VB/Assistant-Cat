@@ -125,50 +125,51 @@
 
 [data-theme="glass"] {
   color-scheme: dark;
-  --bg-primary: #0b1220;
-  --surface-card: rgba(255, 255, 255, 0.07);
-  --surface-elevated: rgba(255, 255, 255, 0.11);
-  --surface-input: rgba(255, 255, 255, 0.13);
-  --surface-hover: rgba(255, 255, 255, 0.17);
-  --text-primary: #f8fafc;
-  --text-secondary: #b3bfd0;
-  --accent: #7dd3fc;
-  --accent-hover: #38bdf8;
-  --accent-soft: rgba(125, 211, 252, 0.16);
-  --accent-border: rgba(125, 211, 252, 0.38);
-  --accent-ring: rgba(125, 211, 252, 0.28);
-  --accent-glow: rgba(125, 211, 252, 0.35);
-  --on-accent: #07131f;
-  --border-subtle: rgba(255, 255, 255, 0.14);
-  --border-strong: rgba(255, 255, 255, 0.26);
-  --overlay-weak: rgba(255, 255, 255, 0.08);
-  --overlay: rgba(255, 255, 255, 0.14);
-  --overlay-strong: rgba(255, 255, 255, 0.22);
-  --overlay-stronger: rgba(255, 255, 255, 0.3);
-  --inverted-bg: #f0f9ff;
-  --inverted-text: #0b1220;
-  --scrollbar-track: #0b1220;
-  --scrollbar-thumb: rgba(255, 255, 255, 0.18);
-  /* Blobs mais fortes para o desfoque ter o que mostrar atrás do vidro. */
-  --page-gradient:
-    radial-gradient(circle at 12% 6%, rgba(125, 211, 252, 0.34), transparent 42%),
-    radial-gradient(circle at 88% 16%, rgba(167, 139, 250, 0.28), transparent 46%),
-    radial-gradient(circle at 50% 108%, rgba(56, 189, 248, 0.26), transparent 55%),
-    linear-gradient(165deg, #0b1220 0%, #0e1b2f 55%, #091120 100%);
-  --header-bg: rgba(11, 18, 32, 0.55);
-  --nav-bg: rgba(13, 23, 40, 0.6);
-  --surface-blur: blur(22px) saturate(160%);
+  /* Base bem escura: o brilho vem da camada de aurora, não das superfícies. */
+  --bg-primary: #060b16;
+  --surface-card: rgba(255, 255, 255, 0.045);
+  --surface-elevated: rgba(255, 255, 255, 0.07);
+  --surface-input: rgba(255, 255, 255, 0.06);
+  --surface-hover: rgba(255, 255, 255, 0.1);
+  --text-primary: #f4f8ff;
+  --text-secondary: #bcc9dc;
+  --accent: #38bdf8;
+  --accent-hover: #7dd3fc;
+  --accent-soft: rgba(56, 189, 248, 0.15);
+  --accent-border: rgba(56, 189, 248, 0.38);
+  --accent-ring: rgba(56, 189, 248, 0.26);
+  --accent-glow: rgba(56, 189, 248, 0.32);
+  --on-accent: #04121f;
+  --border-subtle: rgba(255, 255, 255, 0.11);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --overlay-weak: rgba(255, 255, 255, 0.07);
+  --overlay: rgba(255, 255, 255, 0.12);
+  --overlay-strong: rgba(255, 255, 255, 0.2);
+  --overlay-stronger: rgba(255, 255, 255, 0.28);
+  --inverted-bg: #eaf6ff;
+  --inverted-text: #05101d;
+  --scrollbar-track: #060b16;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.16);
+  /* O fundo é a aurora (body::before); aqui não há gradiente de página. */
+  --page-gradient: none;
+  --header-bg: rgba(6, 11, 22, 0.5);
+  --nav-bg: rgba(8, 15, 28, 0.55);
+  --surface-blur: blur(24px) saturate(170%);
+  /* Brilho concentrado na borda superior, como vidro sob luz. O gradiente
+     diagonal de 0.16 anterior deixava o card com cara de plástico cinza. */
   --surface-sheen: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.16) 0%,
-    rgba(255, 255, 255, 0.02) 42%,
-    rgba(255, 255, 255, 0.1) 100%
+    180deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 255, 255, 0.02) 26%,
+    rgba(255, 255, 255, 0) 60%
   );
   --surface-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.24),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
-    0 24px 48px rgba(2, 8, 23, 0.45);
-  --nav-shadow: 0 24px 60px rgba(2, 8, 23, 0.55);
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 18px 36px -14px rgba(2, 7, 18, 0.75);
+  --nav-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 20px 44px -16px rgba(2, 7, 18, 0.8);
   --heading-font: inherit;
   --heading-tracking: -0.02em;
 }
@@ -329,14 +330,76 @@ header.chat-header {
   -webkit-backdrop-filter: blur(18px) saturate(140%);
 }
 
-/* Glassmorphism: vidro real — blur, saturação, brilho de borda e véu. */
+/* --------------------------------------------------------------------------
+   Tema Vidro — camada de aurora.
+
+   O backdrop-filter só produz vidro quando existe algo colorido atrás para
+   desfocar. Sem esta camada, as superfícies claras sobre um fundo uniforme
+   viram "cards cinzas": era exatamente o que deixava o tema estranho.
+
+   A camada fica atrás do conteúdo (z-index -1) e deriva por transform, que
+   compõe na GPU. Fica atrás do body, então não intercepta toque.
+   -------------------------------------------------------------------------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(46% 34% at 24% 12%, rgba(56, 189, 248, 0.42), transparent 72%),
+    radial-gradient(40% 30% at 82% 30%, rgba(167, 139, 250, 0.36), transparent 74%),
+    radial-gradient(54% 40% at 58% 88%, rgba(45, 212, 191, 0.3), transparent 76%),
+    radial-gradient(30% 24% at 6% 62%, rgba(244, 114, 182, 0.16), transparent 78%);
+  transition: opacity 320ms ease;
+}
+
+/* A base fica no html; o body transparente deixa a aurora aparecer.
+   Sem isso, o background do body pinta depois do ::before de z-index -1
+   e cobre a camada inteira. */
+[data-theme="glass"] body {
+  background-color: transparent;
+}
+
+/* O shell do app deixa a aurora passar. */
+[data-theme="glass"] .app-shell {
+  background-color: transparent;
+}
+
+/* Folhas e gavetas (Personalizar, Notificações, onboarding, booking) usam
+   bg-primary em tela cheia. Deixá-las opacas criava um "buraco" preto no
+   meio do tema. Translúcidas de verdade, o texto de trás vazava e sujava a
+   leitura; aqui elas ganham um tom próprio com o brilho da aurora. */
+[data-theme="glass"] .app-shell [class~="bg-[var(--bg-primary)]"] {
+  background-color: #0a1220;
+  background-image:
+    radial-gradient(120% 70% at 10% 0%, rgba(56, 189, 248, 0.16), transparent 62%),
+    radial-gradient(110% 65% at 100% 100%, rgba(167, 139, 250, 0.13), transparent 66%);
+}
+
+[data-theme="glass"] body::before {
+  opacity: 1;
+  animation: auroraDrift 34s ease-in-out infinite alternate;
+}
+
+@keyframes auroraDrift {
+  from {
+    transform: translate3d(-2%, -1%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3%, 2%, 0) scale(1.08);
+  }
+}
+
+/* Glassmorphism: blur, saturação e brilho de borda. */
 [data-theme="glass"] [class~="bg-[var(--surface-card)]"],
 [data-theme="glass"] [class~="bg-[var(--surface-elevated)]"],
 [data-theme="glass"] [class~="bg-[var(--surface-input)]"] {
   backdrop-filter: var(--surface-blur);
   -webkit-backdrop-filter: var(--surface-blur);
   background-image: var(--surface-sheen);
-  border-color: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
 [data-theme="glass"] nav[role="tablist"],
@@ -344,6 +407,19 @@ header.chat-header {
   backdrop-filter: var(--surface-blur);
   -webkit-backdrop-filter: var(--surface-blur);
   background-image: var(--surface-sheen);
+}
+
+[data-theme="glass"] header.app-header,
+[data-theme="glass"] header.chat-header {
+  backdrop-filter: var(--surface-blur);
+  -webkit-backdrop-filter: var(--surface-blur);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="glass"] body::before {
+    animation: none;
+  }
 }
 
 /* Minimalismo: sem sombras, bordas mais definidas e títulos compactos. */

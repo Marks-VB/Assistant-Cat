@@ -507,11 +507,11 @@ export function App() {
     navLayout === 'side' ? 'md:hidden' : navLayout === 'auto' ? 'lg:hidden' : '';
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans select-none antialiased">
+    <div className="app-shell min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans select-none antialiased">
       <a href="#main" className="skip-link">Pular para conteúdo</a>
       {/* Toast flutuante */}
       {toastMessage && (
-        <div role="status" aria-live="polite" className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-[var(--surface-card)] border border-[var(--border-strong)] text-[var(--text-primary)] text-xs font-semibold px-4 py-2 rounded-full shadow-2xl animate-fade-in flex items-center gap-2">
+        <div role="status" aria-live="polite" className="fixed top-[88px] left-1/2 -translate-x-1/2 z-50 bg-[var(--surface-card)] border border-[var(--border-strong)] text-[var(--text-primary)] text-xs font-semibold px-4 py-2 rounded-full shadow-2xl animate-fade-in flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-[var(--accent)]" />
           <span>{toastMessage}</span>
         </div>

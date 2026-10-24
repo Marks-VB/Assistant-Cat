@@ -38,9 +38,9 @@ export const THEME_OPTIONS: ThemeOption[] = [
   {
     id: 'glass',
     label: 'Vidro',
-    description: 'Glassmorphism azulado',
-    preview: ['#0B1220', 'rgba(255,255,255,0.14)', '#7DD3FC'],
-    themeColor: '#0B1220'
+    description: 'Aurora e vidro fosco',
+    preview: ['#060B16', '#16233A', '#38BDF8'],
+    themeColor: '#060B16'
   },
   {
     id: 'nord',

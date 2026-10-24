@@ -354,10 +354,28 @@
 
 /* Transparência reduzida (glass) e alto contraste: o sistema já resolve a cor. */
 @media (prefers-reduced-transparency: reduce) {
+  [data-theme="glass"] body::before {
+    opacity: 0.3;
+    animation: none;
+  }
+
   [data-theme="glass"] [class~="bg-[var(--surface-card)]"],
   [data-theme="glass"] [class~="bg-[var(--surface-elevated)]"] {
     backdrop-filter: none !important;
-    background-color: var(--surface-card) !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: #131c2c !important;
+  }
+
+  [data-theme="glass"] [class~="bg-[var(--surface-input)]"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: #1a2436 !important;
+  }
+
+  /* Folhas em tela cheia voltam a ser opacas. */
+  [data-theme="glass"] .app-shell [class~="bg-[var(--bg-primary)]"] {
+    background-image: none !important;
+    background-color: #0b1424 !important;
   }
 }
 

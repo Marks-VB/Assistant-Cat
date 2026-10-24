@@ -3,6 +3,18 @@ import { defineConfig, devices } from '@playwright/test';
 export const PROTOTIPO_URL = process.env.PROTOTIPO_URL || 'http://localhost:3001/prototipo/';
 export const APP_URL = process.env.APP_URL || 'http://localhost:5173';
 
+const ALL_PROJECTS = [
+  { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+  { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+  { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+  { name: 'mobile-chrome', use: { ...devices['Pixel 5'] } },
+  { name: 'mobile-safari', use: { ...devices['iPhone 13'] } },
+];
+
+// Em CI o workflow instala apenas o Chromium (mais mobile-chrome, mesmo engine).
+// Defina PLAYWRIGHT_ALL_BROWSERS=1 para rodar a matriz completa (exige os 3 engines).
+const CI_CHROMIUM_ONLY = !!process.env.CI && process.env.PLAYWRIGHT_ALL_BROWSERS !== '1';
+
 export default defineConfig({
   testDir: './e2e/specs',
   fullyParallel: true,
@@ -16,13 +28,9 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
   },
-  projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
-    { name: 'mobile-chrome', use: { ...devices['Pixel 5'] } },
-    { name: 'mobile-safari', use: { ...devices['iPhone 13'] } },
-  ],
+  projects: CI_CHROMIUM_ONLY
+    ? ALL_PROJECTS.filter((p) => p.name === 'chromium' || p.name === 'mobile-chrome')
+    : ALL_PROJECTS,
   webServer: [
     {
       command: 'node server.cjs',

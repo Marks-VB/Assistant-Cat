@@ -120,7 +120,7 @@ export const InlineEventCard: React.FC<InlineEventCardProps> = ({
         <div className="pt-3 border-t border-[var(--border-subtle)] space-y-2.5 text-xs">
           {/* Toggle Call Me */}
           <div className="flex items-center justify-between gap-2">
-            <span className="text-[var(--text-secondary)] font-medium truncate">Call Me (ligar no horário)</span>
+            <span className="text-[var(--text-secondary)] font-medium truncate">Ligar no horário combinado</span>
             <button
               type="button"
               role="switch"

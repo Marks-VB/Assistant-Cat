@@ -1,56 +1,101 @@
-# Assistente Gato
+# Assistant Cat
 
-Pacote v2: especificação, conceitos visuais, design system e protótipo local navegável de um assistente pessoal gratuito e open source.
+Assistente pessoal open source: agenda, afazeres, memórias e chat de IA. A interface é um app **React 19 + TypeScript + Tailwind** (`app/`), publicado como **Cloudflare Worker** com assets estáticos e proxy de IA, e empacotado para **Android com Capacitor**.
 
-## Abrir
+## Estado atual
 
-Na pasta deste arquivo, execute:
+| Parte | Como está |
+| --- | --- |
+| Web | Worker `assistant-cat` serve `app/dist` (build do Vite) e o `POST /api/ai`. |
+| IA | Proxy multi-provider compatível com OpenAI: Gemini, OpenAI, DeepSeek, Groq, OpenRouter, Ollama local e endpoint custom. |
+| Chave da IA | BYOK (chave digitada no app, guardada no aparelho) ou secret no Worker (`GEMINI_API_KEY`, `OPENAI_API_KEY` etc.). |
+| Android | Projeto Capacitor em `app/android/`, `appId` `dev.marksvb.assistantcat`. O APK usa a URL do Worker configurada em **Personalizar → IA**. |
+| Dados | Ficam no aparelho (IndexedDB com fallback para localStorage), com backup/restauração em JSON. Não há conta nem sincronização. |
+| `prototipo/` | Protótipo antigo em JavaScript puro, mantido como referência histórica. Não é o app publicado. |
+| `server.cjs` | Servidor local legado com `/api/gemini`. O app atual usa `/api/ai`; o fallback Gemini só existe na web. |
+
+## Rodar local
+
+Requisito: Node.js 22 ou posterior.
+
+Pilha completa (Worker + assets + `/api/ai`):
 
 ```bash
-python3 -m http.server 8080 --bind 127.0.0.1
+npm install
+npm run build      # instala as deps de app/ e gera app/dist
+npm run dev        # wrangler dev em http://localhost:8787
 ```
 
-Abra `http://127.0.0.1:8080/prototipo/`. No Windows, pode usar `py -m http.server 8080 --bind 127.0.0.1`. Consulte [instalação e execução](docs/Instalacao-e-Execucao.md).
+Para publicar:
 
-## O que já funciona no protótipo
+```bash
+npm run deploy     # build + wrangler deploy
+```
 
-- Menus Chat, Agora, Agenda, Ações e Eu.
-- Eventos simples: criar, editar e excluir; agenda mensal e lista por data.
-- Afazeres: criar, concluir, reabrir e excluir.
-- Chat determinístico de demonstração, revisão e confirmação idempotente de propostas.
-- Memórias manuais: adicionar, listar e excluir.
-- Gato por camadas: seis pelagens, três roupas e três escolhas de óculos, com persistência e download SVG.
-- Tema claro/escuro, nome do assistente, perfil e backup JSON.
-- Persistência com IndexedDB ou alternativa disponível.
+Somente a interface, com HMR do Vite:
 
-## Materiais
+```bash
+cd app
+npm install
+npm run dev        # http://localhost:5173
+```
+
+Nesse modo não há proxy para `/api/ai` no Vite; o chat só funciona apontando para um Worker publicado. Use `npm run dev` na raiz para testar a IA de ponta a ponta.
+
+## IA
+
+O app envia `POST /api/ai` com `provider`, `model`, `messages`, `temperature`, `response_format` e, opcionalmente, `apiKey` e `baseUrl`. O Worker repassa ao provider escolhido. Sem chave no app, ele usa o secret do servidor; sem nenhum dos dois, responde `401`.
+
+Configuração detalhada, CORS, rate limit e Sentry: [`docs/Deploy-Cloudflare.md`](docs/Deploy-Cloudflare.md).
+
+No Android, informe a URL do Worker em **Personalizar → IA → URL do proxy (app Android)**. Sem isso o WebView tenta `https://localhost/api/ai` e o chat falha. Passo a passo: [`docs/Android-APK-e-Play-Store.md`](docs/Android-APK-e-Play-Store.md) §8.
+
+## Android
+
+```bash
+cd app
+npm run android:sync   # build web + cap sync
+npm run android:open   # abre no Android Studio
+```
+
+O build assinado (AAB + APK) roda no GitHub Actions. Segredos de assinatura e publicação: [`docs/Android-APK-e-Play-Store.md`](docs/Android-APK-e-Play-Store.md).
+
+## Testes e tipos
+
+```bash
+cd app
+npm test           # Vitest — lógica pura (domínio, providers)
+npx tsc -b         # checagem de tipos
+```
+
+## Estrutura
+
+```text
+app/               app React/TS (web + Capacitor)
+  src/core/        regras, storage, IA, notificações, temas
+  src/components/  telas e componentes
+  android/         projeto Android nativo
+  public/          assets estáticos do build
+worker/index.ts    assets + proxy /api/ai
+docs/              deploy, Android, especificação
+prototipo/         protótipo legado em JS
+```
+
+## Documentação
 
 | Material | Arquivo |
 | --- | --- |
+| Deploy na Cloudflare | [Deploy-Cloudflare](docs/Deploy-Cloudflare.md) |
+| APK, AAB e Google Play | [Android-APK-e-Play-Store](docs/Android-APK-e-Play-Store.md) |
+| Execução local | [Instalação e execução](docs/Instalacao-e-Execucao.md) |
 | Especificação: 256 capacidades de referência | [Especificação completa](docs/Especificacao-Completa.md) |
 | Design system e tokens | [Design system](design-system/Design-System.md) |
 | Gatos SVG editáveis | [Coleção vetorial](artes/svg-modular/colecao.svg) |
-| Casos de interpretação e critérios futuros | [40 casos](testes/Casos-Assistente.md) |
+| Casos de interpretação e critérios | [40 casos](testes/Casos-Assistente.md) |
 | Backlog com dependências | [38 tickets](backlog/Backlog-Implementacao.md) |
-| Instalação e contribuição | [Execução](docs/Instalacao-e-Execucao.md) e [contribuição](CONTRIBUTING.md) |
-| Próxima rodada com agente | [Prompt de evolução](prompts/Evoluir-Prototipo.md) |
-| Artes PNG e galeria | [Galeria](galeria.html) |
-| Verificação | [Relatório](testes/Relatorio-Verificacao.md) |
+| Contribuição | [CONTRIBUTING.md](CONTRIBUTING.md) |
+| Galeria de artes | [galeria.html](galeria.html) |
 
-## Desenvolvimento
+## Licença
 
-Com Node.js 22 ou posterior:
-
-```bash
-cd prototipo
-npm test
-npm run export:cats
-```
-
-Não há dependências de execução a instalar no protótipo. Ele usa JavaScript simples; o app de produção em **React 19 + TypeScript + Tailwind** fica em [`app/`](app/README.md).
-
-## Estado e licença
-
-O corpus tem 20 casos do interpretador atual e 20 cenários planejados. Os 58 testes cobrem regras e controlador de interface em ambiente simulado; não substituem testes em um navegador real. Automação contínua, IA remota, voz, sincronização e integrações estão no backlog e aparecem como planejadas.
-
-AGPL-3.0-or-later para código, documentação e SVGs novos; origem e escopo das artes em [ASSETS.md](ASSETS.md).
+AGPL-3.0-or-later para código, documentação e SVGs novos. Origem e escopo das artes em [ASSETS.md](ASSETS.md).

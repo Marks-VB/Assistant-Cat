@@ -52,7 +52,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, onSel
             <span className="text-[var(--accent)] transition-transform group-hover:scale-110">
               <Image size={24} strokeWidth={1.8} aria-hidden="true" />
             </span>
-            <span className="text-xs font-semibold text-[var(--text-primary)]">Photos</span>
+            <span className="text-xs font-semibold text-[var(--text-primary)]">Fotos</span>
           </button>
           <button
             onClick={() => onSelectTool('camera')}
@@ -61,19 +61,19 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, onSel
             <span className="text-[var(--accent)] transition-transform group-hover:scale-110">
               <Camera size={24} strokeWidth={1.8} aria-hidden="true" />
             </span>
-            <span className="text-xs font-semibold text-[var(--text-primary)]">Camera</span>
+            <span className="text-xs font-semibold text-[var(--text-primary)]">Câmera</span>
           </button>
           <button
             onClick={() => onSelectTool('files')}
             className="relative rounded-[18px] bg-[var(--surface-elevated)] border border-[var(--border-subtle)] p-3.5 flex flex-col items-center justify-center gap-1.5 hover:bg-[var(--surface-hover)] active:scale-95 transition-all shadow-sm"
           >
             <span className="absolute top-1.5 right-1.5 bg-gradient-to-r from-purple-500 to-pink-500 text-[var(--text-primary)] text-[8px] font-extrabold px-1.5 py-0.2 rounded-full shadow-sm">
-              SUPER
+              NOVO
             </span>
             <span className="text-[var(--accent)] transition-transform group-hover:scale-110">
               <Folder size={24} strokeWidth={1.8} aria-hidden="true" />
             </span>
-            <span className="text-xs font-semibold text-[var(--text-primary)]">Files</span>
+            <span className="text-xs font-semibold text-[var(--text-primary)]">Arquivos</span>
           </button>
         </div>
 
@@ -87,7 +87,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, onSel
               <Handshake size={18} strokeWidth={1.9} />
             </span>
             <div>
-              <div className="font-bold text-[var(--text-primary)] text-xs">Coordination</div>
+              <div className="font-bold text-[var(--text-primary)] text-xs">Coordenação</div>
               <div className="text-[11px] text-[var(--text-secondary)]">O assistente contata participantes e organiza reuniões</div>
             </div>
           </button>
@@ -100,8 +100,8 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, onSel
               <ListChecks size={18} strokeWidth={1.9} />
             </span>
             <div>
-              <div className="font-bold text-[var(--text-primary)] text-xs">To-do</div>
-              <div className="text-[11px] text-[var(--text-secondary)]">Add to your intelligent to-do list</div>
+              <div className="font-bold text-[var(--text-primary)] text-xs">Afazeres</div>
+              <div className="text-[11px] text-[var(--text-secondary)]">Adicionar à sua lista inteligente</div>
             </div>
           </button>
 
@@ -113,8 +113,8 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, onSel
               <Zap size={18} strokeWidth={1.9} />
             </span>
             <div>
-              <div className="font-bold text-[var(--text-primary)] text-xs">Trigger</div>
-              <div className="text-[11px] text-[var(--text-secondary)]">Track real-world updates and alarms</div>
+              <div className="font-bold text-[var(--text-primary)] text-xs">Disparadores</div>
+              <div className="text-[11px] text-[var(--text-secondary)]">Acompanhar atualizações e alarmes do mundo real</div>
             </div>
           </button>
 
@@ -124,7 +124,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, onSel
               onClick={() => setShowMore(!showMore)}
               className="w-full py-2 text-xs font-bold text-[var(--text-primary)] hover:text-[var(--text-primary)] flex items-center justify-center gap-1 active:scale-95 transition-all"
             >
-              <span>{showMore ? 'Menos' : 'More (...) '}</span>
+              <span>{showMore ? 'Menos' : 'Mais (...) '}</span>
             </button>
 
             {showMore && (
@@ -137,7 +137,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, onSel
                     <Globe size={18} strokeWidth={1.9} />
                   </span>
                   <div>
-                    <div className="font-bold text-[var(--text-primary)] text-xs">Web search</div>
+                    <div className="font-bold text-[var(--text-primary)] text-xs">Busca na web</div>
                     <div className="text-[11px] text-[var(--text-secondary)]">Pesquisar informações atualizadas online</div>
                   </div>
                 </button>
@@ -149,7 +149,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, onSel
                     <Brain size={18} strokeWidth={1.9} />
                   </span>
                   <div>
-                    <div className="font-bold text-[var(--text-primary)] text-xs">Memory</div>
+                    <div className="font-bold text-[var(--text-primary)] text-xs">Memória</div>
                     <div className="text-[11px] text-[var(--text-secondary)]">Preferências e fatos anotados sobre você</div>
                   </div>
                 </button>

@@ -16,6 +16,7 @@ import {
   NavLayout
 } from './types';
 import { GatoStorage } from './core/storage';
+import { toExportableState } from './core/backup';
 import { CatAvatar } from './components/CatAvatar';
 import * as Domain from './core/domain';
 import * as AI from './core/ai-adapter';
@@ -45,10 +46,11 @@ const uid = () =>
     ? crypto.randomUUID()
     : 'app-' + Date.now() + '-' + Math.random().toString(36).slice(2, 9);
 
-const defaultAssistantName =
-  typeof navigator !== 'undefined' && navigator.language && navigator.language.startsWith('en')
-    ? 'Your Assistant Cat'
-    : 'Seu Gato Assistente';
+// A interface é só PT-BR, então o nome padrão também é. Antes isto virava
+// "Your Assistant Cat" em navegador com locale en-*, o que misturava idiomas
+// na mesma tela (nome em inglês, o resto em português). O usuário pode
+// renomear em Personalizar.
+const defaultAssistantName = 'Seu Gato Assistente';
 
 const initialAppState: AppState = {
   schemaVersion: 2,
@@ -151,6 +153,7 @@ export function App() {
   // Chat e Voz
   const [chatInput, setChatInput] = useState('');
   const [isListening, setIsListening] = useState(false);
+  const [isThinking, setIsThinking] = useState(false);
   const [speakingMsgId, setSpeakingMsgId] = useState<string | null>(null);
   const chatScrollRef = useRef<HTMLDivElement>(null);
   const confirmingProposals = useRef(new Set<Proposal>());
@@ -329,6 +332,7 @@ export function App() {
     setChatInput('');
     await updateState(s => ({ ...s, messages: newMessages }));
 
+    setIsThinking(true);
     try {
       const aiResponse = await AI.requestInference(text, { ...state, messages: newMessages });
       const assistantMsgId = uid();
@@ -349,6 +353,8 @@ export function App() {
       }
     } catch {
       showToast('Erro ao consultar o assistente.');
+    } finally {
+      setIsThinking(false);
     }
   };
 
@@ -555,6 +561,7 @@ export function App() {
             chatInput={chatInput}
             isListening={isListening}
             speakingMsgId={speakingMsgId}
+            isThinking={isThinking}
             unreadNotifications={true}
             onInputChange={setChatInput}
             onSendMessage={handleSendMessage}
@@ -691,7 +698,7 @@ export function App() {
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                   }`}
                 >
-                  Calendar
+                  Agenda
                 </button>
                 <button
                   onClick={() => setCalendarSubTab('todos')}
@@ -701,7 +708,7 @@ export function App() {
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                   }`}
                 >
-                  To-dos
+                  Afazeres
                 </button>
                 <button
                   onClick={() => setCalendarSubTab('search')}
@@ -711,7 +718,7 @@ export function App() {
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                   }`}
                 >
-                  Search
+                  Buscar
                 </button>
               </div>
 
@@ -1000,35 +1007,35 @@ export function App() {
         {/* ========================================================= */}
         {currentTab === 'me' && (
           <div className="space-y-6">
-            {/* Card de Conta e Cota */}
+            {/* Card de Conta Local */}
             <div className="rounded-[24px] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-5 space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="font-bold text-base text-[var(--text-primary)]">{state.profile.name}</h3>
-                  <p className="text-xs text-[var(--text-secondary)]">+55 (11) 98765-4321</p>
+                  <p className="text-xs text-[var(--text-secondary)]">Conta local · seus dados ficam neste aparelho</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-[10px] font-extrabold uppercase tracking-wider bg-[var(--overlay)] px-2 py-0.5 rounded text-[var(--text-primary)]">
-                    FREE
+                    GRÁTIS
                   </span>
                   <button
-                    onClick={() => showToast('Plano PRO ilimitado!')}
+                    onClick={() => showToast('Ainda não há planos pagos. O app é gratuito e de código aberto.')}
                     className="px-3 py-1 rounded-full bg-[var(--accent)] text-[var(--text-primary)] text-xs font-bold shadow-md hover:bg-[var(--accent-hover)]"
                   >
-                    Upgrade
+                    Planos
                   </button>
                 </div>
               </div>
 
-              {/* Barra de Progresso Horizontal Weekly Quota (100.00%) */}
+              {/* Uso de IA: sem cota do app — o consumo é do provedor escolhido */}
               <div className="space-y-1.5 pt-2 border-t border-[var(--border-subtle)]">
-                <div className="flex justify-between text-xs font-mono">
-                  <span className="text-[var(--text-secondary)]">Weekly Quota</span>
-                  <span className="text-[var(--accent)] font-bold">100.00%</span>
+                <div className="flex justify-between items-baseline text-xs">
+                  <span className="text-[var(--text-secondary)]">Uso de IA</span>
+                  <span className="text-[var(--accent)] font-bold">Configurável</span>
                 </div>
-                <div className="w-full h-2 rounded-full bg-[var(--surface-elevated)] overflow-hidden">
-                  <div className="h-full bg-[var(--accent)] w-full" />
-                </div>
+                <p className="text-[11px] leading-relaxed text-[var(--text-secondary)]">
+                  Sem cota do app. O consumo é da sua chave ou do proxy definido em Personalizar → IA.
+                </p>
               </div>
             </div>
 
@@ -1152,42 +1159,50 @@ export function App() {
               </button>
             </div>
 
-            {/* Seções de Configuração */}
+            {/* Seções de Configuração (itens planejados, sem integração ativa) */}
             <div className="rounded-[24px] bg-[var(--surface-card)] border border-[var(--border-subtle)] divide-y divide-[var(--border-subtle)] text-sm">
-              {/* Calendars */}
+              <div className="flex items-center justify-between px-4 pt-3">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--text-secondary)]">
+                  Integrações planejadas
+                </span>
+                <span className="rounded-full border border-[var(--border-strong)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[var(--text-secondary)]">
+                  Demonstração
+                </span>
+              </div>
+              {/* Calendários */}
               <div className="p-4 flex items-center justify-between">
                 <div>
-                  <div className="font-semibold text-[var(--text-primary)]">Calendars</div>
+                  <div className="font-semibold text-[var(--text-primary)]">Calendários</div>
                   <div className="text-xs text-[var(--text-secondary)]">Sincronização com Google Calendar</div>
                 </div>
-                <span className="text-xs text-[var(--text-secondary)]">Google (Read only) &gt;</span>
+                <span className="text-xs text-[var(--text-secondary)]">Em breve</span>
               </div>
 
-              {/* Contacts */}
+              {/* Contatos */}
               <div className="p-4 flex items-center justify-between">
                 <div>
-                  <div className="font-semibold text-[var(--text-primary)]">Contacts</div>
+                  <div className="font-semibold text-[var(--text-primary)]">Contatos</div>
                   <div className="text-xs text-[var(--text-secondary)]">Importar da agenda ou criar contatos</div>
                 </div>
-                <span className="text-xs text-[var(--text-secondary)]">3 Contatos &gt;</span>
+                <span className="text-xs text-[var(--text-secondary)]">Em breve</span>
               </div>
 
-              {/* Integrations */}
+              {/* Integrações */}
               <div className="p-4 flex items-center justify-between">
                 <div>
-                  <div className="font-semibold text-[var(--text-primary)]">Integrations</div>
-                  <div className="text-xs text-[var(--text-secondary)]">Location, Gmail, Outlook Mail</div>
+                  <div className="font-semibold text-[var(--text-primary)]">Integrações</div>
+                  <div className="text-xs text-[var(--text-secondary)]">Localização, Gmail e Outlook</div>
                 </div>
-                <span className="text-xs text-[var(--text-secondary)]">4 ativas &gt;</span>
+                <span className="text-xs text-[var(--text-secondary)]">Em breve</span>
               </div>
 
-              {/* General */}
+              {/* Geral */}
               <div className="p-4 flex items-center justify-between">
                 <div>
-                  <div className="font-semibold text-[var(--text-primary)]">General</div>
-                  <div className="text-xs text-[var(--text-secondary)]">Notificação 15 min antes, idioma, tema escuro</div>
+                  <div className="font-semibold text-[var(--text-primary)]">Geral</div>
+                  <div className="text-xs text-[var(--text-secondary)]">Notificação 15 min antes, idioma e tema</div>
                 </div>
-                <span className="text-xs text-[var(--text-secondary)]">Configurar &gt;</span>
+                <span className="text-xs text-[var(--text-secondary)]">Em breve</span>
               </div>
             </div>
 
@@ -1195,18 +1210,45 @@ export function App() {
             <div className="pt-2 text-center">
               <button
                 onClick={() => {
-                  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+                  const exportable = toExportableState(state);
+                  const blob = new Blob([JSON.stringify(exportable, null, 2)], { type: 'application/json' });
                   const url = URL.createObjectURL(blob);
                   const a = document.createElement('a');
                   a.href = url;
                   a.download = 'assistant-cat-backup.json';
                   a.click();
-                  showToast('Backup exportado com sucesso.');
+                  showToast('Backup exportado (sem sua chave de IA).');
                 }}
                 className="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] underline font-mono"
               >
                 Exportar Backup de Dados (JSON Local)
               </button>
+            </div>
+
+            {/* Rodapé de privacidade e documentos legais */}
+            <div className="pt-1 space-y-2 text-center">
+              <p className="text-xs leading-relaxed text-[var(--text-secondary)]">
+                Seus dados ficam neste dispositivo e a chave de IA não vai no backup. Ao usar um
+                provedor de IA, o texto da sua mensagem é enviado ao provedor escolhido.
+              </p>
+              <div className="flex items-center justify-center gap-3 text-xs">
+                <a
+                  href="./termos.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[var(--text-secondary)] underline hover:text-[var(--text-primary)]"
+                >
+                  Termos de Uso
+                </a>
+                <a
+                  href="./privacidade.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[var(--text-secondary)] underline hover:text-[var(--text-primary)]"
+                >
+                  Política de Privacidade
+                </a>
+              </div>
             </div>
           </div>
         )}

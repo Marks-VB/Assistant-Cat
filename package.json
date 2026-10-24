@@ -8,9 +8,14 @@
     "build": "npm --prefix app install --no-audit --no-fund && npm --prefix app run build",
     "dev": "wrangler dev",
     "deploy": "npm run build && wrangler deploy",
-    "typecheck": "npm --prefix app exec tsc -b"
+    "typecheck": "npm --prefix app exec -- tsc -b app",
+    "test": "npm --prefix app run test",
+    "test:proto": "npm --prefix prototipo test",
+    "e2e": "playwright test"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
     "wrangler": "^4.0.0"
   },
   "license": "AGPL-3.0-or-later"

@@ -1,6 +1,13 @@
 // Pages Function: POST /api/ai — proxy OpenAI-compatível multi-provider.
 // Body: { provider, model, baseUrl?, apiKey?, messages, temperature?, response_format? }
 // Chave: usa apiKey do body (BYOK) ou secret do ambiente (GEMINI_API_KEY, OPENAI_API_KEY...).
+//
+// ATENÇÃO: este arquivo NÃO é o caminho usado no deploy atual. O site é servido
+// pelo Worker em `worker/index.ts` (wrangler.jsonc -> "main"), que concentra o
+// endurecimento de produção (CORS por allowlist, rate limit, SSRF, limite de
+// payload, timeout e headers de segurança). Esta Pages Function continua aqui
+// apenas como referência histórica; se um dia voltar a ser usada, precisa
+// receber o mesmo tratamento de `worker/index.ts`.
 
 interface Env {
   GEMINI_API_KEY?: string;

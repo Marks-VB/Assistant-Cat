@@ -2,8 +2,9 @@
 // GatoAI - Adaptador multi-provider OpenAI-compatível (/v1/chat/completions)
 // Legado Gemini (/api/gemini) mantido como fallback.
 
+import { Capacitor } from '@capacitor/core';
 import { AppState, Memory, Proposal } from '../types';
-import { AISettings, DEFAULT_AI_SETTINGS, effectiveModel, resolveBaseUrl } from './providers';
+import { AISettings, DEFAULT_AI_SETTINGS, effectiveModel, resolveBaseUrl, resolveProxyBaseUrl } from './providers';
 
 export const GEMINI_CONFIG = Object.freeze({
   model: 'gemini-3.5-flash-lite' as const
@@ -96,7 +97,8 @@ export async function requestInference(
 
 /**
  * Executa a chamada estruturada via proxy OpenAI-compatível (/api/ai).
- * Fallback: proxy legado Gemini (/api/gemini).
+ * Web: URL relativa ao mesmo host, com fallback legado Gemini (/api/gemini).
+ * Nativo (Android/iOS): URL absoluta do Worker configurada em Personalizar → IA.
  */
 export async function generateChatResponse(userText: string, options: ChatOptions = {}, ai: AISettings = DEFAULT_AI_SETTINGS): Promise<AIResponse> {
   const userName = options.userName || 'Você';
@@ -195,27 +197,31 @@ DIRETRIZES DE COMUNICAÇÃO E CONDUTA:
 
   let response: Response | null = null;
   let usedLegacy = false;
-  const isBrowserHttp =
-    typeof window !== 'undefined' &&
-    window.location &&
-    (window.location.protocol === 'http:' || window.location.protocol === 'https:');
 
-  // 1) Proxy novo OpenAI-compatível
-  if (isBrowserHttp) {
-    try {
-      const r = await fetch('/api/ai', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(openaiBody)
-      });
-      if (r.ok || r.status !== 404) response = r;
-    } catch {
-      response = null;
-    }
+  // No APK o WebView roda em `https://localhost` (androidScheme https) e não há
+  // servidor local: só a URL absoluta do Worker funciona. Na web o proxy continua
+  // relativo ao mesmo host.
+  const isNative = Capacitor.isNativePlatform();
+  const proxyBase = resolveProxyBaseUrl(ai);
+
+  if (isNative && !proxyBase) {
+    throw new Error('Configure a URL do proxy em Personalizar → IA (ex.: https://assistant-cat.SEU.workers.dev).');
   }
 
-  // 2) Fallback legado Gemini
-  if (!response && isBrowserHttp) {
+  // 1) Proxy novo OpenAI-compatível (/api/ai)
+  try {
+    const r = await fetch(`${proxyBase}/api/ai`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(openaiBody)
+    });
+    if (r.ok || r.status !== 404) response = r;
+  } catch {
+    response = null;
+  }
+
+  // 2) Fallback legado Gemini (somente web: o Worker não expõe /api/gemini)
+  if (!response && !isNative) {
     try {
       const r = await fetch('/api/gemini', {
         method: 'POST',
@@ -229,7 +235,11 @@ DIRETRIZES DE COMUNICAÇÃO E CONDUTA:
   }
 
   if (!response) {
-    throw new Error('Proxy de IA indisponível. Verifique /api/ai (provider, modelo e chave).');
+    throw new Error(
+      isNative
+        ? `Proxy de IA indisponível em ${proxyBase}. Verifique a URL do Worker em Personalizar → IA e o CORS (ALLOWED_ORIGINS).`
+        : 'Proxy de IA indisponível. Verifique /api/ai (provider, modelo e chave).'
+    );
   }
 
   if (!response.ok) {

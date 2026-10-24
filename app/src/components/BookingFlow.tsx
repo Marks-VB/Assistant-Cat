@@ -79,7 +79,7 @@ export const BookingFlow: React.FC<BookingFlowProps> = ({ isOpen, onClose, assis
             <div className="rounded-2xl bg-[var(--surface-card)] border border-[var(--border-subtle)] p-4 text-xs font-mono text-[var(--accent)] font-bold flex items-center justify-between">
               <span>assistantcat.app/@marcos</span>
               <button className="bg-[var(--overlay)] px-3 py-1 rounded-full text-[var(--text-primary)] text-[11px] hover:bg-[var(--overlay-strong)]">
-                Share
+                Compartilhar
               </button>
             </div>
 
@@ -87,7 +87,7 @@ export const BookingFlow: React.FC<BookingFlowProps> = ({ isOpen, onClose, assis
               onClick={() => setStep('choose')}
               className="w-full py-3.5 rounded-full bg-[var(--accent)] text-[var(--text-primary)] font-bold text-sm shadow-xl hover:bg-[var(--accent-hover)] transition"
             >
-              + Create booking page
+              + Criar página de agendamento
             </button>
           </div>
         )}
@@ -95,7 +95,7 @@ export const BookingFlow: React.FC<BookingFlowProps> = ({ isOpen, onClose, assis
         {/* Escolha do método de criação */}
         {step === 'choose' && (
           <div className="space-y-4 pt-10">
-            <h3 className="text-lg font-bold text-center">New booking type</h3>
+            <h3 className="text-lg font-bold text-center">Novo tipo de agendamento</h3>
             <p className="text-xs text-[var(--text-secondary)] text-center mb-6">Como prefere configurar seu link?</p>
 
             <button
@@ -106,7 +106,7 @@ export const BookingFlow: React.FC<BookingFlowProps> = ({ isOpen, onClose, assis
                 <MessageSquare size={18} strokeWidth={1.9} />
               </span>
               <div>
-                <div className="font-bold text-sm text-[var(--text-primary)]">Create by chatting with {assistantName}</div>
+                <div className="font-bold text-sm text-[var(--text-primary)]">Criar conversando com {assistantName}</div>
                 <div className="text-xs text-[var(--text-secondary)]">Fale normalmente e a IA preenche as regras e horários</div>
               </div>
             </button>
@@ -119,7 +119,7 @@ export const BookingFlow: React.FC<BookingFlowProps> = ({ isOpen, onClose, assis
                 <Settings size={18} strokeWidth={1.9} />
               </span>
               <div>
-                <div className="font-bold text-sm text-[var(--text-primary)]">Set up manually</div>
+                <div className="font-bold text-sm text-[var(--text-primary)]">Configurar manualmente</div>
                 <div className="text-xs text-[var(--text-secondary)]">Definir disponibilidade e durações manualmente</div>
               </div>
             </button>
@@ -132,9 +132,9 @@ export const BookingFlow: React.FC<BookingFlowProps> = ({ isOpen, onClose, assis
             {/* Card de Preview com badge DRAFT */}
             <div className="rounded-[20px] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-5 shadow-2xl space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)]">Booking preview</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)]">Prévia do agendamento</span>
                 <span className="bg-amber-500/20 text-amber-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-amber-500/30">
-                  DRAFT
+                  RASCUNHO
                 </span>
               </div>
 

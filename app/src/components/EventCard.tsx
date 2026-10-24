@@ -72,7 +72,7 @@ export const EventCard: React.FC<EventCardProps> = ({
         <div className="py-3 flex items-center justify-between font-mono text-sm text-[var(--accent)] font-bold">
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-[var(--accent)]" />
-            <span>Today</span>
+            <span>Hoje</span>
           </div>
           <div className="flex items-center gap-2 tracking-wide">
             <span>{startTime}</span>
@@ -85,7 +85,7 @@ export const EventCard: React.FC<EventCardProps> = ({
         <div className="pt-3 border-t border-[var(--border-subtle)] space-y-2.5 text-xs">
           {/* Toggle Call Me */}
           <div className="flex items-center justify-between">
-            <span className="text-[var(--text-secondary)] font-medium">Call Me (ligar no horário)</span>
+            <span className="text-[var(--text-secondary)] font-medium">Ligar no horário combinado</span>
             <button
               type="button"
               role="switch"

@@ -34,17 +34,28 @@ export interface AISettings {
   model: string;
   apiKey: string;
   baseUrl?: string;
+  /** URL absoluta do Worker de proxy. Vazio = mesmo host (web). Obrigatório no app nativo. */
+  proxyUrl?: string;
 }
+
+/** Valor padrão do proxy: vazio, ou seja, mesmo host da página. */
+export const DEFAULT_PROXY_URL = '';
 
 export const DEFAULT_AI_SETTINGS: AISettings = {
   provider: 'gemini',
   model: 'gemini-2.0-flash-lite',
   apiKey: '',
+  proxyUrl: DEFAULT_PROXY_URL,
 };
 
 export function resolveBaseUrl(s: AISettings): string {
   if (s.provider === 'custom') return (s.baseUrl || '').replace(/\/$/, '');
   return AI_PROVIDERS.find((p) => p.id === s.provider)?.baseUrl || '';
+}
+
+/** Normaliza a URL do Worker removendo espaços e a barra final. Vazio = mesmo host. */
+export function resolveProxyBaseUrl(ai: AISettings): string {
+  return (ai.proxyUrl || '').trim().replace(/\/$/, '');
 }
 
 export function effectiveModel(s: AISettings): string {

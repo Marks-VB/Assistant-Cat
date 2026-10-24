@@ -14,6 +14,8 @@
   html {
     /* WCAG 2.4.11: item focado não fica escondido atrás do cabeçalho fixo. */
     scroll-padding-top: 76px;
+    /* Evita salto de layout quando a barra de rolagem aparece (CLS). */
+    scrollbar-gutter: stable;
   }
 
   html,
@@ -25,7 +27,33 @@
     padding: 0;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    /* Fallback para navegadores sem dvh (mobile-native). */
+    min-height: 100vh;
     min-height: 100dvh;
+  }
+
+  /* App instalado (PWA/standalone) não deve puxar para atualizar a página. */
+  @media (display-mode: standalone) {
+    html {
+      overscroll-behavior-y: none;
+    }
+  }
+
+  /* Sem atraso de 300ms no toque; mantém pan e pinch-zoom. */
+  button,
+  [role="button"],
+  a,
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+  }
+
+  /* Títulos com quebra equilibrada (Taste/frontend-design). */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
   }
 
   /* Previne zoom automático indesejado no iOS Safari exigindo min 16px */
@@ -98,6 +126,31 @@
   scrollbar-width: none;
 }
 
+/* ==========================================================================
+   Motion tokens — arquétipo "Premium" (Motion Design Skill / Emil Kowalski).
+   Regras aplicadas:
+   - só transform e opacity (compõe na GPU, sem reflow);
+   - entrada desacelera (ease-out), saída acelera (ease-in);
+   - microinteração 90–150ms, card 220ms, modal 360ms;
+   - stagger de 40ms, teto de ~320ms por lista (regra do 1/3).
+   Trocar o arquétipo = trocar estes tokens, não cada componente.
+   ========================================================================== */
+:root {
+  --dur-instant: 90ms;
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-slow: 320ms;
+  --dur-modal: 360ms;
+
+  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-in: cubic-bezier(0.3, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --stagger-step: 40ms;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -118,34 +171,123 @@
   to { transform: translateX(0); }
 }
 
-/* Emil & Apple Design Spring & Fluid Cubic Bezier Easing */
-:root {
-  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn var(--dur-base) var(--ease-out) forwards;
 }
 
 .animate-slide-up {
-  animation: slideUp 0.36s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideUp var(--dur-modal) var(--ease-apple) forwards;
 }
 
 .animate-slide-left {
-  animation: slideLeft 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideLeft var(--dur-slow) var(--ease-apple) forwards;
 }
 
 .animate-slide-right {
-  animation: slideRight 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideRight var(--dur-slow) var(--ease-apple) forwards;
+}
+
+/* Popovers, menus e sheets ancorados entram por escala, não por deslocamento. */
+.animate-scale-in {
+  animation: scaleIn var(--dur-fast) var(--ease-spring) forwards;
+}
+
+/* Coreografia de lista: herói primeiro, o resto em cascata curta.
+   Uso: <ul className="stagger-list"> — cada filho anima com animate-fade-in
+   ou animate-scale-in. O teto de 8 itens mantém o total abaixo de 500ms. */
+.stagger-list > * {
+  animation-name: fadeIn;
+  animation-duration: var(--dur-base);
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: both;
+}
+.stagger-list > *:nth-child(1) { animation-delay: calc(var(--stagger-step) * 0); }
+.stagger-list > *:nth-child(2) { animation-delay: calc(var(--stagger-step) * 1); }
+.stagger-list > *:nth-child(3) { animation-delay: calc(var(--stagger-step) * 2); }
+.stagger-list > *:nth-child(4) { animation-delay: calc(var(--stagger-step) * 3); }
+.stagger-list > *:nth-child(5) { animation-delay: calc(var(--stagger-step) * 4); }
+.stagger-list > *:nth-child(6) { animation-delay: calc(var(--stagger-step) * 5); }
+.stagger-list > *:nth-child(7) { animation-delay: calc(var(--stagger-step) * 6); }
+.stagger-list > *:nth-child(n + 8) { animation-delay: calc(var(--stagger-step) * 7); }
+
+/* --------------------------------------------------------------------------
+   Motion do chat — arquétipo Premium (LottieFiles Motion Design).
+   - Entrada desacelera (ease-out) e não tem overshoot: conteúdo não quica.
+   - Só transform/opacity: compõe na GPU e não interfere no scroll.
+   - Camadas: herói = balão, secundária = card da proposta (+40ms),
+     ambiente = indicador "digitando".
+   -------------------------------------------------------------------------- */
+@keyframes chatMessageIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Herói: só a mensagem recém-chegada anima. Histórico abre parado, para o
+   usuário não esperar a leitura de algo que já existia. */
+.chat-msg-in {
+  animation: chatMessageIn var(--dur-slow) var(--ease-out) both;
+}
+
+/* Camada secundária: o card de proposta pousa depois do texto que o explica. */
+.chat-secondary {
+  animation: chatMessageIn var(--dur-base) var(--ease-out) both;
+  animation-delay: var(--stagger-step);
+}
+
+/* Ambiente: "digitando". Três pontos com defasagem de 140ms, curva senoidal
+   contínua (sem parada brusca no loop). */
+@keyframes typingDot {
+  0%,
+  60%,
+  100% {
+    opacity: 0.25;
+    transform: translate3d(0, 0, 0);
+  }
+  30% {
+    opacity: 1;
+    transform: translate3d(0, -3px, 0);
+  }
+}
+
+.typing-dot {
+  animation: typingDot 1.2s var(--ease-in-out) infinite;
+}
+.typing-dot:nth-child(2) {
+  animation-delay: 140ms;
+}
+.typing-dot:nth-child(3) {
+  animation-delay: 280ms;
 }
 
 /* Microinterações táteis ativas (Press Feel) */
 .press-scale {
-  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform var(--dur-fast) var(--ease-out);
 }
 .press-scale:active {
   transform: scale(0.95);
+}
+
+/* Alvo mínimo WCAG 2.5.8 (24×24 px) para ícones/botões compactos. */
+.tap-target {
+  min-width: 24px;
+  min-height: 24px;
 }
 
 /* Acessibilidade: foco visível, skip-link e alvos mínimos (WCAG 2.2) */
@@ -165,10 +307,10 @@
   left: 16px;
   z-index: 100;
   padding: 0.75rem 1rem;
-  background: #111;
-  color: #fff;
+  background: var(--inverted-bg);
+  color: var(--inverted-text);
   border-radius: 0.375rem;
-  transition: top 120ms ease-out;
+  transition: top var(--dur-fast) var(--ease-out);
 }
 .skip-link:focus-visible {
   top: 12px;
@@ -188,13 +330,56 @@
   .animate-fade-in,
   .animate-slide-up,
   .animate-slide-left,
-  .animate-slide-right {
+  .animate-slide-right,
+  .animate-scale-in,
+  .chat-msg-in,
+  .chat-secondary,
+  .stagger-list > * {
     animation: none !important;
     transform: none !important;
     opacity: 1 !important;
   }
 
+  /* O indicador de digitação precisa continuar legível sem movimento. */
+  .typing-dot {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   .press-scale:active {
     transform: none !important;
+  }
+}
+
+/* Transparência reduzida (glass) e alto contraste: o sistema já resolve a cor. */
+@media (prefers-reduced-transparency: reduce) {
+  [data-theme="glass"] [class~="bg-[var(--surface-card)]"],
+  [data-theme="glass"] [class~="bg-[var(--surface-elevated)]"] {
+    backdrop-filter: none !important;
+    background-color: var(--surface-card) !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --border-subtle: var(--border-strong);
+    --text-secondary: var(--text-primary);
+  }
+}
+
+/* Windows High Contrast / forced-colors: preserva bordas e foco. */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid Highlight;
+  }
+
+  [class~="bg-[var(--surface-card)]"],
+  [class~="bg-[var(--surface-elevated)]"],
+  button,
+  input,
+  select,
+  textarea {
+    border: 1px solid ButtonBorder;
   }
 }

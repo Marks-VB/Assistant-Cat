@@ -41,7 +41,7 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     key: 'now',
-    label: 'Now',
+    label: 'Agora',
     icon: (active) => (
       <svg
         className={`w-5 h-5 transition-transform duration-200 ${active ? 'scale-105' : ''}`}
@@ -58,7 +58,7 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     key: 'calendar',
-    label: 'Calendar',
+    label: 'Agenda',
     icon: (active) => (
       <svg
         className={`w-5 h-5 transition-transform duration-200 ${active ? 'scale-105' : ''}`}
@@ -77,7 +77,7 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     key: 'tasks',
-    label: 'Tasks',
+    label: 'Tarefas',
     icon: (active) => (
       <svg
         className={`w-5 h-5 transition-transform duration-200 ${active ? 'scale-105' : ''}`}
@@ -94,7 +94,7 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     key: 'me',
-    label: 'Me',
+    label: 'Eu',
     icon: (active) => (
       <svg
         className={`w-5 h-5 transition-transform duration-200 ${active ? 'scale-105' : ''}`}
@@ -147,7 +147,6 @@ export const FloatingBottomBar: React.FC<FloatingBottomBarProps> = ({
             key={tab.key}
             role="tab"
             aria-selected={isActive}
-            aria-label={`${tab.label}${formattedBadge ? ` (${formattedBadge} novas notificações)` : ''}`}
             onClick={() => onChangeTab(tab.key)}
             className={`relative shrink-0 flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-2 rounded-full text-xs font-semibold select-none outline-none active:scale-95 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
               isActive
@@ -155,17 +154,22 @@ export const FloatingBottomBar: React.FC<FloatingBottomBarProps> = ({
                 : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--overlay-weak)]'
             }`}
           >
-            <span className="flex items-center justify-center shrink-0">{tab.icon(isActive)}</span>
-            <span className={`tracking-tight truncate max-w-[60px] sm:max-w-none ${isActive ? 'inline font-bold' : 'hidden sm:inline font-medium'}`}>{tab.label}</span>
+            <span className="flex items-center justify-center shrink-0" aria-hidden="true">{tab.icon(isActive)}</span>
+            {/* Em telas pequenas a aba inativa esconde o rótulo visualmente, mas ele
+                continua no nome acessível (sr-only) — WCAG 2.5.3: o nome contém o texto visível. */}
+            <span className={`tracking-tight truncate max-w-[60px] sm:max-w-none ${isActive ? 'inline font-bold' : 'sr-only sm:not-sr-only sm:inline font-medium'}`}>{tab.label}</span>
 
             {/* Badge de alerta/contagem blindado */}
             {formattedBadge && (
-              <span
-                className="absolute -top-1.5 -right-1 flex h-4 min-w-[16px] max-w-[36px] items-center justify-center rounded-full bg-[var(--accent)] px-1 text-[9px] font-extrabold text-[var(--text-primary)] shadow-sm ring-2 ring-[var(--surface-card)] tabular-nums leading-none pointer-events-none truncate"
-                title={`${badgeCounts[tab.key]} pendentes`}
-              >
-                {formattedBadge}
-              </span>
+              <>
+                <span
+                  aria-hidden="true"
+                  className="absolute -top-1.5 -right-1 flex h-4 min-w-[16px] max-w-[36px] items-center justify-center rounded-full bg-[var(--accent)] px-1 text-[9px] font-extrabold text-[var(--text-primary)] shadow-sm ring-2 ring-[var(--surface-card)] tabular-nums leading-none pointer-events-none truncate"
+                >
+                  {formattedBadge}
+                </span>
+                <span className="sr-only">{` ${formattedBadge} novas notificações`}</span>
+              </>
             )}
           </button>
         );

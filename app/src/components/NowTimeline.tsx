@@ -33,18 +33,18 @@ export const NowTimeline: React.FC<NowTimelineProps> = ({ events, onOpenEvent, o
     <div className="space-y-6 pb-12 text-[var(--text-primary)]">
       {/* Header com botão de adicionar */}
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold tracking-tight">Timeline</h2>
+        <h2 className="text-xl font-bold tracking-tight">Linha do tempo</h2>
         <button
           onClick={onNewEvent}
           className="rounded-full bg-[var(--accent)] text-[var(--text-primary)] px-3.5 py-1.5 text-xs font-bold shadow-md hover:bg-[var(--accent-hover)] transition"
         >
-          + Add Event
+          + Novo compromisso
         </button>
       </div>
 
-      {/* Yesterday */}
+      {/* Ontem */}
       <div className="space-y-3 opacity-60">
-        <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)]">Yesterday</h3>
+        <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)]">Ontem</h3>
         <div className="rounded-[20px] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-3.5 flex items-center gap-3">
           <div className="w-10 h-10 rounded-2xl bg-[var(--surface-elevated)] text-[var(--accent)] flex items-center justify-center">
             <Check size={18} strokeWidth={2} aria-hidden="true" />
@@ -58,7 +58,7 @@ export const NowTimeline: React.FC<NowTimelineProps> = ({ events, onOpenEvent, o
 
       {/* Today */}
       <div className="space-y-3 relative pt-2">
-        <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-primary)]">Today</h3>
+        <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-primary)]">Hoje</h3>
 
         {/* Indicador de Hora Atual: Linha horizontal vermelha atravessando a tela com ponto vermelho à esquerda */}
         <div className="relative py-2 flex items-center">
@@ -106,7 +106,7 @@ export const NowTimeline: React.FC<NowTimelineProps> = ({ events, onOpenEvent, o
 
       {/* Tomorrow */}
       <div className="space-y-3 pt-3 opacity-90">
-        <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)]">Tomorrow</h3>
+        <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)]">Amanhã</h3>
         <div className="rounded-[20px] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-3.5 flex items-center gap-3">
           <div className="w-10 h-10 rounded-2xl bg-[var(--surface-elevated)] text-[var(--accent)] flex items-center justify-center">
             <CalendarDays size={18} strokeWidth={1.9} aria-hidden="true" />

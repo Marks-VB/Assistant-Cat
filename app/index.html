@@ -9,7 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content="Assistant Cat — Organização pessoal com clareza, privacidade e assistência inteligente." />
     <meta name="theme-color" content="#121212" />
-    <!-- Trocar og:url e og:image por URLs absolutas do domínio canônico em produção. -->
+    <!-- Metas OG relativas por padrão (dev). Em produção, o plugin de app/vite.config.ts
+         reescreve og:image/twitter:image para absolutas e injeta og:url + canonical
+         quando VITE_SITE_URL está definida. -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:title" content="Assistant Cat — Organização pessoal com clareza e privacidade" />

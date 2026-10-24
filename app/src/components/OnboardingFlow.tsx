@@ -149,10 +149,10 @@ export const OnboardingFlow: React.FC<OnboardingFlowProps> = ({
                 </h1>
                 <p className="text-sm text-[var(--text-secondary)]">
                   Antes de começar, escolha o assistente, o tema e a forma de navegar.
-                  Tudo pode ser mudado depois em <strong>Me</strong>.
+                  Tudo pode ser mudado depois em <strong>Eu</strong>.
                 </p>
               </div>
-              <ul className="w-full space-y-2 text-left">
+              <ul className="w-full space-y-2 text-left stagger-list">
                 {[
                   { Icon: ShieldCheck, title: 'Privado e local', text: 'Seus dados ficam neste aparelho.' },
                   { Icon: Palette, title: 'Visual flexível', text: 'Temas, vidro, retrô, neon — com efeitos próprios.' },
@@ -414,7 +414,7 @@ export const OnboardingFlow: React.FC<OnboardingFlowProps> = ({
                 <h2 className="text-2xl font-bold tracking-tight">Tudo pronto!</h2>
                 <p className="text-sm text-[var(--text-secondary)]">
                   {name.trim() || assistantName} já está do seu jeito{calledName.trim() ? `, ${calledName.trim()}` : ''}.
-                  Você pode ajustar tudo de novo em <strong>Me</strong>.
+                  Você pode ajustar tudo de novo em <strong>Eu</strong>.
                 </p>
               </div>
               <ul className="flex flex-wrap items-center justify-center gap-2">

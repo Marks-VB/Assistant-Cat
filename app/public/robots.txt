@@ -3,3 +3,6 @@ Allow: /
 Disallow: /app/*
 Disallow: /admin/*
 Disallow: /api/
+
+# O build de produção acrescenta "Sitemap: <VITE_SITE_URL>/sitemap.xml" quando
+# VITE_SITE_URL está definida. Sem ela, nenhuma linha Sitemap é publicada.

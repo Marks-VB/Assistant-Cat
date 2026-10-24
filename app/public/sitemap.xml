@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Trocar https://example.invalid/ pelo domínio canônico de produção. Sem rotas de pagamento inventadas: só páginas públicas reais. -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://example.invalid/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://example.invalid/termos.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://example.invalid/privacidade.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-</urlset>
+<!--
+  Arquivo fonte: o build de produção gera dist/sitemap.xml a partir de VITE_SITE_URL.
+  Sem VITE_SITE_URL este urlset permanece vazio (válido) para não publicar domínio inventado.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>

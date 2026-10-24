@@ -110,6 +110,12 @@ export interface AISettingsState {
   model: string;
   apiKey: string;
   baseUrl?: string;
+  /**
+   * URL absoluta do Worker de proxy, por exemplo `https://assistant-cat.SUBDOMINIO.workers.dev`.
+   * Vazio (ou ausente) = mesmo host da página (web). No app nativo é obrigatório, porque a
+   * origem do WebView é `https://localhost` e não existe servidor local de `/api/ai`.
+   */
+  proxyUrl?: string;
 }
 
 /** Posição da navegação principal. `auto` usa lateral no desktop e inferior no celular. */

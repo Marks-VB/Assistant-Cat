@@ -5,6 +5,8 @@ const config: CapacitorConfig = {
   appName: 'Assistant Cat',
   webDir: 'dist',
   server: {
+    // Origem do WebView no APK: https://localhost. Não há servidor local, então
+    // /api/ai só funciona com a URL absoluta do Worker (Personalizar → IA).
     androidScheme: 'https'
   },
   android: {

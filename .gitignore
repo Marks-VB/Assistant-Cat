@@ -16,3 +16,6 @@ app/android/keystore.properties
 app/android/keystore/
 *.jks
 *.keystore
+
+# Wrangler (estado local de `wrangler dev`/`deploy`)
+.wrangler/

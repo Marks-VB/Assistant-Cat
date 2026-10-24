@@ -16,7 +16,7 @@ async function pularOnboarding(page) {
 }
 
 async function irParaMe(page) {
-  await page.getByRole('tab', { name: 'Me' }).first().click();
+  await page.getByRole('tab', { name: 'Eu' }).first().click();
   await expect(page.getByText('Tema do aplicativo')).toBeVisible();
 }
 
@@ -129,8 +129,8 @@ test.describe('App: boas-vindas, temas, avatar e navegação', () => {
   test('botão "Nova tarefa" abre o modal de criação manual', async ({ page }) => {
     await page.goto(APP);
     await pularOnboarding(page);
-    await page.getByRole('tab', { name: 'Calendar' }).first().click();
-    await page.getByRole('button', { name: 'To-dos' }).click();
+    await page.getByRole('tab', { name: 'Agenda' }).first().click();
+    await page.getByRole('button', { name: 'Afazeres' }).click();
 
     const nova = page.getByRole('button', { name: /nova tarefa/i });
     await expect(nova).toBeVisible();

@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
+import { Capacitor } from '@capacitor/core';
 import { CatAppearance, Profile, AISettingsState } from '../types';
 import { AI_PROVIDERS, DEFAULT_AI_SETTINGS } from '../core/providers';
 import { AVATAR_PRESETS } from '../core/avatar-presets';
@@ -36,6 +37,8 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
   const [aiModel, setAiModel] = useState(initialAi?.model || DEFAULT_AI_SETTINGS.model);
   const [aiKey, setAiKey] = useState(initialAi?.apiKey || '');
   const [aiBase, setAiBase] = useState(initialAi?.baseUrl || '');
+  const [aiProxy, setAiProxy] = useState(initialAi?.proxyUrl || '');
+  const isNative = Capacitor.isNativePlatform();
 
   if (!isOpen) return null;
 
@@ -54,6 +57,7 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
       model: aiModel.trim(),
       apiKey: aiKey.trim(),
       baseUrl: aiBase.trim(),
+      proxyUrl: aiProxy.trim(),
     });
     onClose();
   };
@@ -71,7 +75,8 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
       <div className="sticky top-0 z-10 flex items-center justify-between p-4 bg-[var(--bg-primary)] border-b border-[var(--border-subtle)] backdrop-blur-md">
         <button
           onClick={onClose}
-          className="w-9 h-9 rounded-full bg-[var(--surface-card)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] hover:text-[var(--text-primary)]"
+          aria-label="Fechar personalização"
+          className="press-scale w-9 h-9 rounded-full bg-[var(--surface-card)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] hover:text-[var(--text-primary)]"
         >
           <X size={16} aria-hidden="true" />
         </button>
@@ -94,8 +99,10 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
                 type="button"
                 key={item.label}
                 onClick={() => handleSelectVariation(idx)}
+                aria-label={`Avatar ${item.label}`}
+                aria-pressed={isCenter}
                 className={`flex flex-col items-center cursor-pointer select-none snap-center outline-none transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 ${
-                  isCenter ? 'scale-110 opacity-100 z-10' : 'scale-90 opacity-45 hover:opacity-75 hover:scale-95'
+                  isCenter ? 'scale-110 z-10' : 'scale-90 hover:scale-95'
                 }`}
                 style={{
                   transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)'
@@ -105,7 +112,7 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
                   className={`w-28 h-28 rounded-full flex items-center justify-center p-2 border-2 transition-all duration-300 shadow-xl ${
                     isCenter
                       ? 'border-[var(--accent)] ring-4 ring-[var(--accent-ring)] scale-100 shadow-[0_8px_24px_rgba(255,77,77,0.3)]'
-                      : 'border-transparent shadow-md'
+                      : 'border-transparent shadow-md opacity-50 hover:opacity-100'
                   }`}
                   style={{
                     backgroundColor: item.bgCircle,
@@ -114,6 +121,9 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
                 >
                   <CatAvatar appearance={item.appearance} className="w-24 h-24" />
                 </div>
+                {/* O rótulo mantém contraste cheio mesmo quando o card está
+                    encolhido: a escala já comunica a seleção, e apagar o texto
+                    derrubava o contraste para 2.4:1 (WCAG AA pede 4.5:1). */}
                 <span
                   className={`mt-2 text-xs font-bold transition-colors duration-200 ${
                     isCenter ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'
@@ -129,55 +139,63 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
         {/* Card de Configurações do Assistente (Lista agrupada) */}
         <div className="rounded-[20px] bg-[var(--surface-card)] border border-[var(--border-subtle)] divide-y divide-[var(--border-subtle)] text-sm shadow-xl">
           <div className="p-4 flex items-center justify-between">
-            <span className="text-[var(--text-secondary)] font-medium text-xs">Name</span>
+            <span className="text-[var(--text-secondary)] font-medium text-xs">Nome</span>
             <input
               value={name}
               onChange={e => setName(e.target.value)}
+              aria-label="Nome do assistente"
               className="bg-transparent text-right font-semibold text-[var(--text-primary)] focus:outline-none"
             />
           </div>
 
           <div className="p-4 flex items-center justify-between">
-            <span className="text-[var(--text-secondary)] font-medium text-xs">Email</span>
-            <span className="text-[var(--accent)] font-semibold text-xs cursor-pointer hover:underline">
-              Claim address
-            </span>
+            <span className="text-[var(--text-secondary)] font-medium text-xs">Conta</span>
+            <span className="text-[var(--text-secondary)] text-xs">Somente neste aparelho</span>
           </div>
 
           <div className="p-4 flex items-center justify-between">
-            <span className="text-[var(--text-secondary)] font-medium text-xs">Personality</span>
+            <span className="text-[var(--text-secondary)] font-medium text-xs">Personalidade</span>
             <select
               value={personality}
               onChange={e => setPersonality(e.target.value)}
+              aria-label="Personalidade do assistente"
               className="bg-transparent text-right font-semibold text-[var(--text-primary)] focus:outline-none text-xs"
             >
-              <option value="Friendly" className="bg-[var(--surface-card)]">Friendly</option>
-              <option value="Professional" className="bg-[var(--surface-card)]">Professional</option>
-              <option value="Direct" className="bg-[var(--surface-card)]">Direct</option>
+              <option value="Friendly" className="bg-[var(--surface-card)]">Amigável</option>
+              <option value="Professional" className="bg-[var(--surface-card)]">Profissional</option>
+              <option value="Direct" className="bg-[var(--surface-card)]">Direto</option>
             </select>
           </div>
 
           <div className="p-4 flex items-center justify-between">
-            <span className="text-[var(--text-secondary)] font-medium text-xs">What assistant calls you</span>
+            <span className="text-[var(--text-secondary)] font-medium text-xs">Como o assistente te chama</span>
             <input
               value={userName}
               onChange={e => setUserName(e.target.value)}
+              aria-label="Como o assistente te chama"
               className="bg-transparent text-right font-semibold text-[var(--text-primary)] focus:outline-none"
             />
           </div>
 
-          <div className="p-4 flex items-center justify-between">
+          <div className="p-4 flex items-center justify-between gap-3">
             <div>
-              <div className="font-semibold text-[var(--text-primary)] text-xs">Auto-read responses</div>
+              <div className="font-semibold text-[var(--text-primary)] text-xs">Ler respostas em voz alta</div>
               <div className="text-[11px] text-[var(--text-secondary)]">Ler respostas de voz via TTS automaticamente</div>
-            </div>            <button
+            </div>
+            {/* role="switch" dá o estado ligado/desligado ao leitor de tela;
+                antes era um botão sem nome acessível nenhum. */}
+            <button
+              type="button"
+              role="switch"
+              aria-checked={autoSpeak}
+              aria-label="Ler respostas em voz alta"
               onClick={() => setAutoSpeak(!autoSpeak)}
-              className={`w-10 h-5 rounded-full p-0.5 transition-colors duration-200 ${
+              className={`press-scale shrink-0 w-11 h-6 rounded-full p-0.5 transition-colors duration-200 ${
                 autoSpeak ? 'bg-[var(--accent)]' : 'bg-[var(--surface-hover)]'
               }`}
             >
               <div
-                className={`w-4 h-4 rounded-full bg-white shadow-sm transition-transform duration-200 ${
+                className={`w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${
                   autoSpeak ? 'translate-x-5' : 'translate-x-0'
                 }`}
               />
@@ -188,7 +206,7 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
         {/* IA: provider + modelo + chave (OpenAI-compatível) */}
         <div className="rounded-[20px] bg-[var(--surface-card)] border border-[var(--border-subtle)] divide-y divide-[var(--border-subtle)] text-sm shadow-xl">
           <div className="p-4">
-            <div className="font-semibold text-[var(--text-primary)] text-xs mb-1">IA — Provider</div>
+            <div className="font-semibold text-[var(--text-primary)] text-xs mb-1">IA — Provedor</div>
             <select
               value={aiProvider}
               onChange={(e) => {
@@ -198,7 +216,7 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
                 if (def && !aiModel.trim()) setAiModel(def.defaultModel);
               }}
               className="w-full bg-transparent font-semibold text-[var(--text-primary)] text-xs focus:outline-none"
-              aria-label="Provider de IA"
+              aria-label="Provedor de IA"
             >
               {AI_PROVIDERS.map((p) => (
                 <option key={p.id} value={p.id} className="bg-[var(--surface-card)]">{p.label}</option>
@@ -228,6 +246,30 @@ export const AvatarModal: React.FC<AvatarModalProps> = ({
             />
             <div className="text-[11px] text-[var(--text-secondary)] mt-1">Vazia = usa secret do servidor. Com chave, vai direto via proxy sem salvar em servidor.</div>
           </div>
+          {isNative && (
+            <div className="p-4">
+              <label htmlFor="ai-proxy-url" className="font-semibold text-[var(--text-primary)] text-xs mb-1 block">
+                URL do proxy (app Android)
+              </label>
+              <input
+                id="ai-proxy-url"
+                value={aiProxy}
+                onChange={(e) => setAiProxy(e.target.value)}
+                type="url"
+                inputMode="url"
+                autoComplete="off"
+                autoCapitalize="none"
+                spellCheck={false}
+                placeholder="https://assistant-cat.SEU.workers.dev"
+                className="w-full bg-transparent font-semibold text-[var(--text-primary)] text-xs focus:outline-none"
+                aria-label="URL do proxy do Worker"
+                aria-describedby="ai-proxy-url-help"
+              />
+              <div id="ai-proxy-url-help" className="text-[11px] text-[var(--text-secondary)] mt-1">
+                Endereço do Worker que serve /api/ai. No APK não existe servidor local, então sem esta URL o chat não responde.
+              </div>
+            </div>
+          )}
           {aiProvider === 'custom' && (
             <div className="p-4">
               <div className="font-semibold text-[var(--text-primary)] text-xs mb-1">Base URL</div>

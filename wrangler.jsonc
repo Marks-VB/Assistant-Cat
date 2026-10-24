@@ -14,7 +14,21 @@
   "assets": {
     "directory": "./app/dist",
     "binding": "ASSETS",
-    "not_found_handling": "single-page-application",
+    // O app não tem rotas de cliente: caminho inexistente devolve 404 real
+    // (app/public/404.html) em vez de index.html com status 200.
+    "not_found_handling": "404-page",
     "run_worker_first": true
-  }
+  },
+  // Rate limit nativo para o proxy /api/ai (30 req/min por IP).
+  // O Worker usa fallback em memória quando este binding não está disponível (dev).
+  "ratelimits": [
+    {
+      "name": "AI_RATE_LIMITER",
+      "namespace_id": "2026102401",
+      "simple": {
+        "limit": 30,
+        "period": 60
+      }
+    }
+  ]
 }

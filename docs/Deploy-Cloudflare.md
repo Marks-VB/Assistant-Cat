@@ -21,7 +21,7 @@ npm run deploy              # build + wrangler deploy
 | `main` | `worker/index.ts` |
 | `build.command` | `npm run build` (instala as deps de `app/` e gera `app/dist`) |
 | `assets.directory` | `./app/dist` |
-| `assets.not_found_handling` | `single-page-application` |
+| `assets.not_found_handling` | `404-page` (o app não tem rotas de cliente) |
 | `assets.run_worker_first` | `true` |
 
 ## Deploy via Git (Workers Builds)
